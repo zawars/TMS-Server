@@ -34,7 +34,9 @@ module.exports = {
         message: `Please use this <code>${authCode}</code> token to verify your account. `
       }, (err) => {
         if (err) {
-          res.forbidden('Error sending email.');
+          res.ok({
+            message: 'Error sending email.'
+          });
         }
       });
 
@@ -43,7 +45,7 @@ module.exports = {
         message: 'Verification token sent to your email. Please verify.'
       });
     } else {
-      res.status(200).json({
+      res.ok({
         message: 'User already exists with either email or username.'
       });
     }
