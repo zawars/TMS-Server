@@ -16,7 +16,7 @@ module.exports = {
       type: "string"
     },
     position: {
-      type: "integer"
+      type: "number"
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

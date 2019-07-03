@@ -148,10 +148,10 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     cors: {
-      allowOrigins: [
-        '*',
-        'https://example.com',
-      ]
+      allowOrigins: '*'
+      // allowOrigins: [
+      //   'https://example.com',
+      // ]
     },
 
   },
@@ -252,7 +252,6 @@ module.exports = {
     *                                                                          *
     ***************************************************************************/
     onlyAllowOrigins: [
-      '*',
       'https://example.com',
       'https://staging.example.com',
     ],

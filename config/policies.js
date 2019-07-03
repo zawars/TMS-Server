@@ -24,7 +24,7 @@ module.exports.policies = {
     verify: true,
     resendToken: true,
     forgetPassword: true,
-    renewToken: true,
+    renewPassword: true,
   },
 
   UserController: {

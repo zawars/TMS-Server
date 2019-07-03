@@ -43,5 +43,4 @@ module.exports.routes = {
 
   'POST /api/v1/user': 'UserController.create',
 
-  'GET /api/v1/skills': 'SkillsController.index',
 };
