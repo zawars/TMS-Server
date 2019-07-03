@@ -36,7 +36,7 @@ module.exports = {
                   });
                 });
               } else {
-                res.status(400).json({
+                res.status(200).json({
                   message: 'Invalid password.'
                 });
               }
@@ -53,7 +53,7 @@ module.exports = {
         });
       }
     } else {
-      res.status(404).json({
+      res.status(200).json({
         message: 'User does not exist.'
       });
     }
@@ -91,7 +91,7 @@ module.exports = {
             });
           });
         } else {
-          res.status(401).json({
+          res.status(200).json({
             message: 'Invalid authentication token'
           });
         }
@@ -101,7 +101,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      res.status(500).json({
+      res.status(200).json({
         message: error
       });
     }
@@ -204,7 +204,7 @@ module.exports = {
             message: 'User verified successfully.'
           });
         } else {
-          res.status(401).json({
+          res.status(200).json({
             message: 'Invalid authentication token'
           });
         }
@@ -214,7 +214,7 @@ module.exports = {
         });
       }
     } catch (error) {
-      res.status(500).json({
+      res.status(200).json({
         message: error
       });
     }
@@ -251,7 +251,7 @@ module.exports = {
                   });
                 });
               } else {
-                res.status(400).json({
+                res.status(200).json({
                   message: 'Invalid old password.'
                 });
               }
@@ -268,7 +268,7 @@ module.exports = {
         });
       }
     } else {
-      res.status(404).json({
+      res.status(200).json({
         message: 'User does not exist.'
       });
     }
