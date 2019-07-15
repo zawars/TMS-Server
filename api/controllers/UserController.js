@@ -6,6 +6,7 @@
  */
 
 const speakEasy = require('speakeasy');
+const fs = require('fs');
 
 module.exports = {
   create: async (req, res) => {
@@ -71,6 +72,37 @@ module.exports = {
         });
       }
     })
+  },
+
+  search: async (req, res) => {
+    try {
+      let query = req.params.query;
+      let users = await User.find({
+        or: [{
+            name: {
+              'contains': query
+            }
+          },
+          {
+            email: {
+              'contains': query
+            }
+          }
+        ]
+      });
+      res.ok(users);
+    } catch (error) {
+      res.ok({
+        message: error
+      });
+    }
+  },
+
+  fetchLanguage: (req, res) => {
+    let locale = req.params.id;
+
+    let file = fs.readFileSync('assets/langs/' + locale + '.json', 'utf8')
+    res.ok(file);
   }
 
 };
