@@ -38,12 +38,13 @@ module.exports = {
           res.ok({
             message: 'Error sending email.'
           });
-        }
+        } else {
 
-        res.ok({
-          user,
-          message: 'Verification token sent to your email. Please verify.'
-        });
+          res.ok({
+            user,
+            message: 'Verification token sent to your email. Please verify.'
+          });
+        }
       });
     } else {
       res.ok({
