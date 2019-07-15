@@ -44,6 +44,7 @@ module.exports.routes = {
   'GET /api/v1/auth/logout': 'AuthController.logout',
 
   'POST /api/v1/user': 'UserController.create',
+  'POST /api/v1/user/sendmail': 'UserController.sendEmail',
 
   'GET /api/v1/tradingPartners/:type': 'TradingPartnersController.partnersByType',
 

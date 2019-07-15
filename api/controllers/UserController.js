@@ -53,4 +53,23 @@ module.exports = {
     }
   },
 
+  sendEmail: (req, res) => {
+    EmailService.sendMail({
+      email: req.body.email,
+      message: req.body.message,
+      subject: req.body.subject
+    }, (err) => {
+      if (err) {
+        console.log(err);
+        res.forbidden({
+          message: "Error sending email."
+        });
+      } else {
+        res.send({
+          message: "Email sent."
+        });
+      }
+    })
+  }
+
 };
