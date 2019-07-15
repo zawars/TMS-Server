@@ -16,7 +16,10 @@ module.exports = {
         },
         {
           email: data.email
-        }
+        },
+        {
+          phone: data.phone
+        },
       ]
     });
 
@@ -31,15 +34,14 @@ module.exports = {
 
       EmailService.sendMail({
         email: user.email,
-        subject: 'User Verification',
-        message: `Please use this <code>${authCode}</code> token to verify your account. `
+        subject: "Verification",
+        message: `Please use this <code>${authCode}</code> token to verify your account.`
       }, (err) => {
         if (err) {
           res.ok({
             message: 'Error sending email.'
           });
         } else {
-
           res.ok({
             user,
             message: 'Verification token sent to your email. Please verify.'
@@ -48,7 +50,7 @@ module.exports = {
       });
     } else {
       res.ok({
-        message: 'User already exists with either email or username.'
+        message: 'User already exists with either email, username or phone.'
       });
     }
   },
@@ -60,7 +62,6 @@ module.exports = {
       subject: req.body.subject
     }, (err) => {
       if (err) {
-        console.log(err);
         res.forbidden({
           message: "Error sending email."
         });
