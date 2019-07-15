@@ -67,9 +67,12 @@ module.exports = {
     },
     role: {
       type: 'string',
-      isIn: ['Admin', 'Employee'],
+      isIn: ['Admin', 'Customer', 'Vendor', 'Agent'],
       required: true
     },
+    Permission: {
+      type: 'json',
+    }
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
