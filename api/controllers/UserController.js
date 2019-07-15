@@ -12,11 +12,12 @@ module.exports = {
     let data = req.body;
     let check = await User.findOne({
       or: [{
-        username: data.username
-      },
-      {
-        email: data.email
-      }]
+          username: data.username
+        },
+        {
+          email: data.email
+        }
+      ]
     });
 
     if (check == undefined) {
@@ -38,11 +39,11 @@ module.exports = {
             message: 'Error sending email.'
           });
         }
-      });
 
-      res.ok({
-        user,
-        message: 'Verification token sent to your email. Please verify.'
+        res.ok({
+          user,
+          message: 'Verification token sent to your email. Please verify.'
+        });
       });
     } else {
       res.ok({
@@ -52,4 +53,3 @@ module.exports = {
   },
 
 };
-

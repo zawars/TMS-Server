@@ -28,183 +28,23 @@ module.exports.bootstrap = async function () {
           //   name: 'Software Development',
           //   position: 1,
           // },
-          // {
-          //   name: 'Logo Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Brochure Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Website Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Front End Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Web Application Design',
-          //   position: 0,
-          // },
         ]
       },
       {
         field: 'Weight Unit',
-        values: [
-          // {
-          //   name: 'Software Development',
-          //   position: 1,
-          // },
-          // {
-          //   name: 'Logo Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Brochure Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Website Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Front End Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Web Application Design',
-          //   position: 0,
-          // },
-        ]
+        values: []
       },
       {
         field: 'Length Unit',
-        values: [
-          // {
-          //   name: 'Software Development',
-          //   position: 1,
-          // },
-          // {
-          //   name: 'Logo Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Brochure Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Website Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Front End Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Web Application Design',
-          //   position: 0,
-          // },
-        ]
+        values: []
       },
       {
         field: 'Cube Unit',
-        values: [
-          // {
-          //   name: 'Software Development',
-          //   position: 1,
-          // },
-          // {
-          //   name: 'Logo Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Brochure Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Website Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Front End Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Web Application Design',
-          //   position: 0,
-          // },
-        ]
+        values: []
       },
       {
         field: 'Class',
-        values: [
-          // {
-          //   name: 'Software Development',
-          //   position: 1,
-          // },
-          // {
-          //   name: 'Logo Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Brochure Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Design',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Website Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Front End Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Mobile Application Development',
-          //   position: 0,
-          // },
-          // {
-          //   name: 'Web Application Design',
-          //   position: 0,
-          // },
-        ]
+        values: []
       },
       {
         field: 'Vendor Type',
