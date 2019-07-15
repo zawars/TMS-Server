@@ -6,7 +6,12 @@
  */
 
 module.exports = {
-  
+  partnersByType: async (req, res) => {
+    let partners = await TradingPartners.find({
+      type: req.params.type
+    });
+
+    res.ok(partners);
+  },
 
 };
-

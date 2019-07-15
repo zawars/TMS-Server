@@ -1,5 +1,5 @@
 /**
- * TradingPartners.js
+ * Contracts.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,50 +12,67 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    uid: {
+      type: 'number',
+      unique: true,
+      required: true
+    },
     name: {
       type: 'string',
+      required: true
     },
-    number: {
+    description: {
       type: 'string',
     },
-    street1: {
+    reference: {
       type: 'string',
     },
-    street2: {
+    effectiveFrom: {
       type: 'string',
     },
-    postalCode: {
+    expiryDate: {
       type: 'string',
     },
-    city: {
+    renewalDate: {
       type: 'string',
     },
-    state: {
-      type: 'string',
-    },
-    country: {
-      type: 'string',
+    currency: {
+      type: 'string'
     },
     type: {
       type: 'string'
     },
-    isActive: {
+    status: {
+      type: 'string'
+    },
+    isClientSpecific: {
       type: 'boolean',
-      defaultsTo: true
+      defaultsTo: false
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
+    vendor: {
+      model: 'tradingPartners'
+    },
+    client: {
+      model: 'tradingPartners'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    contracts: {
-      collection: 'contracts',
-      via: 'vendor'
-    }
+    rateSheets: {
+      collection: 'rateSheets',
+      via: 'contract'
+    },
   },
+
+  beforeCreate: (values, cb) => {
+    UtilityService.contractCounter++;
+    values.uid = UtilityService.counter;
+    cb();
+  }
 
 };

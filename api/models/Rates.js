@@ -1,5 +1,5 @@
 /**
- * TradingPartners.js
+ * Rates.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,36 +12,26 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    name: {
-      type: 'string',
-    },
-    number: {
-      type: 'string',
-    },
-    street1: {
-      type: 'string',
-    },
-    street2: {
-      type: 'string',
-    },
-    postalCode: {
-      type: 'string',
-    },
-    city: {
-      type: 'string',
-    },
-    state: {
-      type: 'string',
-    },
-    country: {
-      type: 'string',
-    },
-    type: {
+    originCity: {
       type: 'string'
     },
-    isActive: {
-      type: 'boolean',
-      defaultsTo: true
+    originCountry: {
+      type: 'string'
+    },
+    destCity: {
+      type: 'string'
+    },
+    destCountry: {
+      type: 'string'
+    },
+    minCharge: {
+      type: 'number'
+    },
+    maxCharge: {
+      type: 'number'
+    },
+    markup: {
+      type: 'number'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -52,9 +42,8 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    contracts: {
-      collection: 'contracts',
-      via: 'vendor'
+    rateSheet: {
+      model: 'rateSheets'
     }
   },
 

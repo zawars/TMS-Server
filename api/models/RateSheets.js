@@ -1,5 +1,5 @@
 /**
- * TradingPartners.js
+ * RateSheets.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,49 +13,30 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     name: {
-      type: 'string',
-    },
-    number: {
-      type: 'string',
-    },
-    street1: {
-      type: 'string',
-    },
-    street2: {
-      type: 'string',
-    },
-    postalCode: {
-      type: 'string',
-    },
-    city: {
-      type: 'string',
-    },
-    state: {
-      type: 'string',
-    },
-    country: {
-      type: 'string',
-    },
-    type: {
       type: 'string'
     },
-    isActive: {
-      type: 'boolean',
-      defaultsTo: true
+    startDate: {
+      type: 'string'
+    },
+    endDate: {
+      type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+    contract: {
+      model: 'contracts'
+    },
 
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    contracts: {
-      collection: 'contracts',
-      via: 'vendor'
-    }
+    rates: {
+      collection: 'rates',
+      via: 'rateSheet'
+    },
   },
 
 };

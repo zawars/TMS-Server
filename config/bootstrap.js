@@ -17,8 +17,7 @@ module.exports.bootstrap = async function () {
   // ```
   // // Set up fake development data (or if we already have some, avast)
   if (await Dropdown.count() == 0) {
-    let data = [
-      {
+    let data = [{
         field: 'Country',
         values: []
       },
@@ -207,6 +206,58 @@ module.exports.bootstrap = async function () {
           // },
         ]
       },
+      {
+        field: 'Vendor Type',
+        values: []
+      },
+      {
+        field: 'Freight Terms',
+        values: []
+      },
+      {
+        field: 'Vendor Status',
+        values: []
+      },
+      {
+        field: 'Billing State',
+        values: []
+      },
+      {
+        field: 'Billing Country',
+        values: []
+      },
+      {
+        field: 'Currency',
+        values: []
+      },
+      {
+        field: 'Vendor Services',
+        values: []
+      },
+      {
+        field: 'Contract Type',
+        values: []
+      },
+      {
+        field: 'Rate Type',
+        values: []
+      },
+      {
+        field: 'Rate Calc UOM',
+        values: []
+      },
+      {
+        field: 'Rate Calc Type',
+        values: []
+      },
+      {
+        field: 'Rate Breaks',
+        values: []
+      },
+      {
+        field: 'Rate Break UOM',
+        values: []
+      },
     ];
 
     data.forEach(async val => {
@@ -223,4 +274,9 @@ module.exports.bootstrap = async function () {
     console.log('Dropdown seeds planted. Ready to grow.');
   }
 
+  if (await Contracts.count() > 0) {
+    let contracts = await Contracts.find();
+    let uid = contracts[contracts.length - 1].uid;
+    UtilityService.contractCounter = uid;
+  }
 };
