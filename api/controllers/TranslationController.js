@@ -5,6 +5,8 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const fs = require('fs');
+
 module.exports = {
 
   index: async (req, res) => {
