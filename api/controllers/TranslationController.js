@@ -14,7 +14,7 @@ module.exports = {
       let deFile = JSON.parse(fs.readFileSync('assets/langs/de.json', 'utf8'));
       let frFile = JSON.parse(fs.readFileSync('assets/langs/fr.json', 'utf8'));
 
-      en = Object.keys(deFile);
+      let en = Object.keys(deFile);
       let trans = [];
 
       en.forEach(val => {

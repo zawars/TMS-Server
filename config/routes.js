@@ -53,8 +53,8 @@ module.exports.routes = {
   'POST /api/v1/contracts': 'ContractsController.create',
 
    // Translation Api
-  'GET /translation': 'TranslationController.index',
-  'POST /translation': 'TranslationController.create',
-  'PATCH /translation': 'TranslationController.update',
-  'POST /translation/delete': 'TranslationController.delete',
+  'GET /api/v1/translation': 'TranslationController.index',
+  'POST /api/v1/translation': 'TranslationController.create',
+  'PATCH /api/v1/translation': 'TranslationController.update',
+  'POST /api/v1/translation/delete': 'TranslationController.delete',
 };
