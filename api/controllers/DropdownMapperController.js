@@ -40,6 +40,24 @@ module.exports = {
     });
   },
 
+  create: async (req, res) => {
+    let data = req.body;
+    let obj = data.dropdown;
+    let langs = {};
+    let langFiles = {};
+
+    langsList.map(val => {
+      langs[val] = data[val];
+      langFiles[val] = JSON.parse(fs.readFileSync(`assets/langs/${val}.json`));
+      langFiles[val][obj.name] = langs[val];
+      fs.writeFileSync(`assets/langs/${val}.json`, JSON.stringify(langFiles[val], null, 2));
+    });
+
+    let response = await DropdownMapper.create(obj).fetch();
+
+    res.ok(response);
+  },
+
   delete: (req, res) => {
     let id = req.params.id;
     let langFiles = {};
@@ -52,7 +70,7 @@ module.exports = {
       id: id
     }).then(dropdownObj => {
       langsList.map(val => {
-        delete (langFiles[val][dropdownObj.name]);
+        delete(langFiles[val][dropdownObj.name]);
         fs.writeFileSync(`assets/langs/${val}.json`, JSON.stringify(langFiles[val], null, 2));
       });
 
@@ -82,7 +100,7 @@ module.exports = {
       id: id
     }).then(dropdownObj => {
       langsList.map(val => {
-        delete (langFiles[val][dropdownObj.name]);
+        delete(langFiles[val][dropdownObj.name]);
         langFiles[val][obj.name] = langs[val];
         fs.writeFileSync(`assets/langs/${val}.json`, JSON.stringify(langFiles[val], null, 2));
       });

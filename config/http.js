@@ -10,7 +10,7 @@
  */
 
 const helmet = require('helmet');
-var express = require('express');
+const express = require('express');
 
 module.exports.http = {
 
