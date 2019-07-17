@@ -35,6 +35,7 @@ module.exports.routes = {
    *                                                                          *
    ***************************************************************************/
 
+  // Auth
   'POST /api/v1/auth/login': 'AuthController.login',
   'POST /api/v1/auth/verify': 'AuthController.verify',
   'POST /api/v1/auth/verify/resend': 'AuthController.resendToken',
@@ -43,15 +44,19 @@ module.exports.routes = {
   'POST /api/v1/auth/password/renew': 'AuthController.renewPassword',
   'GET /api/v1/auth/logout': 'AuthController.logout',
 
+  // User
   'POST /api/v1/user': 'UserController.create',
   'POST /api/v1/user/sendmail': 'UserController.sendEmail',
   'GET /api/v1/user/search/:query': 'UserController.search',
   'GET /api/v1/user/lang/:id': 'UserController.fetchLanguage',
 
+  // Trading Partners
   'GET /api/v1/tradingPartners/:type': 'TradingPartnersController.partnersByType',
 
+  // Contracts
   'POST /api/v1/contracts': 'ContractsController.create',
 
+  // Attachments
   'POST /api/v1/attachments': 'AttachmentsController.create',
   'DELETE /api/v1/attachments/:id': 'AttachmentsController.delete',
 
@@ -60,4 +65,14 @@ module.exports.routes = {
   'POST /api/v1/translation': 'TranslationController.create',
   'PATCH /api/v1/translation': 'TranslationController.update',
   'POST /api/v1/translation/delete': 'TranslationController.delete',
+
+  // Dropdowns
+  'GET  /api/v1/dropdown': 'DropdownController.index',
+  'PUT  /api/v1/dropdown/:id': 'DropdownController.update',
+  'POST  /api/v1/dropdown': 'DropdownController.create',
+  'POST  /api/v1/dropdownMapper/position': 'DropdownMapperController.positionSort',
+  'POST  /api/v1/dropdownMapper': 'DropdownMapperController.create',
+  'GET  /api/v1/dropdownMapper/:id': 'DropdownMapperController.show',
+  'DELETE  /api/v1/dropdownMapper/:id': 'DropdownMapperController.delete',
+  'PUT  /api/v1/dropdownMapper/:id': 'DropdownMapperController.update',
 };
