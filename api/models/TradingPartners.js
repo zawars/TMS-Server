@@ -18,10 +18,7 @@ module.exports = {
     number: {
       type: 'string',
     },
-    street1: {
-      type: 'string',
-    },
-    street2: {
+    street: {
       type: 'string',
     },
     postalCode: {
@@ -36,8 +33,89 @@ module.exports = {
     country: {
       type: 'string',
     },
-    type: {
-      type: 'string'
+    contactName: {
+      type: 'string',
+    },
+    contactEmail: {
+      type: 'string',
+    },
+    contactNumber: {
+      type: 'string',
+    },
+    billingName: {
+      type: 'string',
+    },
+    billingStreet: {
+      type: 'string',
+    },
+    billingCity: {
+      type: 'string',
+    },
+    billingZipCode: {
+      type: 'string',
+    },
+    billingContactName: {
+      type: 'string',
+    },
+    billingContactEmail: {
+      type: 'string',
+    },
+    paymentTerms: {
+      type: 'string',
+    },
+    consigneeName: {
+      type: 'string',
+    },
+    consigneeLocationType: {
+      type: 'string',
+    },
+    consigneeStreet: {
+      type: 'string',
+    },
+    consigneeCity: {
+      type: 'string',
+    },
+    consigneePostalCode: {
+      type: 'string',
+    },
+    consigneeCountry: {
+      type: 'string',
+    },
+    productName: {
+      type: 'string',
+    },
+    nmfc: {
+      type: 'string',
+    },
+    handlingUnit: {
+      type: 'string',
+    },
+    class: {
+      type: 'string',
+    },
+    huType: {
+      type: 'string',
+    },
+    pickupName: {
+      type: 'string',
+    },
+    pickupLocationType: {
+      type: 'string',
+    },
+    pickupStreet: {
+      type: 'string',
+    },
+    pickupCity: {
+      type: 'string',
+    },
+    pickupPostalCode: {
+      type: 'string',
+    },
+    pickupCountry: {
+      type: 'string',
+    },
+    confirmationEmail: {
+      type: 'string',
     },
     isActive: {
       type: 'boolean',
@@ -47,7 +125,30 @@ module.exports = {
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
+    logo: {
+      model: 'attachments',
+    },
+    type: {
+      model: 'dropdownMapper'
+    },
+    freightTerms: {
+      model: 'dropdownMapper',
+    },
+    status: {
+      model: 'dropdownMapper',
+    },
+    billingState: {
+      model: 'dropdownMapper',
+    },
+    billingCountry: {
+      model: 'dropdownMapper',
+    },
+    currency: {
+      model: 'dropdownMapper',
+    },
+    services: {
+      model: 'dropdownMapper',
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
