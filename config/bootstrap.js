@@ -66,12 +66,12 @@ module.exports.bootstrap = async function () {
         field: 'Freight Terms',
         values: []
       },
-      // {
-      //   field: 'Vendor Status',
-      //   values: []
-      // },
       {
-        field: 'Status',
+        field: 'Vendor Status',
+        values: []
+      },
+      {
+        field: 'Contract Status',
         values: []
       },
       {
@@ -82,10 +82,6 @@ module.exports.bootstrap = async function () {
         field: 'Currency',
         values: []
       },
-      // {
-      //   field: 'Vendor Services',
-      //   values: []
-      // },
       {
         field: 'Vendor Type',
         values: []

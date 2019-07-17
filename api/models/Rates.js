@@ -12,16 +12,37 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    name: {
+      type: 'string'
+    },
     originCity: {
       type: 'string'
     },
+    originState: {
+      type: 'string'
+    },
+    originPostalCode: {
+      type: 'string'
+    },
+    originArea: {
+      type: 'number'
+    },
     originCountry: {
+      type: 'number'
+    },
+    destinationCity: {
+      type: 'number'
+    },
+    destinationState: {
       type: 'string'
     },
-    destCity: {
+    destinationArea: {
       type: 'string'
     },
-    destCountry: {
+    destinationCountry: {
+      type: 'string'
+    },
+    originPostalCode: {
       type: 'string'
     },
     minCharge: {
@@ -30,7 +51,7 @@ module.exports = {
     maxCharge: {
       type: 'number'
     },
-    markup: {
+    weightBreaks: {
       type: 'number'
     },
 

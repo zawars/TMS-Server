@@ -36,15 +36,6 @@ module.exports = {
     renewalDate: {
       type: 'string',
     },
-    currency: {
-      type: 'string'
-    },
-    type: {
-      type: 'string'
-    },
-    status: {
-      type: 'string'
-    },
     isClientSpecific: {
       type: 'boolean',
       defaultsTo: false
@@ -59,10 +50,20 @@ module.exports = {
     client: {
       model: 'tradingPartners'
     },
+    contractType: {
+      model: 'dropdownMapper'
+    },
+    currency: {
+      model: 'dropdownMapper'
+    },
+    contractStatus: {
+      model: 'dropdownMapper'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
     rateSheets: {
       collection: 'rateSheets',
       via: 'contract'
