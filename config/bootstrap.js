@@ -22,6 +22,10 @@ module.exports.bootstrap = async function () {
         values: []
       },
       {
+        field: 'Product',
+        values: []
+      },
+      {
         field: 'Handling Unit',
         values: [
           // {
@@ -47,7 +51,15 @@ module.exports.bootstrap = async function () {
         values: []
       },
       {
-        field: 'Vendor Type',
+        field: 'Show Accessorials',
+        values: []
+      },
+      {
+        field: 'Cities',
+        values: []
+      },
+      {
+        field: 'Postal Code',
         values: []
       },
       {
@@ -59,11 +71,11 @@ module.exports.bootstrap = async function () {
         values: []
       },
       {
-        field: 'Billing State',
+        field: 'Contract Status',
         values: []
       },
       {
-        field: 'Billing Country',
+        field: 'Billing State',
         values: []
       },
       {
@@ -71,7 +83,15 @@ module.exports.bootstrap = async function () {
         values: []
       },
       {
-        field: 'Vendor Services',
+        field: 'Vendor Type',
+        values: []
+      },
+      {
+        field: 'User Type',
+        values: []
+      },
+      {
+        field: 'State',
         values: []
       },
       {

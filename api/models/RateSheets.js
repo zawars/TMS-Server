@@ -15,10 +15,7 @@ module.exports = {
     name: {
       type: 'string'
     },
-    startDate: {
-      type: 'string'
-    },
-    endDate: {
+    description: {
       type: 'string'
     },
 
@@ -27,6 +24,24 @@ module.exports = {
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
     contract: {
       model: 'contracts'
+    },
+    rateType: {
+      model: 'dropdownMapper'
+    },
+    rateCalcUOM: {
+      model: 'dropdownMapper'
+    },
+    rateCalcType: {
+      model: 'dropdownMapper'
+    },
+    rateBreaks: {
+      model: 'dropdownMapper'
+    },
+    rateBreakUOM: {
+      model: 'dropdownMapper'
+    },
+    currency: {
+      model: 'dropdownMapper'
     },
 
 

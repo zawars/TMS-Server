@@ -54,4 +54,10 @@ module.exports.routes = {
 
   'POST /api/v1/attachments': 'AttachmentsController.create',
   'DELETE /api/v1/attachments/:id': 'AttachmentsController.delete',
+
+  // Translation Api
+  'GET /api/v1/translation': 'TranslationController.index',
+  'POST /api/v1/translation': 'TranslationController.create',
+  'PATCH /api/v1/translation': 'TranslationController.update',
+  'POST /api/v1/translation/delete': 'TranslationController.delete',
 };
