@@ -9,7 +9,7 @@ module.exports = {
 
   getBatchRateSheets: async (req, res) => {
     try {
-      let rateSheetsIds = req.rateSheetsIds;
+      let rateSheetsIds = req.body.rateSheetsIds;
 
       const rateSheets = await RateSheets.find({ id: { in: rateSheetsIds } }).populate('rates');
 
