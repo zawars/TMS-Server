@@ -15,7 +15,7 @@ module.exports = {
 
     let ratesCollection = [];
     rateSheetList.map(rateSheet => {
-      rateSheet.contract = contractObj[0].id
+      rateSheet.contract = contractObj.id
       ratesCollection.push(rateSheet.rates);
       delete(rateSheet.rates);
     });
