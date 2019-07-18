@@ -58,6 +58,7 @@ module.exports.routes = {
 
   // RateSheets
   'POST /api/v1/getBatchRateSheets': 'RateSheetsController.getBatchRateSheets',
+  'POST /api/v1/createBatchRateSheets': 'RateSheetsController.createBatchRateSheets',
 
   // Attachments
   'POST /api/v1/attachments': 'AttachmentsController.create',

@@ -17,6 +17,28 @@ module.exports = {
     } catch (e) {
       res.badRequest(e);
     }
+  },
+
+  createBatchRateSheets: async (req, res) => {
+    try {
+      let rateSheetList = req.body.contractRates;
+
+      let ratesCollection = [];
+      rateSheetList.map(rateSheet => {
+        ratesCollection.push(rateSheet.rates);
+        delete (rateSheet.rates);
+      });
+
+      let rateSheets = await RateSheets.createEach(rateSheetList).fetch();
+      
+      ratesCollection.map(async (rateList, idx) => {
+        rateList.map(rate => rate.rateSheet = rateSheets[idx].id);
+        rateSheets[idx].rates = await Rates.createEach(rateList).fetch();
+      });
+      res.ok(rateSheets);
+    } catch (e) {
+      res.badRequest(e);
+    }
   }
 
 };
