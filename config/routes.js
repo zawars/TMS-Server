@@ -56,6 +56,9 @@ module.exports.routes = {
   // Contracts
   'POST /api/v1/contracts': 'ContractsController.create',
 
+  // RateSheets
+  'POST /api/v1/getBatchRateSheets': 'RateSheetsController.getBatchRateSheets',
+
   // Attachments
   'POST /api/v1/attachments': 'AttachmentsController.create',
   'DELETE /api/v1/attachments/:id': 'AttachmentsController.delete',
