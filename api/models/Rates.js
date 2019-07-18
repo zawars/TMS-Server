@@ -42,7 +42,7 @@ module.exports = {
     destinationCountry: {
       type: 'string'
     },
-    originPostalCode: {
+    destinationPostalCode: {
       type: 'string'
     },
     minCharge: {
