@@ -11,7 +11,7 @@ module.exports = {
     try {
       let rateSheetsIds = req.body.rateSheetsIds;
 
-      const rateSheets = await RateSheets.find({ id: { in: rateSheetsIds } }).populateAll;
+      const rateSheets = await RateSheets.find({ id: { in: rateSheetsIds } }).populateAll();
 
       res.ok(rateSheets);
     } catch (e) {
