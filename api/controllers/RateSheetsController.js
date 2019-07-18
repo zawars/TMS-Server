@@ -11,7 +11,7 @@ module.exports = {
     try {
       let rateSheetsIds = req.body.rateSheetsIds;
 
-      const rateSheets = await RateSheets.find({ id: { in: rateSheetsIds } }).populate('rates');
+      const rateSheets = await RateSheets.find({ id: { in: rateSheetsIds } }).populate('rates').populate('dropdownMapper');
 
       res.ok(rateSheets);
     } catch (e) {
