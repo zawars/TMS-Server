@@ -87,6 +87,10 @@ module.exports.bootstrap = async function () {
         values: []
       },
       {
+        field: 'Vendor Services',
+        values: []
+      },
+      {
         field: 'User Type',
         values: []
       },
