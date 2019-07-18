@@ -147,7 +147,7 @@ module.exports = {
       model: 'dropdownMapper',
     },
     class: {
-      type: 'dropdownMapper',
+      model: 'dropdownMapper',
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
