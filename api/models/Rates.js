@@ -25,13 +25,13 @@ module.exports = {
       type: 'string'
     },
     originArea: {
-      type: 'number'
+      type: 'string'
     },
     originCountry: {
-      type: 'number'
+      type: 'string'
     },
     destinationCity: {
-      type: 'number'
+      type: 'string'
     },
     destinationState: {
       type: 'string'
@@ -46,13 +46,13 @@ module.exports = {
       type: 'string'
     },
     minCharge: {
-      type: 'number'
+      type: 'string'
     },
     maxCharge: {
-      type: 'number'
+      type: 'string'
     },
     weightBreaks: {
-      type: 'number'
+      type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗

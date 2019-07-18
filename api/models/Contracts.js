@@ -14,8 +14,7 @@ module.exports = {
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
     uid: {
       type: 'number',
-      unique: true,
-      required: true
+      unique: true
     },
     name: {
       type: 'string',
@@ -72,7 +71,7 @@ module.exports = {
 
   beforeCreate: (values, cb) => {
     UtilityService.contractCounter++;
-    values.uid = UtilityService.counter;
+    values.uid = UtilityService.contractCounter;
     cb();
   }
 
