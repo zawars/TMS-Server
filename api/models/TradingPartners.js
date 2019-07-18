@@ -90,9 +90,6 @@ module.exports = {
     handlingUnit: {
       type: 'string',
     },
-    class: {
-      type: 'string',
-    },
     huType: {
       type: 'string',
     },
@@ -148,6 +145,9 @@ module.exports = {
     },
     services: {
       model: 'dropdownMapper',
+    },
+    class: {
+      type: 'dropdownMapper',
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
