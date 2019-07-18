@@ -109,7 +109,7 @@ module.exports = {
         id: id
       }).set({
         name: obj.name
-      }).then(response => {
+      }).fetch().then(response => {
         res.ok({
           data: response,
           ...langFiles

@@ -75,10 +75,6 @@ module.exports.bootstrap = async function () {
         values: []
       },
       {
-        field: 'Billing State',
-        values: []
-      },
-      {
         field: 'Currency',
         values: []
       },
