@@ -144,7 +144,7 @@ module.exports = {
       model: 'dropdownMapper',
     },
     services: {
-      model: 'dropdownMapper',
+      collection: 'dropdownMapper',
     },
     classType: {
       model: 'dropdownMapper',
