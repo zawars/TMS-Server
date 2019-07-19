@@ -139,4 +139,10 @@ module.exports.bootstrap = async function () {
     let uid = contracts[contracts.length - 1].uid;
     UtilityService.contractCounter = uid;
   }
+
+  if (await RateSheets.count() > 0) {
+    let rateShheets = await RateSheets.find();
+    let uid = rateShheets[rateShheets.length - 1].uid;
+    UtilityService.rateSheetCounter = uid;
+  }
 };
