@@ -12,6 +12,10 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    uid: {
+      type: 'number',
+      unique: true
+    },
     name: {
       type: 'string'
     },
@@ -53,5 +57,11 @@ module.exports = {
       via: 'rateSheet'
     },
   },
+
+  beforeCreate: (values, cb) => {
+    UtilityService.rateSheetCounter++;
+    values.uid = UtilityService.rateSheetCounter;
+    cb();
+  }
 
 };
