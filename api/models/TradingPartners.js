@@ -114,6 +114,9 @@ module.exports = {
     confirmationEmail: {
       type: 'string',
     },
+    type: {
+      type: 'string',
+    },
     isActive: {
       type: 'boolean',
       defaultsTo: true
@@ -125,7 +128,7 @@ module.exports = {
     logo: {
       model: 'attachments',
     },
-    type: {
+    vendorType: {
       model: 'dropdownMapper'
     },
     freightTerms: {
