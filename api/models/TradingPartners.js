@@ -12,6 +12,11 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    uid: {
+      type: 'number',
+      unique: true,
+      required: true
+    },
     name: {
       type: 'string',
     },
@@ -166,5 +171,11 @@ module.exports = {
       via: 'vendor'
     }
   },
+
+  beforeCreate: (values, cb) => {
+    UtilityService.tradingPartnerCounter++;
+    values.uid = UtilityService.tradingPartnerCounter;
+    cb();
+  }
 
 };
