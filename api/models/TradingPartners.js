@@ -81,9 +81,6 @@ module.exports = {
     consigneeCountry: {
       type: 'string',
     },
-    productName: {
-      type: 'string',
-    },
     nmfc: {
       type: 'string',
     },
@@ -151,6 +148,14 @@ module.exports = {
     },
     classType: {
       model: 'dropdownMapper',
+    },
+    locations: {
+      collection: 'locations',
+      via: 'tradingPartner'
+    },
+    products: {
+      collection: 'products',
+      via: 'tradingPartner'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
