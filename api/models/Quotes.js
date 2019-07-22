@@ -26,42 +26,45 @@ module.exports = {
     pickUpDate: {
       type: 'string'
     },
-    deliveryDate: {
-      type: 'string'
+    freight: {
+      type: 'json'
     },
-    description: {
-      type: 'string'
-    },
-    huCNT: {
-      type: 'string'
-    },
-    pieces: {
-      type: 'string'
-    },
-    nmFC: {
-      type: 'string'
-    },
-    weight: {
-      type: 'string'
-    },
-    length: {
-      type: 'string'
-    },
-    width: {
-      type: 'string'
-    },
-    height: {
-      type: 'string'
-    },
-    cube: {
-      type: 'string'
-    },
-    density: {
-      type: 'string'
-    },
-    hazmatUN: {
-      type: 'string'
-    },
+    // deliveryDate: {
+    //   type: 'string'
+    // },
+    // description: {
+    //   type: 'string'
+    // },
+    // huCNT: {
+    //   type: 'string'
+    // },
+    // pieces: {
+    //   type: 'string'
+    // },
+    // nmFC: {
+    //   type: 'string'
+    // },
+    // weight: {
+    //   type: 'string'
+    // },
+    // length: {
+    //   type: 'string'
+    // },
+    // width: {
+    //   type: 'string'
+    // },
+    // height: {
+    //   type: 'string'
+    // },
+    // cube: {
+    //   type: 'string'
+    // },
+    // density: {
+    //   type: 'string'
+    // },
+    // hazmatUN: {
+    //   type: 'string'
+    // },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -82,29 +85,23 @@ module.exports = {
     deliverToCountry: {
       model: 'dropdownMapper'
     },
-    product: {
-      model: 'dropdownMapper'
-    },
-    handlingUnit: {
-      model: 'dropdownMapper'
-    },
-    lengthUnit: {
-      model: 'dropdownMapper'
-    },
-    cubeUnit: {
-      model: 'dropdownMapper'
-    },
-    cubeUnit: {
-      model: 'dropdownMapper'
-    },
-    cuFt: {
-      model: 'dropdownMapper'
-    },
-    class: {
-      model: 'dropdownMapper'
-    },
-    accessorials: {
-      model: 'dropdownMapper'
+    // product: {
+    //   model: 'dropdownMapper'
+    // },
+    // handlingUnit: {
+    //   model: 'dropdownMapper'
+    // },
+    // lengthUnit: {
+    //   model: 'dropdownMapper'
+    // },
+    // cubeUnit: {
+    //   model: 'dropdownMapper'
+    // },
+    // class: {
+    //   model: 'dropdownMapper'
+    // },
+    services: {
+      collection: 'dropdownMapper',
     },
     rate: {
       model: 'rates'
