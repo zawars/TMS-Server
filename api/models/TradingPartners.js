@@ -15,7 +15,6 @@ module.exports = {
     uid: {
       type: 'number',
       unique: true,
-      required: true
     },
     name: {
       type: 'string',
