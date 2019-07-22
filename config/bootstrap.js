@@ -134,6 +134,12 @@ module.exports.bootstrap = async function () {
     console.log('Dropdown seeds planted. Ready to grow.');
   }
 
+  if (await TradingPartners.count() > 0) {
+    let tradingPartners = await TradingPartners.find();
+    let uid = tradingPartners[tradingPartners.length - 1].uid;
+    UtilityService.tradingPartnerCounter = uid;
+  }
+
   if (await Contracts.count() > 0) {
     let contracts = await Contracts.find();
     let uid = contracts[contracts.length - 1].uid;
