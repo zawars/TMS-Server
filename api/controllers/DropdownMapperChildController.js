@@ -11,7 +11,7 @@ module.exports = {
     try {
       let query = req.params.query;
 
-      let dropDown = await Dropdown.findOne({ field: 'Cities'});
+      let dropDown = await Dropdown.findOne({ field: 'Cities' });
 
       const cities = await DropdownMapper.find({
         dropdown: dropDown.id,
@@ -20,10 +20,10 @@ module.exports = {
             'contains': query
           }
         }]
-      }).papulateAll();
+      }).populateAll();
       res.ok(cities);
     } catch (e) {
-      res.badRequest(e);
+      res.ok(e);
     }
   },
 
