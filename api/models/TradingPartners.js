@@ -111,6 +111,7 @@ module.exports = {
     },
     type: {
       type: 'string',
+      isIn: ['Vendor', 'Customer'],
     },
     isActive: {
       type: 'boolean',

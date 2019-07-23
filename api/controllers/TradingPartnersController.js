@@ -17,23 +17,37 @@ module.exports = {
   create: async (req, res) => {
     let data = req.body;
     let locations = data.locations;
+    let products = data.products;
     delete(data.locations);
+    delete(data.products);
 
     let partner = await TradingPartners.create(data).fetch();
     locations.forEach(location => {
-      location.tradingPartner = partner.id
+      location.tradingPartner = partner.id;
     });
 
     let locationsList = await Locations.createEach(locations).fetch();
     partner.locations = locationsList;
 
-    res.ok(locations);
+    // Check for products and create them if being sent by the user, in case of Customer.
+    if (products) {
+      products.forEach(product => {
+        product.tradingPartner = partner.id;
+      });
+
+      let productsList = await Products.createEach(products).fetch();
+      partner.products = productsList;
+    }
+
+    res.ok(partner);
   },
 
   update: async (req, res) => {
     let data = req.body;
     let locations = data.locations;
+    let products = data.products;
     delete(data.locations);
+    delete(data.products);
 
     let partner = await TradingPartners.update({
       id: req.params.id
@@ -56,6 +70,24 @@ module.exports = {
       partner.locations = locationsList;
     }
 
-    res.ok(locations);
+    // Products section
+    if (products) {
+      let toBeCreatedProducts = [];
+      products.forEach(product => {
+        if (product.id == undefined) {
+          product.tradingPartner = partner.id;
+          product.handlingUnit = product.handlingUnit.id;
+          product.class = product.class.id;
+          toBeCreatedProducts.push(product);
+        }
+      });
+
+      if (toBeCreatedProducts.length > 0) {
+        let productsList = await Products.createEach(toBeCreatedProducts).fetch();
+        partner.products = productsList;
+      }
+    }
+
+    res.ok(partner);
   },
 };

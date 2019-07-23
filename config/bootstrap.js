@@ -118,6 +118,10 @@ module.exports.bootstrap = async function () {
         field: 'Rate Break UOM',
         values: []
       },
+      {
+        field: 'Location Type',
+        values: []
+      },
     ];
 
     data.forEach(async val => {
