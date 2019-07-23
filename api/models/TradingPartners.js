@@ -31,12 +31,6 @@ module.exports = {
     city: {
       type: 'string',
     },
-    state: {
-      type: 'string',
-    },
-    country: {
-      type: 'string',
-    },
     contactName: {
       type: 'string',
     },
@@ -131,6 +125,12 @@ module.exports = {
     },
     vendorType: {
       model: 'dropdownMapper'
+    },
+    state: {
+      model: 'dropdownMapper',
+    },
+    country: {
+      model: 'dropdownMapper',
     },
     freightTerms: {
       model: 'dropdownMapper',
