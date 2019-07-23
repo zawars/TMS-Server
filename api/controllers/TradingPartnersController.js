@@ -37,18 +37,24 @@ module.exports = {
 
     let partner = await TradingPartners.update({
       id: req.params.id
-    }).set(data);
+    }).set(data).fetch();
+    partner = partner[0];
 
     let toBeCreatedLocations = [];
-    location.forEach(location => {
+    locations.forEach(location => {
       if (location.id == undefined) {
         location.tradingPartner = partner.id;
+        location.type = location.type.id;
+        location.state = location.state.id;
+        location.country = location.country.id;
         toBeCreatedLocations.push(location);
       }
     });
 
-    let locationsList = await Locations.createEach(locations).fetch();
-    partner.locations = locationsList;
+    if (toBeCreatedLocations.length > 0) {
+      let locationsList = await Locations.createEach(toBeCreatedLocations).fetch();
+      partner.locations = locationsList;
+    }
 
     res.ok(locations);
   },

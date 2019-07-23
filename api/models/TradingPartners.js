@@ -123,7 +123,7 @@ module.exports = {
     logo: {
       model: 'attachments',
     },
-    vendorType: {
+    partnerType: {
       model: 'dropdownMapper'
     },
     state: {
