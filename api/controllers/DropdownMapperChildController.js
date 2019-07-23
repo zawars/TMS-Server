@@ -27,5 +27,23 @@ module.exports = {
     }
   },
 
+  searchPostalCode: async (req, res) => {
+    try {
+      let query = req.params.query;
+
+      const postalCodes = await DropdownMapperChild.find({
+        or: [{
+          name: {
+            'contains': query
+          }
+        }]
+      }).populateAll();
+
+      res.ok(postalCodes);
+    } catch (e) {
+      res.ok(e);
+    }
+  },
+
 };
 
