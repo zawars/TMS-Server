@@ -12,6 +12,10 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    uid: {
+      type: 'number',
+      unique: true,
+    },
     name: {
       type: 'string',
     },
@@ -79,9 +83,6 @@ module.exports = {
       type: 'string',
     },
     consigneeCountry: {
-      type: 'string',
-    },
-    productName: {
       type: 'string',
     },
     nmfc: {
@@ -152,6 +153,14 @@ module.exports = {
     classType: {
       model: 'dropdownMapper',
     },
+    locations: {
+      collection: 'locations',
+      via: 'tradingPartner'
+    },
+    products: {
+      collection: 'products',
+      via: 'tradingPartner'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
@@ -161,5 +170,11 @@ module.exports = {
       via: 'vendor'
     }
   },
+
+  beforeCreate: (values, cb) => {
+    UtilityService.tradingPartnerCounter++;
+    values.uid = UtilityService.tradingPartnerCounter;
+    cb();
+  }
 
 };
