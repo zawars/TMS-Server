@@ -21,10 +21,10 @@ module.exports = {
     handlingUnit: {
       type: 'string'
     },
-    class: {
+    classType: {
       type: 'string'
     },
-    huType: {
+    huCount: {
       type: 'string'
     },
 

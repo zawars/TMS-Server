@@ -24,6 +24,9 @@ module.exports = {
     let partner = await TradingPartners.create(data).fetch();
     locations.forEach(location => {
       location.tradingPartner = partner.id;
+      location.type = location.type.id;
+      location.state = location.state.id;
+      location.country = location.country.id;
     });
 
     let locationsList = await Locations.createEach(locations).fetch();
@@ -33,6 +36,8 @@ module.exports = {
     if (products) {
       products.forEach(product => {
         product.tradingPartner = partner.id;
+        product.handlingUnit = product.handlingUnit.id;
+        product.classType = product.classType.id;
       });
 
       let productsList = await Products.createEach(products).fetch();
@@ -77,7 +82,7 @@ module.exports = {
         if (product.id == undefined) {
           product.tradingPartner = partner.id;
           product.handlingUnit = product.handlingUnit.id;
-          product.class = product.class.id;
+          product.classType = product.classType.id;
           toBeCreatedProducts.push(product);
         }
       });

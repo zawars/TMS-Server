@@ -151,9 +151,6 @@ module.exports = {
     services: {
       collection: 'dropdownMapper',
     },
-    classType: {
-      model: 'dropdownMapper',
-    },
     locations: {
       collection: 'locations',
       via: 'tradingPartner'
