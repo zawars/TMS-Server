@@ -20,7 +20,7 @@ module.exports = {
 
     DropdownMapper.findOne({
       id: id
-    }).then(dropdownObj => {
+    }).populateAll().then(dropdownObj => {
       if (dropdownObj != undefined) {
         let temp = {};
         langsList.map(val => {
