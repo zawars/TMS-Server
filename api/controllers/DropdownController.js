@@ -19,13 +19,6 @@ module.exports = {
     });
   },
 
-  create: (req, res) => {
-    let data = req.body;
-    Dropdown.create(data).populate('values').then(response => {
-      res.ok(response);
-    });
-  },
-
   update: async (req, res) => {
     let data = req.body;
     let langs = {};
@@ -41,7 +34,7 @@ module.exports = {
       langsFile[val] = JSON.parse(fs.readFileSync(`assets/langs/${val}.json`, 'utf8'));
       langsFile[val] = langs[val];
       fs.writeFileSync(`assets/langs/${val}.json`, JSON.stringify(langsFile[val], null, 2), options);
-      delete (data[val]);
+      delete(data[val]);
     });
 
     await Dropdown.update({
@@ -64,4 +57,3 @@ module.exports = {
 
 
 };
-

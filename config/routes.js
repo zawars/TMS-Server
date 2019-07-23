@@ -75,7 +75,6 @@ module.exports.routes = {
   // Dropdowns
   'GET  /api/v1/dropdown': 'DropdownController.index',
   'PATCH  /api/v1/dropdown/:id': 'DropdownController.update',
-  'POST  /api/v1/dropdown': 'DropdownController.create',
   'POST  /api/v1/dropdownMapper/position': 'DropdownMapperController.positionSort',
   'POST  /api/v1/dropdownMapper': 'DropdownMapperController.create',
   'GET  /api/v1/dropdownMapper/:id': 'DropdownMapperController.show',
