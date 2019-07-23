@@ -1,5 +1,5 @@
 /**
- * DropdownMapper.js
+ * DropdownMapperChild.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,28 +12,23 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+
     name: {
       type: "string"
-    },
-    position: {
-      type: "number"
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
+    dropdownMapper: {
+      model: "dropdownMapper"
+    }
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    dropdown: {
-      model: "dropdown"
-    },
-    values: {
-      collection: "dropdownMapperChild",
-      via: "dropdownMapper"
-    }
+
   },
 
 };
