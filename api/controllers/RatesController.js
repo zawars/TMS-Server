@@ -50,11 +50,27 @@ module.exports = {
         }],
         weightBreaks: ratePrams.weight
       }).populateAll();
+
+      let contractIds = [];
+
+      rates.forEach(rate => {
+        contractIds.push(rate.rateSheet.contract);
+      });
+
+      const contracts = await Contracts.find({ id: { in: contractIds } }).populateAll();
+
+      rates.forEach(rate => {
+        let contract = contracts.find(val => val.rateSheet.id == rate.rateSheet.id);
+        if(vendor) {
+          rates.vendor = contract.vendor
+        }
+      });
+
       res.ok(rates);
     } catch (e) {
       res.ok(e);
     }
   },
-  
+
 };
 
