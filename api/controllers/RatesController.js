@@ -61,7 +61,7 @@ module.exports = {
 
       rates.forEach(rate => {
         let contract = contracts.find(val => val.rateSheet.id == rate.rateSheet.id);
-        if(vendor) {
+        if(contract) {
           rates.vendor = contract.vendor
         }
       });
