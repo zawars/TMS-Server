@@ -59,18 +59,26 @@ module.exports = {
 
       const contracts = await Contracts.find({ id: { in: contractIds } }).populateAll();
 
-      let vendors = [];
+      let vendorsList = [];
+      let vendorsIds = [];
 
       rates.forEach(rate => {
         contracts.forEach(contract => {
           let findContract = contract.rateSheets.find(val => val.id == rate.rateSheet.id);
           if (findContract) {  
-            vendors.push({vendor: contract.vendor , rateSheet: rate.rateSheet.id});
+            vendorsIds.push(contract.vendor.id);
+            vendorsList.push({vendor: contract.vendor , rateSheet: rate.rateSheet.id});
           }
         });
       });
+
+      const vendors = await TradingPartners.find({ id: { in: vendorsIds } }).populateAll();
+
+      vendorsList.forEach(vendor => {
+        vendor.vendor = vendors.find(val => val.id == vendor.id);
+      });
       
-      res.ok({rates, vendors});
+      res.ok({rates, vendorsList});
     } catch (e) {
       res.ok(e);
     }
