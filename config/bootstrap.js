@@ -155,4 +155,10 @@ module.exports.bootstrap = async function () {
     let uid = rateShheets[rateShheets.length - 1].uid;
     UtilityService.rateSheetCounter = uid;
   }
+
+  if (await Quotes.count() > 0) {
+    let quotes = await Quotes.find();
+    let uid = quotes[quotes.length - 1].uid;
+    UtilityService.quoteCounter = uid;
+  }
 };
