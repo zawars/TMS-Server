@@ -161,4 +161,10 @@ module.exports.bootstrap = async function () {
     let uid = quotes[quotes.length - 1].uid;
     UtilityService.quoteCounter = uid;
   }
+
+  if (await Orders.count() > 0) {
+    let orders = await Orders.find();
+    let uid = orders[orders.length - 1].uid;
+    UtilityService.orderCounter = uid;
+  }
 };

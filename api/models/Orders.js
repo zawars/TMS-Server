@@ -1,5 +1,5 @@
 /**
- * Quotes.js
+ * Orders.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -8,7 +8,6 @@
 module.exports = {
 
   attributes: {
-
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
@@ -17,23 +16,29 @@ module.exports = {
       type: 'number',
       unique: true
     },
-    quoteNumber: {
+    orderNumber: {
       type: 'string',
       unique: true
     },
-    name: {
+    status: {
       type: 'string'
     },
-    quoteDate: {
+    instructions: {
       type: 'string'
     },
-    pickUpDate: {
+    bolNumber: {
       type: 'string'
     },
-    pickUpFromCity: {
+    refNumType: {
+      type: 'string'
+    },
+    refNumValue: {
+      type: 'string'
+    },
+    pickUpDetails: {
       type: 'json'
     },
-    deliverToCity: {
+    dropOfDetails: {
       type: 'json'
     },
     freight: {
@@ -42,42 +47,9 @@ module.exports = {
     services: {
       type: 'json'
     },
-    // deliveryDate: {
-    //   type: 'string'
-    // },
-    // description: {
-    //   type: 'string'
-    // },
-    // huCNT: {
-    //   type: 'string'
-    // },
-    // pieces: {
-    //   type: 'string'
-    // },
-    // nmFC: {
-    //   type: 'string'
-    // },
-    // weight: {
-    //   type: 'string'
-    // },
-    // length: {
-    //   type: 'string'
-    // },
-    // width: {
-    //   type: 'string'
-    // },
-    // height: {
-    //   type: 'string'
-    // },
-    // cube: {
-    //   type: 'string'
-    // },
-    // density: {
-    //   type: 'string'
-    // },
-    // hazmatUN: {
-    //   type: 'string'
-    // },
+    isPlaced: {
+      type: 'boolean'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -86,27 +58,6 @@ module.exports = {
     customer: {
       model: 'tradingPartners'
     },
-    pickUpFromCountry: {
-      model: 'dropdownMapper'
-    },
-    deliverToCountry: {
-      model: 'dropdownMapper'
-    },
-    // product: {
-    //   model: 'dropdownMapper'
-    // },
-    // handlingUnit: {
-    //   model: 'dropdownMapper'
-    // },
-    // lengthUnit: {
-    //   model: 'dropdownMapper'
-    // },
-    // cubeUnit: {
-    //   model: 'dropdownMapper'
-    // },
-    // class: {
-    //   model: 'dropdownMapper'
-    // },
     rate: {
       model: 'rates'
     },
@@ -121,9 +72,9 @@ module.exports = {
   },
 
   beforeCreate: (values, cb) => {
-    UtilityService.quoteCounter++;
-    values.uid = UtilityService.quoteCounter;
-    values.quoteNumber = 'ROH' + UtilityService.quoteCounter;
+    UtilityService.orderCounter++;
+    values.uid = UtilityService.orderCounter;
+    values.orderNumber = 'SO' + UtilityService.orderCounter;
     cb();
   }
 
