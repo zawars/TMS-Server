@@ -23,6 +23,12 @@ module.exports = {
     status: {
       type: 'string'
     },
+    pickUpDate: {
+      type: 'string'
+    },
+    deliveryDate: {
+      type: 'string'
+    },
     instructions: {
       type: 'string'
     },
@@ -35,11 +41,77 @@ module.exports = {
     refNumValue: {
       type: 'string'
     },
-    pickUpDetails: {
-      type: 'json'
+    pickupfLocation: {
+      type: 'string'
     },
-    dropOfDetails: {
-      type: 'json'
+    pickupAddressName: {
+      type: 'string'
+    },
+    pickupContact: {
+      type: 'string'
+    },
+    pickupAddress: {
+      type: 'string'
+    },
+    pickupPhone: {
+      type: 'string'
+    },
+    pickupAddress2: {
+      type: 'string'
+    },
+    pickupFax: {
+      type: 'string'
+    },
+    pickupCity: {
+      type: 'string'
+    },
+    pickupEmail: {
+      type: 'string'
+    },
+    pickupPostalCode: {
+      type: 'string'
+    },
+    pickupHours: {
+      type: 'string'
+    },
+    pickupMinutes: {
+      type: 'string'
+    },
+    dropoffLocation: {
+      type: 'string'
+    },
+    dropoffAddressName: {
+      type: 'string'
+    },
+    dropoffContact: {
+      type: 'string'
+    },
+    dropoffAddress: {
+      type: 'string'
+    },
+    dropoffPhone: {
+      type: 'string'
+    },
+    dropoffAddress2: {
+      type: 'string'
+    },
+    dropoffFax: {
+      type: 'string'
+    },
+    dropoffCity: {
+      type: 'string'
+    },
+    dropoffEmail: {
+      type: 'string'
+    },
+    dropoffPostalCode: {
+      type: 'string'
+    },
+    dropoffHours: {
+      type: 'string'
+    },
+    dropoffMinutes: {
+      type: 'string'
     },
     freight: {
       type: 'json'
@@ -55,6 +127,12 @@ module.exports = {
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
+    pickupState:{
+      model: 'dropdownMapper'
+    },
+    dropoffState: {
+      model: 'dropdownMapper'
+    },
     customer: {
       model: 'tradingPartners'
     },

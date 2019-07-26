@@ -87,4 +87,7 @@ module.exports.routes = {
   // DropdownMapperChild
   'GET /api/v1/dropdownMapper/search/city/:query': 'DropdownMapperChildController.searchCity',
   'GET /api/v1/dropdownMapper/search/postalCode/:query': 'DropdownMapperChildController.searchPostalCode',
+
+  // Orders
+  'GET /api/v1/getOrders/:query': 'OrdersController.getOrders',
 };
