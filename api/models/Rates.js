@@ -54,6 +54,9 @@ module.exports = {
     weightBreaks: {
       type: 'string'
     },
+    appliedMarkup: {
+      type: 'number',
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

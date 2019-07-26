@@ -92,4 +92,7 @@ module.exports.routes = {
 
   // Orders
   'GET /api/v1/getOrders/:query': 'OrdersController.getOrders',
+
+  // Markup
+  'POST /api/v1/markup': 'MarkupController.create',
 };
