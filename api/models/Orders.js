@@ -113,6 +113,12 @@ module.exports = {
     dropoffMinutes: {
       type: 'string'
     },
+    pickupCountry: {
+      type: 'json'
+    },
+    dropoffCountry: {
+      type: 'json'
+    },
     freight: {
       type: 'json'
     },
