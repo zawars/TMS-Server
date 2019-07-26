@@ -13,8 +13,12 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    quoteNumber: {
+    uid: {
       type: 'number',
+      unique: true
+    },
+    quoteNumber: {
+      type: 'string',
       unique: true
     },
     name: {
@@ -26,7 +30,16 @@ module.exports = {
     pickUpDate: {
       type: 'string'
     },
+    pickUpFromCity: {
+      type: 'json'
+    },
+    deliverToCity: {
+      type: 'json'
+    },
     freight: {
+      type: 'json'
+    },
+    services: {
       type: 'json'
     },
     // deliveryDate: {
@@ -73,13 +86,7 @@ module.exports = {
     customer: {
       model: 'tradingPartners'
     },
-    pickUpFromCity: {
-      model: 'dropdownMapper'
-    },
     pickUpFromCountry: {
-      model: 'dropdownMapper'
-    },
-    deliverToCity: {
       model: 'dropdownMapper'
     },
     deliverToCountry: {
@@ -100,9 +107,6 @@ module.exports = {
     // class: {
     //   model: 'dropdownMapper'
     // },
-    services: {
-      collection: 'dropdownMapper',
-    },
     rate: {
       model: 'rates'
     },
@@ -115,6 +119,13 @@ module.exports = {
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
   },
+
+  beforeCreate: (values, cb) => {
+    UtilityService.quoteCounter++;
+    values.uid = UtilityService.quoteCounter;
+    values.quoteNumber = 'ROH' + UtilityService.quoteCounter;
+    cb();
+  }
 
 };
 

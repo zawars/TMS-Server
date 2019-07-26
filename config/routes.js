@@ -63,6 +63,9 @@ module.exports.routes = {
   'POST /api/v1/getBatchRateSheets': 'RateSheetsController.getBatchRateSheets',
   'POST /api/v1/createBatchRateSheets': 'RateSheetsController.createBatchRateSheets',
 
+  // Rates
+  'POST /api/v1/rates/search/': 'RatesController.searchRates',
+
   // Attachments
   'POST /api/v1/attachments': 'AttachmentsController.create',
   'DELETE /api/v1/attachments/:id': 'AttachmentsController.delete',
@@ -85,4 +88,7 @@ module.exports.routes = {
   // DropdownMapperChild
   'GET /api/v1/dropdownMapper/search/city/:query': 'DropdownMapperChildController.searchCity',
   'GET /api/v1/dropdownMapper/search/postalCode/:query': 'DropdownMapperChildController.searchPostalCode',
+
+  // Orders
+  'GET /api/v1/getOrders/:query': 'OrdersController.getOrders',
 };

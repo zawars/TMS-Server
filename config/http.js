@@ -24,7 +24,7 @@ module.exports.http = {
    ****************************************************************************/
 
   middleware: {
-    bootstrapAssets: express.static(process.cwd().split('\\' + process.cwd().split('\\').pop())[0] + '/uploads'),
+    bootstrapAssets: express.static(process.cwd().split('\\' + process.cwd().split('\\').pop())[0] + '/api/v1/uploads'),
     helmetGuard: helmet({
       frameguard: {
         action: 'deny'
