@@ -111,9 +111,15 @@ module.exports = {
             'contains': query
           },
           type
-        }
+        },
+        {
+          number: {
+            'contains': query
+          },
+          type
+        },
       ]
-    });
+    }).populateAll();
     res.ok(partners);
   },
 
