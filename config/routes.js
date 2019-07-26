@@ -54,6 +54,7 @@ module.exports.routes = {
   'GET /api/v1/tradingPartners/type/:type': 'TradingPartnersController.partnersByType',
   'POST /api/v1/tradingPartners': 'TradingPartnersController.create',
   'PATCH /api/v1/tradingPartners/:id': 'TradingPartnersController.update',
+  'GET /api/v1/tradingPartners/search/:type/:query': 'TradingPartnersController.search',
 
   // Contracts
   'POST /api/v1/contracts': 'ContractsController.create',
