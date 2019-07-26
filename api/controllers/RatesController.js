@@ -12,9 +12,8 @@ module.exports = {
       let ratePrams = req.body.searchObj;
 
       const rates = await Rates.find({
-        or: [
-          {
-            and: [{
+        or: [{
+          and: [{
               originCity: {
                 'contains': ratePrams.originCity
               }
@@ -23,9 +22,10 @@ module.exports = {
               destinationCity: {
                 'contains': ratePrams.destinationCity
               }
-            }]
-          }, {
-            and: [{
+            }
+          ]
+        }, {
+          and: [{
               originPostalCode: {
                 'contains': ratePrams.originPostalCode
               }
@@ -35,19 +35,19 @@ module.exports = {
                 'contains': ratePrams.destinationPostalCode
               }
             }
-            ]
+          ]
+        }],
+        and: [{
+            originCountry: {
+              'contains': ratePrams.originCountry
+            }
+          },
+          {
+            destinationCountry: {
+              'contains': ratePrams.destinationCountry
+            }
           }
         ],
-        and: [{
-          originCountry: {
-            'contains': ratePrams.originCountry
-          }
-        },
-        {
-          destinationCountry: {
-            'contains': ratePrams.destinationCountry
-          }
-        }],
         weightBreaks: ratePrams.weight
       }).populateAll();
 
@@ -57,7 +57,11 @@ module.exports = {
         contractIds.push(rate.rateSheet.contract);
       });
 
-      const contracts = await Contracts.find({ id: { in: contractIds } }).populateAll();
+      const contracts = await Contracts.find({
+        id: {
+          in: contractIds
+        }
+      }).populateAll();
 
       let vendorsList = [];
       let vendorsIds = [];
@@ -65,29 +69,41 @@ module.exports = {
       rates.forEach(rate => {
         contracts.forEach(contract => {
           let findContract = contract.rateSheets.find(val => val.id == rate.rateSheet.id);
-          if (findContract) {  
+          if (findContract) {
             vendorsIds.push(contract.vendor.id);
-            vendorsList.push({vendor: contract.vendor , rateSheet: rate.rateSheet.id});
+            vendorsList.push({
+              vendor: contract.vendor,
+              rateSheet: rate.rateSheet.id
+            });
           }
         });
       });
 
-      const vendors = await TradingPartners.find({ id: { in: vendorsIds } }).populateAll();
+      const vendors = await TradingPartners.find({
+        id: {
+          in: vendorsIds
+        }
+      }).populateAll();
 
       let rateSheetVendor = [];
 
       vendorsList.forEach(vendorObj => {
-        if(vendors.find(val => val.id == vendorObj.vendor.id)) {
+        if (vendors.find(val => val.id == vendorObj.vendor.id)) {
           vendorObj.vendor = vendors.find(val => val.id == vendorObj.vendor.id);
-          rateSheetVendor.push({vendor: vendorObj.vendor , rateSheet: vendorObj.rateSheet});
+          rateSheetVendor.push({
+            vendor: vendorObj.vendor,
+            rateSheet: vendorObj.rateSheet
+          });
         }
       });
-      
-      res.ok({rates, rateSheetVendor});
+
+      res.ok({
+        rates,
+        rateSheetVendor
+      });
     } catch (e) {
       res.ok(e);
     }
   },
 
 };
-

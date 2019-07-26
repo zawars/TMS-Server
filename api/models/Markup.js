@@ -1,5 +1,5 @@
 /**
- * RateSheets.js
+ * Markup.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -17,55 +17,50 @@ module.exports = {
       unique: true
     },
     name: {
-      type: 'string'
+      type: 'string',
     },
-    description: {
-      type: 'string'
+    effectiveFrom: {
+      type: 'string',
+    },
+    defaultPercentage: {
+      type: 'string',
+    },
+    appliesToAccesorials: {
+      type: 'string',
+    },
+    minAmount: {
+      type: 'number',
+    },
+    maxAmount: {
+      type: 'number',
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+    client: {
+      model: 'tradingPartners',
+    },
+    vendor: {
+      model: 'tradingPartners',
+    },
     contract: {
-      model: 'contracts'
+      model: 'contracts',
     },
-    rateType: {
-      model: 'dropdownMapper'
+    rateSheet: {
+      model: 'rateSheets',
     },
-    rateCalcUOM: {
-      model: 'dropdownMapper'
+    minAmountCurrency: {
+      model: 'dropdownMapper',
     },
-    rateCalcType: {
-      model: 'dropdownMapper'
+    maxAmountCurrency: {
+      model: 'dropdownMapper',
     },
-    rateBreaks: {
-      model: 'dropdownMapper'
-    },
-    rateBreakUOM: {
-      model: 'dropdownMapper'
-    },
-    currency: {
-      model: 'dropdownMapper'
-    },
-
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    rates: {
-      collection: 'rates',
-      via: 'rateSheet'
-    },
-    markups: {
-      collection: 'markup',
-      via: 'rateSheet'
-    }
-  },
 
-  beforeCreate: (values, cb) => {
-    UtilityService.rateSheetCounter++;
-    values.uid = UtilityService.rateSheetCounter;
-    cb();
-  }
+  },
 
 };
