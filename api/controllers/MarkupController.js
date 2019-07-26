@@ -12,7 +12,7 @@ module.exports = {
       rateSheet: data.rateSheet
     }).populateAll();
 
-    rates.map(rate => {
+    rates.map(async rate => {
       let markup = rate.minCharge * data.defaultPercentage / 100;
 
       if (data.minAmount < markup) {
