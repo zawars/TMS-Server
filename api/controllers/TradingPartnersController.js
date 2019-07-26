@@ -9,7 +9,7 @@ module.exports = {
   partnersByType: async (req, res) => {
     let partners = await TradingPartners.find({
       type: req.params.type
-    });
+    }).populateAll();
 
     res.ok(partners);
   },
@@ -95,4 +95,26 @@ module.exports = {
 
     res.ok(partner);
   },
+
+  search: async (req, res) => {
+    let query = req.params.query;
+    let type = req.params.type;
+    let partners = await TradingPartners.find({
+      or: [{
+          name: {
+            'contains': query
+          },
+          type
+        },
+        {
+          email: {
+            'contains': query
+          },
+          type
+        }
+      ]
+    });
+    res.ok(partners);
+  },
+
 };
