@@ -8,6 +8,8 @@
 module.exports = {
   create: async (req, res) => {
     let data = req.body;
+    data.client = data.client.id;
+    data.vendor = data.vendor.id;
     let rates = await Rates.find({
       rateSheet: data.rateSheet
     }).populateAll();
@@ -25,7 +27,9 @@ module.exports = {
 
       await Rates.update({
         id: rate.id
-      }).set(rate);
+      }).set({
+        appliedMarkup: rate.appliedMarkup
+      });
     });
 
     let markup = await Markup.create(data).fetch();
