@@ -26,9 +26,4 @@ module.exports.policies = {
     forgetPassword: true,
     renewPassword: true,
   },
-
-  UserController: {
-    create: true,
-  },
-
 };

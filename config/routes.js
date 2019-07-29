@@ -45,7 +45,7 @@ module.exports.routes = {
   'GET /api/v1/auth/logout': 'AuthController.logout',
 
   // User
-  'POST /api/v1/user': 'UserController.create',
+  // 'POST /api/v1/user': 'UserController.create',
   'POST /api/v1/user/sendmail': 'UserController.sendEmail',
   'GET /api/v1/user/search/:query': 'UserController.search',
   'GET /api/v1/user/lang/:id': 'UserController.fetchLanguage',

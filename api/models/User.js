@@ -38,19 +38,6 @@ module.exports = {
     },
     phone: {
       type: 'string',
-      unique: true,
-      required: true
-    },
-    address: {
-      type: 'string',
-    },
-    city: {
-      type: 'string',
-      required: true
-    },
-    country: {
-      type: 'string',
-      required: true
     },
     isBlocked: {
       type: 'boolean',
@@ -69,7 +56,7 @@ module.exports = {
       isIn: ['Admin', 'Customer', 'Vendor', 'Agent'],
       required: true
     },
-    Permission: {
+    permissions: {
       type: 'json',
     }
 
@@ -80,7 +67,7 @@ module.exports = {
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
-    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+    //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ F╩ ╩ ╩╚═╝╝╚╝╚═╝
   },
 
   customToJSON: function () {
@@ -106,4 +93,3 @@ module.exports = {
   }
 
 };
-

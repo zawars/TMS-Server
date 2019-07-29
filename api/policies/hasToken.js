@@ -6,7 +6,7 @@ module.exports = function (req, res, next) {
 
   // User is not allowed
   // (default res.forbidden() behavior can be overridden in `config/403.js`)
-  return res.forbidden({
+  return res.ok({
     message: 'You are not permitted to perform this action. Unauthorized or Access Token missing.'
   });
 };

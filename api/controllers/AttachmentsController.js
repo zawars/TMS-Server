@@ -8,7 +8,7 @@
 module.exports = {
   create: (req, res) => {
     req.file('attachment').upload({
-      dirname: '../../../api/v1/uploads/'
+      dirname: '../../../uploads/'
     }, async (err, uploadedFiles) => {
       if (err) {
         return res.send(500, err);

@@ -167,4 +167,17 @@ module.exports.bootstrap = async function () {
     let uid = orders[orders.length - 1].uid;
     UtilityService.orderCounter = uid;
   }
+
+  if (await User.count() > 0) {
+    await User.create({
+      username: 'admin',
+      email: 'zawar.shahid@gmail.com',
+      password: 'zawars',
+      firstName: 'Zawar',
+      lastName: 'Shahid',
+      phone: '03244663758',
+      isVerified: true,
+      role: 'Admin'
+    });
+  }
 };
