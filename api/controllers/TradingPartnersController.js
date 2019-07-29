@@ -54,6 +54,12 @@ module.exports = {
     delete(data.locations);
     delete(data.products);
 
+    let services = [];
+    data.services.map(service => {
+      services.push(service.id);
+    });
+    data.services = services;
+
     let partner = await TradingPartners.update({
       id: req.params.id
     }).set(data).fetch();

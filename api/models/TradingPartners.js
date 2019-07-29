@@ -61,50 +61,8 @@ module.exports = {
     paymentTerms: {
       type: 'string',
     },
-    consigneeName: {
-      type: 'string',
-    },
-    consigneeLocationType: {
-      type: 'string',
-    },
-    consigneeStreet: {
-      type: 'string',
-    },
-    consigneeCity: {
-      type: 'string',
-    },
-    consigneePostalCode: {
-      type: 'string',
-    },
-    consigneeCountry: {
-      type: 'string',
-    },
-    nmfc: {
-      type: 'string',
-    },
-    handlingUnit: {
-      type: 'string',
-    },
-    huType: {
-      type: 'string',
-    },
-    pickupName: {
-      type: 'string',
-    },
-    pickupLocationType: {
-      type: 'string',
-    },
-    pickupStreet: {
-      type: 'string',
-    },
-    pickupCity: {
-      type: 'string',
-    },
-    pickupPostalCode: {
-      type: 'string',
-    },
-    pickupCountry: {
-      type: 'string',
+    creditLimit: {
+      type: 'number',
     },
     confirmationEmail: {
       type: 'string',
