@@ -60,8 +60,8 @@ module.exports.routes = {
   'POST /api/v1/contracts': 'ContractsController.create',
 
   // RateSheets
-  'POST /api/v1/getBatchRateSheets': 'RateSheetsController.getBatchRateSheets',
-  'POST /api/v1/createBatchRateSheets': 'RateSheetsController.createBatchRateSheets',
+  'POST /api/v1/rateSheets/batch/get': 'RateSheetsController.getBatchRateSheets',
+  'POST /api/v1/rateSheets/batch/create': 'RateSheetsController.createBatchRateSheets',
   'GET /api/v1/rateSheets/contract/:id': 'RateSheetsController.getRateSheetsBycontract',
 
   // Rates
@@ -91,7 +91,7 @@ module.exports.routes = {
   'GET /api/v1/dropdownMapper/search/postalCode/:query': 'DropdownMapperChildController.searchPostalCode',
 
   // Orders
-  'GET /api/v1/getOrders/:query': 'OrdersController.getOrders',
+  'GET /api/v1/orders/status/:query': 'OrdersController.getOrdersByStatus',
 
   // Markup
   'POST /api/v1/markup': 'MarkupController.create',

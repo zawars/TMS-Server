@@ -7,7 +7,7 @@
 
 module.exports = {
 
-  getOrders: async (req, res) => {
+  getOrdersByStatus: async (req, res) => {
     try {
       let query = req.params.query;
 
