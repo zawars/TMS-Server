@@ -133,7 +133,7 @@ module.exports = {
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
-    pickupState:{
+    pickupState: {
       model: 'dropdownMapper'
     },
     dropoffState: {
@@ -152,7 +152,10 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
+    shipmentTracking: {
+      collection: 'shipmentTracking',
+      via: 'order'
+    },
   },
 
   beforeCreate: (values, cb) => {
@@ -163,4 +166,3 @@ module.exports = {
   }
 
 };
-

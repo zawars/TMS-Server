@@ -32,7 +32,7 @@ module.exports = {
     try {
       let orders = await Orders.find({
         vendor: req.params.id
-      });
+      }).populateAll();
 
       res.ok(orders);
     } catch (error) {

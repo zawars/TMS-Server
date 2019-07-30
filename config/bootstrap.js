@@ -122,6 +122,30 @@ module.exports.bootstrap = async function () {
         field: 'Location Type',
         values: []
       },
+      {
+        field: 'Shipment Status',
+        values: [{
+            name: 'Waiting for pick up',
+            position: 0,
+          },
+          {
+            name: 'Picked up',
+            position: 1,
+          },
+          {
+            name: 'In Transit',
+            position: 2,
+          },
+          {
+            name: 'Delivered',
+            position: 3,
+          },
+          {
+            name: 'Proof of delivery',
+            position: 4,
+          },
+        ]
+      },
     ];
 
     data.forEach(async val => {
