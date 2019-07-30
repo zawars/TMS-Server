@@ -6,19 +6,22 @@
  */
 
 module.exports = {
-  getOrdersByStatus: async (req, res) => {
+  getOrderByCustomer: async (req, res) => {
     try {
-      let query = req.params.query;
+      let id = req.params.id;
+      let status = req.params.status;
 
-      if (query == 'saved') {
+      if (status == 'saved') {
         const orders = await Orders.find({
+          customer: id,
           isPlaced: false
-        }).populateAll();
+        }).populateAll().sort('createdAt DESC');
         res.ok(orders);
-      } else if (query == 'placed') {
+      } else if (status == 'placed') {
         const orders = await Orders.find({
+          customer: id,
           isPlaced: true
-        }).populateAll();
+        }).populateAll().sort('createdAt DESC');
         res.ok(orders);
       } else {
         res.ok([]);

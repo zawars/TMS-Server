@@ -91,8 +91,11 @@ module.exports.routes = {
   'GET /api/v1/dropdownMapper/search/postalCode/:query': 'DropdownMapperChildController.searchPostalCode',
 
   // Orders
-  'GET /api/v1/orders/status/:query': 'OrdersController.getOrdersByStatus',
+  'GET /api/v1/getOrderByCustomer/:status/:id': 'OrdersController.getOrderByCustomer',
   'GET /api/v1/orders/vendor/:id': 'OrdersController.getVendorOrders',
+
+  // Quotes
+  'GET /api/v1/getQuotesByCustomer/:id': 'QuotesController.getQuotesByCustomer',
 
   // Markup
   'POST /api/v1/markup': 'MarkupController.create',

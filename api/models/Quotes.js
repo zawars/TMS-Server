@@ -42,42 +42,6 @@ module.exports = {
     services: {
       type: 'json'
     },
-    // deliveryDate: {
-    //   type: 'string'
-    // },
-    // description: {
-    //   type: 'string'
-    // },
-    // huCNT: {
-    //   type: 'string'
-    // },
-    // pieces: {
-    //   type: 'string'
-    // },
-    // nmFC: {
-    //   type: 'string'
-    // },
-    // weight: {
-    //   type: 'string'
-    // },
-    // length: {
-    //   type: 'string'
-    // },
-    // width: {
-    //   type: 'string'
-    // },
-    // height: {
-    //   type: 'string'
-    // },
-    // cube: {
-    //   type: 'string'
-    // },
-    // density: {
-    //   type: 'string'
-    // },
-    // hazmatUN: {
-    //   type: 'string'
-    // },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -92,21 +56,6 @@ module.exports = {
     deliverToCountry: {
       model: 'dropdownMapper'
     },
-    // product: {
-    //   model: 'dropdownMapper'
-    // },
-    // handlingUnit: {
-    //   model: 'dropdownMapper'
-    // },
-    // lengthUnit: {
-    //   model: 'dropdownMapper'
-    // },
-    // cubeUnit: {
-    //   model: 'dropdownMapper'
-    // },
-    // class: {
-    //   model: 'dropdownMapper'
-    // },
     rate: {
       model: 'rates'
     },
