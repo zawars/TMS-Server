@@ -6,18 +6,21 @@
  */
 
 module.exports = {
-
   getOrdersByStatus: async (req, res) => {
     try {
       let query = req.params.query;
 
-      if(query == 'saved') {
-        const orders = await Orders.find({ isPlaced: false }).populateAll();
+      if (query == 'saved') {
+        const orders = await Orders.find({
+          isPlaced: false
+        }).populateAll();
         res.ok(orders);
-      }else if(query == 'placed'){
-        const orders = await Orders.find({ isPlaced: true }).populateAll();
+      } else if (query == 'placed') {
+        const orders = await Orders.find({
+          isPlaced: true
+        }).populateAll();
         res.ok(orders);
-      }else {
+      } else {
         res.ok([]);
       }
     } catch (e) {
@@ -25,5 +28,18 @@ module.exports = {
     }
   },
 
-};
+  getVendorOrders: async (req, res) => {
+    try {
+      let orders = await Orders.find({
+        vendor: req.params.id
+      });
 
+      res.ok(orders);
+    } catch (error) {
+      res.ok({
+        message: error
+      });
+    }
+  },
+
+};

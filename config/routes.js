@@ -92,6 +92,7 @@ module.exports.routes = {
 
   // Orders
   'GET /api/v1/orders/status/:query': 'OrdersController.getOrdersByStatus',
+  'GET /api/v1/orders/vendor/:id': 'OrdersController.getVendorOrders',
 
   // Markup
   'POST /api/v1/markup': 'MarkupController.create',
