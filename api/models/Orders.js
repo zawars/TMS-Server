@@ -44,7 +44,7 @@ module.exports = {
     pickupfLocation: {
       type: 'string'
     },
-    pickupAddressName: {
+    shipperName: {
       type: 'string'
     },
     pickupContact: {
@@ -80,7 +80,7 @@ module.exports = {
     dropoffLocation: {
       type: 'string'
     },
-    dropoffAddressName: {
+    consigneeName: {
       type: 'string'
     },
     dropoffContact: {
@@ -127,6 +127,12 @@ module.exports = {
     },
     isPlaced: {
       type: 'boolean'
+    },
+    accumulatedPieces: {
+      type: 'number'
+    },
+    accumulatedWeight: {
+      type: 'number'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
