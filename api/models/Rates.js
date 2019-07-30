@@ -46,10 +46,10 @@ module.exports = {
       type: 'string'
     },
     minCharge: {
-      type: 'string'
+      type: 'number'
     },
     maxCharge: {
-      type: 'string'
+      type: 'number'
     },
     weightBreaks: {
       type: 'string'
