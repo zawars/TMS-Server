@@ -142,6 +142,12 @@ module.exports = {
     dropoffState: {
       model: 'dropdownMapper'
     },
+    pickupLocation: {
+      model: 'locations'
+    },
+    dropoffLocation: {
+      model: 'locations'
+    },
     customer: {
       model: 'tradingPartners'
     },

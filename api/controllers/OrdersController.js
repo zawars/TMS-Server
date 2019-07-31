@@ -46,4 +46,69 @@ module.exports = {
     }
   },
 
+  createOrderBatchFreights: async (req, res) => {
+    try {
+      let orderObj = req.body.orderObj;
+
+      let freightCollection = orderObj.freights;
+      delete (orderObj.freights);
+
+      let order = await Orders.create(orderObj).fetch();
+
+      freightCollection.map(freight => {
+        freight.order = order.id;
+      });
+
+      let freights = await Freights.createEach(freightCollection).fetch();
+
+      order.freights = freights;
+
+      res.ok(order);
+    } catch (e) {
+      res.badRequest(e);
+    }
+  },
+
+  updateOrderBatchFreights: async (req, res) => {
+    try {
+      let orderObj = req.body.orderObj;
+
+      let freightCollection = orderObj.freights;
+      delete (orderObj.freights);
+
+      let oldFreightsIds = [];
+      let newFreights = [];
+      let oldFreights = [];
+
+      freightCollection.forEach(freight => {
+        if(freight.id == undefined) {
+          freight.order = req.params.id
+          newFreights.push(freight);
+        }else {
+          oldFreightsIds.push(freight.id);
+          oldFreights.push(freight);
+        }
+      });
+
+      orderObj.freights = oldFreightsIds;
+
+      let order = await Orders.update({
+        id: req.params.id
+      }).set(orderObj).fetch();
+
+
+      let freights = await Freights.createEach(newFreights).fetch();
+
+      oldFreights.forEach(async freigth => {
+        let freight = await Freights.update({
+          id: freigth.id
+        }).set(freigth).fetch();
+      });
+
+      res.ok(order);
+    } catch (e) {
+      res.badRequest(e);
+    }
+  },
+
 };
