@@ -161,6 +161,7 @@ module.exports = {
     },
     freights: {
       collection: 'freights',
+      via: 'order'
     },
   },
 

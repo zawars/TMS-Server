@@ -53,6 +53,12 @@ module.exports = {
     },
     product: {
       model: 'products'
+    },
+    quote: {
+      model: 'quotes'
+    },
+    order: {
+      model: 'orders'
     }
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
