@@ -52,7 +52,7 @@ module.exports = {
       type: 'number'
     },
     weightBreaks: {
-      type: 'string'
+      type: 'number'
     },
     appliedMarkup: {
       type: 'number',

@@ -119,9 +119,6 @@ module.exports = {
     dropoffCountry: {
       type: 'json'
     },
-    freight: {
-      type: 'json'
-    },
     services: {
       type: 'json'
     },
@@ -161,6 +158,9 @@ module.exports = {
     shipmentTracking: {
       collection: 'shipmentTracking',
       via: 'order'
+    },
+    freights: {
+      collection: 'freights',
     },
   },
 

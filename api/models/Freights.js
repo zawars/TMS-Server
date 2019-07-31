@@ -1,5 +1,5 @@
 /**
- * Quotes.js
+ * Freights.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -13,69 +13,53 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
-    uid: {
-      type: 'number',
-      unique: true
-    },
-    quoteNumber: {
-      type: 'string',
-      unique: true
-    },
-    name: {
+    description: {
       type: 'string'
     },
-    quoteDate: {
+    pieces: {
+      type: 'number'
+    },
+    weight: {
+      type: 'number'
+    },
+    length: {
+      type: 'number'
+    },
+    width: {
+      type: 'number'
+    },
+    height: {
+      type: 'number'
+    },
+    cube: {
+      type: 'number'
+    },
+    density: {
       type: 'string'
     },
-    pickUpDate: {
+    hazmatUN: {
       type: 'string'
-    },
-    pickUpFromCity: {
-      type: 'json'
-    },
-    deliverToCity: {
-      type: 'json'
-    },
-    services: {
-      type: 'json'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
-    customer: {
-      model: 'tradingPartners'
+    cubeUnit: {
+      model: 'dropdownMapper',
     },
-    pickUpFromCountry: {
-      model: 'dropdownMapper'
+    lengthUnit: {
+      model: 'dropdownMapper',
     },
-    deliverToCountry: {
-      model: 'dropdownMapper'
-    },
-    rate: {
-      model: 'rates'
-    },
-    vendor: {
-      model: 'tradingPartners'
-    },
+    product: {
+      model: 'products'
+    }
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    freights: {
-      collection: 'freights',
-    },
-
   },
-
-  beforeCreate: (values, cb) => {
-    UtilityService.quoteCounter++;
-    values.uid = UtilityService.quoteCounter;
-    values.quoteNumber = 'ROH' + UtilityService.quoteCounter;
-    cb();
-  }
 
 };
 
