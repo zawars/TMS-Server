@@ -96,6 +96,7 @@ module.exports.routes = {
 
   // Quotes
   'GET /api/v1/getQuotesByCustomer/:id': 'QuotesController.getQuotesByCustomer',
+  'POST /api/v1/quotes/batch': 'QuotesController.createQuoteBatchFreights',
 
   // Markup
   'POST /api/v1/markup': 'MarkupController.create',
