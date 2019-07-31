@@ -100,4 +100,7 @@ module.exports.routes = {
   // Markup
   'POST /api/v1/markup': 'MarkupController.create',
   'PATCH /api/v1/markup/:id': 'MarkupController.update',
+
+  // Shipment Tracking
+  'POST /api/v1/shipmentTracking': 'ShipmentTrackingController.create',
 };
