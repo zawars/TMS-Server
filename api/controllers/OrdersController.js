@@ -34,7 +34,8 @@ module.exports = {
   getVendorOrders: async (req, res) => {
     try {
       let orders = await Orders.find({
-        vendor: req.params.id
+        vendor: req.params.id,
+        isPlaced: true
       }).populateAll();
 
       res.ok(orders);
