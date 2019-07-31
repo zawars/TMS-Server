@@ -8,13 +8,17 @@
 module.exports = {
   create: async (req, res) => {
     let data = req.body;
+    let isNote = data.isNote;
+    delete(data.isNote);
 
     let trackingObj = await ShipmentTracking.create(data).fetch();
-    let order = await Orders.update({
-      id: data.order
-    }).set({
-      status: data.status
-    });
+    if (!isNote) {
+      let order = await Orders.update({
+        id: data.order
+      }).set({
+        status: data.status
+      });
+    }
 
     res.ok(trackingObj);
   },
