@@ -62,7 +62,7 @@ module.exports = {
         }
       });
 
-      quote.freights = oldFreightsIds;
+      quoteObj.freights = oldFreightsIds;
 
       let quote = await Quotes.update({
         id: req.params.id
