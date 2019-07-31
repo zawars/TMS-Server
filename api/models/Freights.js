@@ -40,6 +40,18 @@ module.exports = {
     hazmatUN: {
       type: 'string'
     },
+    nmfc: {
+      type: 'string'
+    },
+    handlingUnit: {
+      type: 'string'
+    },
+    classType: {
+      type: 'string'
+    },
+    huCount: {
+      type: 'string'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

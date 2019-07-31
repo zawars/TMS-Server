@@ -18,5 +18,28 @@ module.exports = {
     }
   },
 
+  createQuoteBatchFreights: async (req, res) => {
+    try {
+      let quoteObj = req.body.quoteObj;
+
+      let freightCollection = quoteObj.freights;
+      delete(quoteObj.freights);
+
+      let quote = await Quotes.create(quoteObj).fetch();
+
+      freightCollection.map(freight => {
+        freight.quote = quote.id;
+      });
+
+      let freights = await Freights.createEach(freightCollection).fetch();
+
+      quote.freights = freights;
+
+      res.ok(quote);
+    } catch (e) {
+      res.badRequest(e);
+    }
+  },
+
 };
 
