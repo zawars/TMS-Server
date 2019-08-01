@@ -85,6 +85,7 @@ module.exports.routes = {
   'GET  /api/v1/dropdownMapper/:id': 'DropdownMapperController.show',
   'DELETE  /api/v1/dropdownMapper/:id': 'DropdownMapperController.delete',
   'PATCH  /api/v1/dropdownMapper/:id': 'DropdownMapperController.update',
+  'POST  /api/v1/dropdownMapper/import ': 'DropdownMapperController.import',
 
   // DropdownMapperChild
   'GET /api/v1/dropdownMapper/search/city/:query': 'DropdownMapperChildController.searchCity',

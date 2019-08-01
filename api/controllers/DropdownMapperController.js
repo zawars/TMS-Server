@@ -130,5 +130,45 @@ module.exports = {
     });
 
     res.ok(data);
+  },
+
+  import: async (req, res) => {
+    let data = req.body;
+    const fs = require('fs');
+    const XLSX = require('xlsx');
+    let workbook = XLSX.readFile(data.path);
+    let results = XLSX.utils.sheet_to_json(workbook.Sheets['Part 1']);
+    let part2 = XLSX.utils.sheet_to_json(workbook.Sheets['Part 2']);
+    let citiesSet = {};
+    results.push(...part2);
+
+    results.map(row => {
+      if (citiesSet[row.City] != undefined) {
+        citiesSet[row.City].push({
+          name: row.Zip
+        });
+      } else {
+        citiesSet[row.City] = [];
+        citiesSet[row.City].push({
+          name: row.Zip
+        });
+      }
+    });
+
+    let keys = Object.keys(citiesSet);
+    keys.map(async key => {
+      let dropdownMapper = await DropdownMapper.create({
+        name: key
+      }).fetch();
+      citiesSet[key].forEach(zipObj => zipObj.dropdownMapper = dropdownMapper.id);
+      await DropdownMapperChild.createEach(citiesSet[key]);
+    });
+
+    fs.unlink(data.path, function (err) {
+      if (err) return console.log(err); // handle error as you wish
+      res.ok({
+        message: 'Data Imported successfully.'
+      });
+    });
   }
 };
