@@ -192,7 +192,7 @@ module.exports.bootstrap = async function () {
     UtilityService.orderCounter = uid;
   }
 
-  if (await User.count() > 0) {
+  if (await User.count() == 0) {
     await User.create({
       username: 'admin',
       email: 'zawar.shahid@gmail.com',
