@@ -11,7 +11,8 @@ let langsList = ['de', 'fr'];
 module.exports = {
   index: (req, res) => {
     Dropdown.find().populate('values', {
-      sort: 'position ASC'
+      sort: 'position ASC',
+      limit: 100
     }).then(dropdownList => {
       res.ok(dropdownList);
     }).catch(err => {
