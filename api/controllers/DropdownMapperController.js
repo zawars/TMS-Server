@@ -158,7 +158,8 @@ module.exports = {
     let keys = Object.keys(citiesSet);
     keys.map(async key => {
       let dropdownMapper = await DropdownMapper.create({
-        name: key
+        name: key,
+        dropdown: data.dropdown
       }).fetch();
       citiesSet[key].forEach(zipObj => zipObj.dropdownMapper = dropdownMapper.id);
       await DropdownMapperChild.createEach(citiesSet[key]);
