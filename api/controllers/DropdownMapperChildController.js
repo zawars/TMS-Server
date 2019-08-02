@@ -20,7 +20,7 @@ module.exports = {
             'contains': query
           }
         }]
-      }).populateAll();
+      }).populateAll().limit(50);
       res.ok(cities);
     } catch (e) {
       res.ok(e);
