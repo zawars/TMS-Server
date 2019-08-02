@@ -131,6 +131,10 @@ module.exports = {
     accumulatedWeight: {
       type: 'number'
     },
+    isAccepted: {
+      type: 'boolean',
+      defaultsTo: false
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
