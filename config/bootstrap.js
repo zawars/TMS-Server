@@ -204,4 +204,10 @@ module.exports.bootstrap = async function () {
       role: 'Admin'
     });
   }
+
+  if (await Invoices.count() > 0) {
+    let invoices = await Invoices.find();
+    let uid = invoices[invoices.length - 1].uid;
+    UtilityService.invoiceCounter = uid;
+  }
 };

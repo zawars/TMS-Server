@@ -4,4 +4,5 @@ module.exports = {
   rateSheetCounter: 0,
   quoteCounter: 0,
   orderCounter: 0,
+  invoiceCounter: 0,
 };

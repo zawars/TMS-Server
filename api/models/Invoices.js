@@ -13,6 +13,14 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    uid: {
+      type: 'number',
+      unique: true
+    },
+    invoiceNo: {
+      type: 'string',
+      unique: true
+    },
     originalQuotationRateSheet: {
       type: 'json'
     },
@@ -46,5 +54,11 @@ module.exports = {
 
   },
 
+  beforeCreate: (values, cb) => {
+    UtilityService.invoiceCounter++;
+    values.uid = UtilityService.invoiceCounter;
+    values.invoiceNo = 'INV' + UtilityService.invoiceCounter;
+    cb();
+  }
 };
 
