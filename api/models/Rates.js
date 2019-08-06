@@ -51,8 +51,8 @@ module.exports = {
     maxCharge: {
       type: 'number'
     },
-    weightBreaks: {
-      type: 'number'
+    rateBreaks: {
+      type: 'string'
     },
     appliedMarkup: {
       type: 'number',

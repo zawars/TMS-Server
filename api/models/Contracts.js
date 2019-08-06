@@ -35,6 +35,9 @@ module.exports = {
     renewalDate: {
       type: 'string',
     },
+    weightBreaks: {
+      type: 'string',
+    },
     isClientSpecific: {
       type: 'boolean',
       defaultsTo: false

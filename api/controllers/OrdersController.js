@@ -51,7 +51,7 @@ module.exports = {
       let orderObj = req.body.orderObj;
 
       let freightCollection = orderObj.freights;
-      delete (orderObj.freights);
+      delete(orderObj.freights);
 
       let order = await Orders.create(orderObj).fetch();
 
@@ -74,17 +74,17 @@ module.exports = {
       let orderObj = req.body.orderObj;
 
       let freightCollection = orderObj.freights;
-      delete (orderObj.freights);
+      delete(orderObj.freights);
 
       let oldFreightsIds = [];
       let newFreights = [];
       let oldFreights = [];
 
       freightCollection.forEach(freight => {
-        if(freight.id == undefined) {
+        if (freight.id == undefined) {
           freight.order = req.params.id
           newFreights.push(freight);
-        }else {
+        } else {
           oldFreightsIds.push(freight.id);
           oldFreights.push(freight);
         }
