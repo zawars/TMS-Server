@@ -162,7 +162,7 @@ module.exports = {
         dropdown: data.dropdown
       }).fetch();
       citiesSet[key].forEach(zipObj => zipObj.dropdownMapper = dropdownMapper.id);
-      await DropdownMapperChild.createEach(citiesSet[key]);
+      let childs = await DropdownMapperChild.createEach(citiesSet[key]).fetch();
     });
 
     fs.unlink(data.path, function (err) {
