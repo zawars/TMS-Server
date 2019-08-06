@@ -173,6 +173,10 @@ module.exports = {
       collection: 'freights',
       via: 'order'
     },
+    invoices: {
+      collection: 'invoices',
+      via: 'order'
+    }
   },
 
   beforeCreate: (values, cb) => {
