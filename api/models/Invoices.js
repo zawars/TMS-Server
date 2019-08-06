@@ -21,6 +21,9 @@ module.exports = {
       type: 'string',
       unique: true
     },
+    invoiceDate: {
+      type: 'string',
+    },
     originalQuotationRateSheet: {
       type: 'json'
     },
@@ -46,6 +49,12 @@ module.exports = {
     },
     rate: {
       model: 'rates'
+    },
+    vendor: {
+      model: 'tradingPartners'
+    },
+    customer: {
+      model: 'tradingPartners'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
