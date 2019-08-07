@@ -108,4 +108,7 @@ module.exports.routes = {
 
   // Shipment Tracking
   'POST /api/v1/shipmentTracking': 'ShipmentTrackingController.create',
+
+  // Invoices
+  'GET /api/v1/invoices': 'InvoicesController.index',
 };

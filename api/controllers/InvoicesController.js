@@ -7,6 +7,14 @@
 
 module.exports = {
   
+  index: async (req, res) => {
+    try {
+      const invoices = await Invoices.find().populateAll().sort('createdAt DESC');
+      res.ok(invoices);
+    } catch (e) {
+      res.badRequest(e);
+    }
+  },
 
 };
 
