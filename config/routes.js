@@ -111,4 +111,5 @@ module.exports.routes = {
 
   // Invoices
   'GET /api/v1/invoices': 'InvoicesController.index',
+  'POST /api/v1/invoices/edi': 'InvoicesController.createInvoiceByEDI',
 };
