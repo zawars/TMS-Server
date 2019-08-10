@@ -115,7 +115,7 @@ module.exports = {
     try {
       let orders = await Orders.find({
         isPlaced: true
-      }).populateAll();
+      }).populateAll().sort('createdAt DESC');
 
       res.ok(orders);
     } catch (error) {
