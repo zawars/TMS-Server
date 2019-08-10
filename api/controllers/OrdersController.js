@@ -111,4 +111,18 @@ module.exports = {
     }
   },
 
+  getPlacedOrders: async (req, res) => {
+    try {
+      let orders = await Orders.find({
+        isPlaced: true
+      }).populateAll();
+
+      res.ok(orders);
+    } catch (error) {
+      res.ok({
+        message: error
+      });
+    }
+  },
+
 };

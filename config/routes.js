@@ -96,6 +96,7 @@ module.exports.routes = {
   'GET /api/v1/orders/vendor/:id': 'OrdersController.getVendorOrders',
   'POST /api/v1/orders/batch': 'OrdersController.createOrderBatchFreights',
   'PATCH /api/v1/orders/batch/:id': 'OrdersController.updateOrderBatchFreights',
+  'GET /api/v1/orders/placed': 'OrdersController.getPlacedOrders',
 
   // Quotes
   'GET /api/v1/quotes/customer/:id': 'QuotesController.getQuotesByCustomer',
