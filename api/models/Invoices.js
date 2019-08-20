@@ -30,6 +30,9 @@ module.exports = {
     carrierInvoice: {
       type: 'json'
     },
+    specificCarrierInvoice: {
+      type: 'json'
+    },
     originalQuotationMargin: {
       type: 'json'
     },
