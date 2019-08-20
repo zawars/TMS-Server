@@ -1,5 +1,5 @@
 /**
- * Rates.js
+ * Services.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,51 +12,7 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    name: {
-      type: 'string'
-    },
-    originCity: {
-      type: 'string'
-    },
-    originState: {
-      type: 'string'
-    },
-    originPostalCode: {
-      type: 'string'
-    },
-    originArea: {
-      type: 'string'
-    },
-    originCountry: {
-      type: 'string'
-    },
-    destinationCity: {
-      type: 'string'
-    },
-    destinationState: {
-      type: 'string'
-    },
-    destinationArea: {
-      type: 'string'
-    },
-    destinationCountry: {
-      type: 'string'
-    },
-    destinationPostalCode: {
-      type: 'string'
-    },
-    minCharge: {
-      type: 'number'
-    },
-    maxCharge: {
-      type: 'number'
-    },
-    rateBreaks: {
-      type: 'json'
-    },
-    appliedMarkup: {
-      type: 'number',
-    },
+
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -66,9 +22,8 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    rateSheet: {
-      model: 'rateSheets'
-    }
+
   },
 
 };
+
