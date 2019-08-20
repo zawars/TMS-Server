@@ -21,10 +21,16 @@ module.exports = {
       type: 'string',
       unique: true
     },
+    invoiceDate: {
+      type: 'string',
+    },
     originalQuotationRateSheet: {
       type: 'json'
     },
     carrierInvoice: {
+      type: 'json'
+    },
+    specificCarrierInvoice: {
       type: 'json'
     },
     originalQuotationMargin: {
@@ -46,6 +52,12 @@ module.exports = {
     },
     rate: {
       model: 'rates'
+    },
+    vendor: {
+      model: 'tradingPartners'
+    },
+    customer: {
+      model: 'tradingPartners'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
