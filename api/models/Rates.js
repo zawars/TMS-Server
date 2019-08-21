@@ -54,9 +54,6 @@ module.exports = {
     rateBreaks: {
       type: 'json'
     },
-    appliedMarkup: {
-      type: 'number',
-    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

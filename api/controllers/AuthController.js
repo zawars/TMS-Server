@@ -295,6 +295,49 @@ module.exports = {
     }
   },
 
+  renewForgetPassword: async (req, res) => {
+    let user = await User.findOne({
+      email: req.body.email
+    });
+
+    if (user) {
+      if (user.isPasswordChanged) {
+        if (user.isVerified) {
+          user = await User.update({
+            email: user.email
+          }).set({
+            password: req.body.password,
+            isPasswordChanged: req.body.isPasswordChanged
+          }).fetch();
+          user = user[0];
+
+          jwt.sign(user, sails.config.session.secret, (err, token) => {
+            RedisService.set(token, user, () => {
+              console.log(`${user.email} logged in.`);
+              res.ok({
+                token,
+                user,
+                message: 'Password changed successfully.'
+              });
+            });
+          });
+        } else {
+          res.ok({
+            message: 'User is not verified.'
+          });
+        }
+      } else {
+        res.ok({
+          message: 'Invalid request for password change.'
+        });
+      }
+    } else {
+      res.status(200).json({
+        message: 'User does not exist.'
+      });
+    }
+  },
+
   logout: async (req, res) => {
     const bearerToken = req.headers['authorization'].split(' ')[1];
     RedisService.del(bearerToken, () => {
