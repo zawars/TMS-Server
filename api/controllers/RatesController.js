@@ -54,8 +54,6 @@ module.exports = {
       }).populateAll();
 
       // Search for customer specific contract rates
-      console.log('Here')
-      debugger
       let filterRates = [];
       rates.forEach(rate => {
         if (contractsList.find(val => val.id == rate.rateSheet.contract)) {
@@ -66,7 +64,6 @@ module.exports = {
       if (filterRates.length > 0) {
         rates = filterRates;
       }
-      console.log('Here')
 
       let rateSheetsIds = [];
       rates.forEach(rate => {
@@ -87,16 +84,13 @@ module.exports = {
         rateSheets.forEach(rateSheet => {
           // Calulate rate based on the weight breaks
           let weightBreak = rateSheet.contract.weightBreaks.split(',').map(val => val.trim());
-          let weightUnit = 0;
           let weightIdx = 0;
           // Find the relative weight break and its index
           for (let i = 0; i < weightBreak.length; i++) {
             if (i == weightBreak.length - 1) {
-              weightUnit = weightBreak[i];
               weightIdx = i;
               break;
             } else if (weight < weightBreak[i + 1]) {
-              weightUnit = weightBreak[i];
               weightIdx = i;
               break;
             }
@@ -145,7 +139,7 @@ module.exports = {
 
       vendorsList.forEach(vendorObj => {
         if (vendors.find(val => val.id == vendorObj.vendor.id)) {
-          vendorObj.vendor = vendors.find(val => val.id == vendorObj.vendor.id);
+          vendorObj.vendor = vendors.find(val => val.id == vendorObj.vendor);
           rateSheetVendor.push({
             vendor: vendorObj.vendor,
             rateSheet: vendorObj.rateSheet
