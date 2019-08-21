@@ -6,20 +6,20 @@
  */
 
 module.exports = {
-  
+
   searchCity: async (req, res) => {
     try {
       let query = req.params.query;
 
-      let dropDown = await Dropdown.findOne({ field: 'Cities' });
+      let dropDown = await Dropdown.findOne({
+        field: 'Cities'
+      });
 
       const cities = await DropdownMapper.find({
         dropdown: dropDown.id,
-        or: [{
-          name: {
-            'contains': query
-          }
-        }]
+        name: {
+          'contains': query
+        }
       }).populateAll().limit(50);
       res.ok(cities);
     } catch (e) {
@@ -32,11 +32,9 @@ module.exports = {
       let query = req.params.query;
 
       const postalCodes = await DropdownMapperChild.find({
-        or: [{
-          name: {
-            'contains': query
-          }
-        }]
+        name: {
+          'contains': query
+        }
       }).populateAll();
 
       res.ok(postalCodes);
@@ -46,4 +44,3 @@ module.exports = {
   },
 
 };
-

@@ -6,16 +6,15 @@
  */
 
 module.exports = {
-
   searchRates: async (req, res) => {
     try {
       let rateParams = req.body.searchObj;
 
-      let contractsList = await Rates.find({
+      let contractsList = await Contracts.find({
         client: rateParams.clientId
       }).populateAll();
 
-      const rates = await Rates.find({
+      let rates = await Rates.find({
         or: [{
           and: [{
               originCity: {
@@ -55,6 +54,8 @@ module.exports = {
       }).populateAll();
 
       // Search for customer specific contract rates
+      console.log('Here')
+      debugger
       let filterRates = [];
       rates.forEach(rate => {
         if (contractsList.find(val => val.id == rate.rateSheet.contract)) {
@@ -65,6 +66,7 @@ module.exports = {
       if (filterRates.length > 0) {
         rates = filterRates;
       }
+      console.log('Here')
 
       let rateSheetsIds = [];
       rates.forEach(rate => {
@@ -156,7 +158,9 @@ module.exports = {
         rateSheetVendor
       });
     } catch (e) {
-      res.ok(e);
+      res.ok({
+        message: e
+      });
     }
   },
 
