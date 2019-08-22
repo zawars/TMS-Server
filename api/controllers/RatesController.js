@@ -138,7 +138,7 @@ module.exports = {
       }).populateAll();
 
       vendorsList.forEach(vendorObj => {
-        if (vendors.find(val => val.id == vendorObj.vendor.id)) {
+        if (vendors.find(val => val.id == vendorObj.vendor)) {
           vendorObj.vendor = vendors.find(val => val.id == vendorObj.vendor);
           rateSheetVendor.push({
             vendor: vendorObj.vendor,
