@@ -25,12 +25,6 @@ module.exports = {
     street: {
       type: 'string',
     },
-    postalCode: {
-      type: 'string',
-    },
-    city: {
-      type: 'string',
-    },
     contactName: {
       type: 'string',
     },
@@ -44,12 +38,6 @@ module.exports = {
       type: 'string',
     },
     billingStreet: {
-      type: 'string',
-    },
-    billingCity: {
-      type: 'string',
-    },
-    billingZipCode: {
       type: 'string',
     },
     billingContactName: {
@@ -81,6 +69,18 @@ module.exports = {
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
     logo: {
       model: 'attachments',
+    },
+    postalCode: {
+      model: 'dropdownMapperChild',
+    },
+    city: {
+      model: 'dropdownMapper',
+    },
+    billingCity: {
+      model: 'dropdownMapper',
+    },
+    billingZipCode: {
+      model: 'dropdownMapperChild',
     },
     partnerType: {
       model: 'dropdownMapper'

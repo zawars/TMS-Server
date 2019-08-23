@@ -21,12 +21,6 @@ module.exports = {
     street: {
       type: 'string'
     },
-    city: {
-      type: 'string'
-    },
-    postalCode: {
-      type: 'string'
-    },
     state: {
       type: 'string'
     },
@@ -37,7 +31,12 @@ module.exports = {
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
+    city: {
+      model: 'dropdownMapper'
+    },
+    postalCode: {
+      model: 'dropdownMapperChild'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗

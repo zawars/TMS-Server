@@ -17,14 +17,14 @@ module.exports.policies = {
    *                                                                          *
    ***************************************************************************/
 
-  '*': true,
-  // '*': ['hasToken', 'isAuthenticated'],
+  // '*': true,
+  '*': ['hasToken', 'isAuthenticated'],
 
-  // AuthController: {
-  //   login: true,
-  //   verify: true,
-  //   resendToken: true,
-  //   forgetPassword: true,
-  //   renewPassword: true,
-  // },
+  AuthController: {
+    login: true,
+    verify: true,
+    resendToken: true,
+    forgetPassword: true,
+    renewPassword: true,
+  },
 };
