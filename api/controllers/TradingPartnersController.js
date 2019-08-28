@@ -14,12 +14,30 @@ module.exports = {
     res.ok(partners);
   },
 
+  show: async (req, res) => {
+    let id = req.params.id;
+
+    let partner = await TradingPartners.findOne({
+      id
+    }).populateAll();
+
+    partner.locations = await Locations.find({
+      tradingPartner: partner.id
+    }).populateAll();
+
+    res.ok(partner);
+  },
+
   create: async (req, res) => {
     let data = req.body;
     let locations = data.locations;
     let products = data.products;
     delete(data.locations);
     delete(data.products);
+    data.postalCode = data.postalCode.id;
+    data.city = data.city.id;
+    data.billingCity = data.billingCity.id;
+    data.billingZipCode = data.billingZipCode.id;
 
     let partner = await TradingPartners.create(data).fetch();
     locations.forEach(location => {
@@ -27,6 +45,8 @@ module.exports = {
       location.type = location.type.id;
       location.state = location.state.id;
       location.country = location.country.id;
+      location.city = location.city.id;
+      location.postalCode = location.postalCode.id;
     });
 
     let locationsList = await Locations.createEach(locations).fetch();
@@ -54,11 +74,10 @@ module.exports = {
     delete(data.locations);
     delete(data.products);
 
-    // let services = [];
-    // data.services.map(service => {
-    //   services.push(service.id);
-    // });
-    // data.services = services;
+    data.postalCode = data.postalCode.id;
+    data.city = data.city.id;
+    data.billingCity = data.billingCity.id;
+    data.billingZipCode = data.billingZipCode.id;
 
     let partner = await TradingPartners.update({
       id: req.params.id
@@ -72,6 +91,8 @@ module.exports = {
         location.type = location.type.id;
         location.state = location.state.id;
         location.country = location.country.id;
+        location.city = location.city.id;
+        location.postalCode = location.postalCode.id;
         toBeCreatedLocations.push(location);
       }
     });

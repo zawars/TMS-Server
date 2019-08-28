@@ -16,6 +16,7 @@ module.exports.bootstrap = async function () {
   // For example:
   // ```
   // // Set up fake development data (or if we already have some, avast)
+  let cityDropdownId = '';
   if (await Dropdown.count() == 0) {
     let data = [{
         field: 'Country',
@@ -153,6 +154,10 @@ module.exports.bootstrap = async function () {
         field: val.field
       }).fetch();
 
+      if (dropdown.field == 'Cities') {
+        cityDropdownId = dropdown.id;
+      }
+
       val.values.forEach(obj => {
         dropdown: dropdown.id
       });
@@ -209,5 +214,68 @@ module.exports.bootstrap = async function () {
     let invoices = await Invoices.find();
     let uid = invoices[invoices.length - 1].uid;
     UtilityService.invoiceCounter = uid;
+  }
+
+  if (await States.count() == 0) {
+    let promise = new Promise(async (resolve, reject) => {
+      let data = {
+        path: process.cwd() + '/USA.xls',
+        dropdown: '5d2f32b56ecf131e7413035f' //cityDropdownId
+      };
+      const XLSX = require('xlsx');
+      let workbook = XLSX.readFile(data.path);
+      let results = XLSX.utils.sheet_to_json(workbook.Sheets['Part 1']);
+      let part2 = XLSX.utils.sheet_to_json(workbook.Sheets['Part 2']);
+      let statesSet = {};
+      results.push(...part2);
+
+      results.map(row => {
+        if (statesSet[row.State] == undefined) {
+          statesSet[row.State] = {};
+        }
+
+        if (statesSet[row.State][row.City] != undefined) {
+          statesSet[row.State][row.City].push({
+            name: row.Zip
+          });
+        } else {
+          statesSet[row.State][row.City] = [];
+          statesSet[row.State][row.City].push({
+            name: row.Zip
+          });
+        }
+      });
+
+      let stateKeys = Object.keys(statesSet).map(val => val = {
+        name: val
+      });
+      let states = await States.createEach(stateKeys).fetch();
+      let citiesKeys = [];
+
+      states.forEach(state => {
+        citiesKeys.push(...Object.keys(statesSet[state.name]).map(val => val = {
+          name: val,
+          dropdown: data.dropdown,
+          state: state.id
+        }));
+      });
+
+      let cities = await DropdownMapper.createEach(citiesKeys).fetch();
+      let zipCodeskeys = [];
+
+      states.forEach(state => {
+        let stateCities = cities.filter(val => val.state == state.id);
+
+        stateCities.forEach(city => {
+          statesSet[state.name][city.name].map(val => val.dropdownMapper = city.id);
+          zipCodeskeys.push(...statesSet[state.name][city.name]);
+        });
+      });
+
+      await DropdownMapperChild.createEach(zipCodeskeys);
+      resolve('Data Imported successfully.');
+    });
+
+    promise.then(result => console.log(result));
   }
 };

@@ -134,42 +134,60 @@ module.exports = {
 
   import: async (req, res) => {
     let data = req.body;
-    const fs = require('fs');
     const XLSX = require('xlsx');
     let workbook = XLSX.readFile(data.path);
     let results = XLSX.utils.sheet_to_json(workbook.Sheets['Part 1']);
     let part2 = XLSX.utils.sheet_to_json(workbook.Sheets['Part 2']);
-    let citiesSet = {};
+    let statesSet = {};
     results.push(...part2);
 
     results.map(row => {
-      if (citiesSet[row.City] != undefined) {
-        citiesSet[row.City].push({
+      if (statesSet[row.State] == undefined) {
+        statesSet[row.State] = {};
+      }
+
+      if (statesSet[row.State][row.City] != undefined) {
+        statesSet[row.State][row.City].push({
           name: row.Zip
         });
       } else {
-        citiesSet[row.City] = [];
-        citiesSet[row.City].push({
+        statesSet[row.State][row.City] = [];
+        statesSet[row.State][row.City].push({
           name: row.Zip
         });
       }
     });
 
-    let keys = Object.keys(citiesSet);
-    keys.map(async key => {
-      let dropdownMapper = await DropdownMapper.create({
-        name: key,
-        dropdown: data.dropdown
-      }).fetch();
-      citiesSet[key].forEach(zipObj => zipObj.dropdownMapper = dropdownMapper.id);
-      let childs = await DropdownMapperChild.createEach(citiesSet[key]).fetch();
+    let stateKeys = Object.keys(statesSet).map(val => val = {
+      name: val
+    });
+    let states = await States.createEach(stateKeys).fetch();
+    let citiesKeys = [];
+
+    states.forEach(state => {
+      citiesKeys.push(...Object.keys(statesSet[state.name]).map(val => val = {
+        name: val,
+        dropdown: data.dropdown,
+        state: state.id
+      }));
     });
 
-    fs.unlink(data.path, function (err) {
-      if (err) return console.log(err); // handle error as you wish
-      res.ok({
-        message: 'Data Imported successfully.'
+    let cities = await DropdownMapper.createEach(citiesKeys).fetch();
+    let zipCodeskeys = [];
+
+    states.forEach(state => {
+      let stateCities = cities.filter(val => val.state == state.id);
+
+      stateCities.forEach(city => {
+        statesSet[state.name][city.name].map(val => val.dropdownMapper = city.id);
+        zipCodeskeys.push(...statesSet[state.name][city.name]);
       });
+    });
+
+    await DropdownMapperChild.createEach(zipCodeskeys);
+
+    res.ok({
+      message: 'Data Imported successfully.'
     });
   }
 };

@@ -15,22 +15,22 @@ module.exports = {
     name: {
       type: 'string'
     },
-    type: {
-      type: 'string'
-    },
     street: {
-      type: 'string'
-    },
-    state: {
-      type: 'string'
-    },
-    country: {
       type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
+    type: {
+      model: 'dropdownMapper'
+    },
+    state: {
+      model: 'dropdownMapper'
+    },
+    country: {
+      model: 'dropdownMapper'
+    },
     city: {
       model: 'dropdownMapper'
     },

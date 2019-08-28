@@ -28,7 +28,7 @@ module.exports = {
           name: {
             'contains': query
           }
-        }).populateAll();
+        }).limit(20).populateAll();
       }
 
       res.ok(result);

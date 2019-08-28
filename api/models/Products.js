@@ -18,12 +18,6 @@ module.exports = {
     nmfc: {
       type: 'string'
     },
-    handlingUnit: {
-      type: 'string'
-    },
-    classType: {
-      type: 'string'
-    },
     huCount: {
       type: 'string'
     },
@@ -31,7 +25,12 @@ module.exports = {
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
+    handlingUnit: {
+      model: 'dropdownMapper'
+    },
+    classType: {
+      model: 'dropdownMapper'
+    },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗

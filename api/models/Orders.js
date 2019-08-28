@@ -135,6 +135,9 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     },
+    rate: {
+      type: 'json'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -154,9 +157,6 @@ module.exports = {
     },
     customer: {
       model: 'tradingPartners'
-    },
-    rate: {
-      model: 'rates'
     },
     vendor: {
       model: 'tradingPartners'
