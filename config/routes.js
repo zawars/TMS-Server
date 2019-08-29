@@ -52,6 +52,7 @@ module.exports.routes = {
   'GET /api/v1/user/lang/:id': 'UserController.fetchLanguage',
 
   // Trading Partners
+  'GET /api/v1/tradingPartners': 'TradingPartnersController.index',
   'GET /api/v1/tradingPartners/type/:type': 'TradingPartnersController.partnersByType',
   'POST /api/v1/tradingPartners': 'TradingPartnersController.create',
   'GET /api/v1/tradingPartners/:id': 'TradingPartnersController.show',

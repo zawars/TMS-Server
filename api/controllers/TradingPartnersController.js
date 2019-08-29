@@ -28,6 +28,11 @@ module.exports = {
     res.ok(partner);
   },
 
+  index: async (req, res) => {
+    let results = await TradingPartners.find().populateAll();
+    res.ok(results);
+  },
+
   create: async (req, res) => {
     let data = req.body;
     let locations = data.locations;

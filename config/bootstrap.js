@@ -220,7 +220,7 @@ module.exports.bootstrap = async function () {
     let promise = new Promise(async (resolve, reject) => {
       let data = {
         path: process.cwd() + '/USA.xls',
-        dropdown: '5d2f32b56ecf131e7413035f' //cityDropdownId
+        dropdown: cityDropdownId
       };
       const XLSX = require('xlsx');
       let workbook = XLSX.readFile(data.path);
