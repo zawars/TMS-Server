@@ -21,7 +21,7 @@ module.exports = {
       id
     }).populateAll();
 
-    if(partner.id) {
+    if(partner) {
       partner.locations = await Locations.find({
         tradingPartner: partner.id
       }).populateAll();
