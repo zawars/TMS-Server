@@ -21,9 +21,11 @@ module.exports = {
       id
     }).populateAll();
 
-    partner.locations = await Locations.find({
-      tradingPartner: partner.id
-    }).populateAll();
+    if(partner.id) {
+      partner.locations = await Locations.find({
+        tradingPartner: partner.id
+      }).populateAll();
+    }
 
     res.ok(partner);
   },
