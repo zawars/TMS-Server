@@ -13,6 +13,9 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    frId: {
+      type: 'string'
+    },
     description: {
       type: 'string'
     },
@@ -58,6 +61,9 @@ module.exports = {
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
     cubeUnit: {
+      model: 'dropdownMapper',
+    },
+    weightUnit: {
       model: 'dropdownMapper',
     },
     lengthUnit: {
