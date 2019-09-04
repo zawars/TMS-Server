@@ -138,6 +138,9 @@ module.exports = {
     rate: {
       type: 'json'
     },
+    appliedRate: {
+      type: 'number'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
