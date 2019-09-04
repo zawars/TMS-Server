@@ -135,9 +135,6 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     },
-    rate: {
-      type: 'json'
-    },
     appliedRate: {
       type: 'number'
     },
@@ -163,6 +160,9 @@ module.exports = {
     },
     vendor: {
       model: 'tradingPartners'
+    },
+    rate: {
+      model: 'rates'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
