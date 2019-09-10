@@ -138,6 +138,9 @@ module.exports = {
     appliedRate: {
       type: 'number'
     },
+    markupValue: {
+      type: 'number'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
