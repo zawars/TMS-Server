@@ -100,6 +100,7 @@ module.exports.routes = {
   'POST /api/v1/orders/batch': 'OrdersController.createOrderBatchFreights',
   'PATCH /api/v1/orders/batch/:id': 'OrdersController.updateOrderBatchFreights',
   'GET /api/v1/orders/placed': 'OrdersController.getPlacedOrders',
+  'GET /api/v1/orders': 'OrdersController.getAllOrders',
 
   // Quotes
   'GET /api/v1/quotes/customer/:id': 'QuotesController.getQuotesByCustomer',

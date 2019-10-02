@@ -125,4 +125,16 @@ module.exports = {
     }
   },
 
+  getAllOrders: async (req, res) => {
+    try {
+      let orders = await Orders.findAll().populateAll().sort('createdAt DESC');
+
+      res.ok(orders);
+    } catch (error) {
+      res.ok({
+        message: error
+      });
+    }
+  },
+
 };
