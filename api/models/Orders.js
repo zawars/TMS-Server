@@ -114,10 +114,10 @@ module.exports = {
       type: 'string'
     },
     pickupCountry: {
-      type: 'json'
+      type: 'string'
     },
     dropoffCountry: {
-      type: 'json'
+      type: 'string'
     },
     services: {
       type: 'json'
