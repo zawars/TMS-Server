@@ -60,6 +60,10 @@ module.exports.bootstrap = async function () {
         values: []
       },
       {
+        field: 'Charge Type',
+        values: []
+      },
+      {
         field: 'Postal Code',
         values: []
       },
