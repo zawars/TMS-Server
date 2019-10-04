@@ -26,20 +26,31 @@ module.exports = {
   createBatchRateSheets: async (req, res) => {
     try {
       let rateSheetList = req.body.contractRates;
+      let accessorialList = req.body.accessorials;
 
-      let ratesCollection = [];
-      rateSheetList.map(rateSheet => {
-        ratesCollection.push(rateSheet.rates);
-        delete(rateSheet.rates);
-      });
+      let rateSheets;
+      let accessorials;
 
-      let rateSheets = await RateSheets.createEach(rateSheetList).fetch();
+      if (rateSheetList.length > 0) {
+        let ratesCollection = [];
+        rateSheetList.map(rateSheet => {
+          ratesCollection.push(rateSheet.rates);
+          delete (rateSheet.rates);
+        });
 
-      ratesCollection.map(async (rateList, idx) => {
-        rateList.map(rate => rate.rateSheet = rateSheets[idx].id);
-        rateSheets[idx].rates = await Rates.createEach(rateList).fetch();
-      });
-      res.ok(rateSheets);
+        rateSheets = await RateSheets.createEach(rateSheetList).fetch();
+
+        ratesCollection.map(async (rateList, idx) => {
+          rateList.map(rate => rate.rateSheet = rateSheets[idx].id);
+          rateSheets[idx].rates = await Rates.createEach(rateList).fetch();
+        });
+      }
+
+      if(accessorialList.length > 0) {
+        accessorials = await Accessorials.createEach(accessorialList).fetch();
+      }
+      
+      res.ok({rateSheets: rateSheets, accessorials: accessorials});
     } catch (e) {
       res.badRequest(e);
     }
