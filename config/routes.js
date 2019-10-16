@@ -125,5 +125,8 @@ module.exports.routes = {
 
  // States
   'GET /api/v1/states/search/:query': 'StatesController.searchState',
+
+ // Area
+  'POST /api/v1/area': 'AreaController.create',
   
 };
