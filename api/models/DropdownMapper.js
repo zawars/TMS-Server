@@ -33,6 +33,9 @@ module.exports = {
     values: {
       collection: "dropdownMapperChild",
       via: "dropdownMapper"
+    },
+    state: {
+      model: "states"
     }
   },
 

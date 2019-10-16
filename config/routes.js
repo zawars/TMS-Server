@@ -92,7 +92,9 @@ module.exports.routes = {
 
   // DropdownMapperChild
   'GET /api/v1/dropdownMapper/search/city/:query': 'DropdownMapperChildController.searchCity',
-  'GET /api/v1/dropdownMapper/search/postalCode/:query': 'DropdownMapperChildController.searchPostalCode',
+  'POST /api/v1/dropdownMapper/state/city': 'DropdownMapperChildController.searchCityByState',
+  'POST /api/v1/dropdownMapper/city/postalCode': 'DropdownMapperChildController.searchPostalCodesByCity',
+  'POST /api/v1/dropdownMapperChild/postalCodes': 'DropdownMapperChildController.getPostalCodesForArea',
 
   // Orders
   'GET /api/v1/orders/customer/:status/:id': 'OrdersController.getOrderByCustomer',
@@ -116,4 +118,8 @@ module.exports.routes = {
   // Invoices
   'GET /api/v1/invoices': 'InvoicesController.index',
   'POST /api/v1/invoices/edi': 'InvoicesController.createInvoiceByEDI',
+
+  // States
+  'GET /api/v1/states/search/:query': 'StatesController.searchState',
+
 };

@@ -229,6 +229,13 @@ module.exports.bootstrap = async function () {
       let statesSet = {};
       results.push(...part2);
 
+      if (data.dropdown == '') {
+        let dropdown = await Dropdown.findOne({
+          field: 'Cities'
+        });
+        data.dropdown = dropdown.id;
+      }
+
       results.map(row => {
         if (statesSet[row.State] == undefined) {
           statesSet[row.State] = {};

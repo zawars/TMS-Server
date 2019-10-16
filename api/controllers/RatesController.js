@@ -114,7 +114,7 @@ module.exports = {
           if (markup <= markupObj.minAmount) {
             markup = markupObj.minAmount;
           } else if (markup >= markupObj.maxAmount) {
-            markup = markupObj.minAmount;
+            markup = markupObj.maxAmount;
           }
 
           appliedRate += markup;

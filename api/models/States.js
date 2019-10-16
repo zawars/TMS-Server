@@ -15,12 +15,15 @@ module.exports = {
     name: {
       type: 'string'
     },
+    shortCode: {
+      type: 'string'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
     cities: {
-      collection: "dropdown",
+      collection: "dropdownMapper",
       via: 'state'
     }
 
