@@ -1572,6 +1572,11 @@ ecdsa-sig-formatter@1.0.11:
   dependencies:
     safe-buffer "^5.0.1"
 
+edi-parser@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/edi-parser/-/edi-parser-1.0.1.tgz#f175efa6d22ed65341670f07ba4c57f083c17479"
+  integrity sha1-8XXvptIu1lNBZw8HukxX8IPBdHk=
+
 ee-first@1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/ee-first/-/ee-first-1.1.1.tgz#590c61156b0ae2f4f0255732a158b266bc56b21d"

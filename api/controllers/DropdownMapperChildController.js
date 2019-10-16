@@ -101,15 +101,14 @@ module.exports = {
       let result = [];
       let cities;
 
-      console.log(data)
       if (data.cities) { // Collect postalCodes for selected cities
-         cities = await DropdownMapper.find({
+        cities = await DropdownMapper.find({
           id: {
             in: data.cities
           },
         }).populateAll();
       } else if (data.states) {
-         cities = await DropdownMapper.find({
+        cities = await DropdownMapper.find({
           state: {
             in: data.states
           },
