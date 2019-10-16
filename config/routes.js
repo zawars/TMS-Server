@@ -130,5 +130,6 @@ module.exports.routes = {
   'POST /api/v1/area': 'AreaController.create',
   'GET /api/v1/area': 'AreaController.index',
   'GET /api/v1/area/:id': 'AreaController.show',
+  'PATCH /api/v1/area/:id': 'AreaController.update',
 
 };

@@ -73,5 +73,25 @@ module.exports = {
     res.ok(result);
   },
 
+  update: async (req, res) => {
+    try {
+      let data = req.body;
+      if (data.postalCodes) {
+        data.postalCodes.forEach((val, idx) => {
+          data.postalCodes[idx] = val.id
+        });
+      }
+
+      let area = await Area.update({ id: req.params.id }).set(data).fetch();
+      area = area[0];
+
+      res.ok(area);
+    } catch (error) {
+      res.ok({
+        error
+      });
+    }
+  }
+
 };
 
