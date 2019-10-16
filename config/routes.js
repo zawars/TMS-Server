@@ -123,10 +123,12 @@ module.exports.routes = {
   // Accessorials
   'POST /api/v1/accessorials/batch/get': 'AccessorialsController.getBatchAccessorials',
 
- // States
+  // States
   'GET /api/v1/states/search/:query': 'StatesController.searchState',
 
- // Area
+  // Area
   'POST /api/v1/area': 'AreaController.create',
-  
+  'GET /api/v1/area': 'AreaController.index',
+  'GET /api/v1/area/:id': 'AreaController.show',
+
 };
