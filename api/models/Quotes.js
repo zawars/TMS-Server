@@ -39,6 +39,12 @@ module.exports = {
     services: {
       type: 'json'
     },
+    appliedRate: {
+      type: 'number'
+    },
+    markupValue: {
+      type: 'number'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗

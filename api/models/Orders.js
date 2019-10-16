@@ -114,10 +114,10 @@ module.exports = {
       type: 'string'
     },
     pickupCountry: {
-      type: 'json'
+      type: 'string'
     },
     dropoffCountry: {
-      type: 'json'
+      type: 'string'
     },
     services: {
       type: 'json'
@@ -135,8 +135,11 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     },
-    rate: {
-      type: 'json'
+    appliedRate: {
+      type: 'number'
+    },
+    markupValue: {
+      type: 'number'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
@@ -160,6 +163,9 @@ module.exports = {
     },
     vendor: {
       model: 'tradingPartners'
+    },
+    rate: {
+      model: 'rates'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗

@@ -102,6 +102,7 @@ module.exports.routes = {
   'POST /api/v1/orders/batch': 'OrdersController.createOrderBatchFreights',
   'PATCH /api/v1/orders/batch/:id': 'OrdersController.updateOrderBatchFreights',
   'GET /api/v1/orders/placed': 'OrdersController.getPlacedOrders',
+  'GET /api/v1/orders': 'OrdersController.getAllOrders',
 
   // Quotes
   'GET /api/v1/quotes/customer/:id': 'QuotesController.getQuotesByCustomer',
@@ -119,7 +120,10 @@ module.exports.routes = {
   'GET /api/v1/invoices': 'InvoicesController.index',
   'POST /api/v1/invoices/edi': 'InvoicesController.createInvoiceByEDI',
 
-  // States
-  'GET /api/v1/states/search/:query': 'StatesController.searchState',
+  // Accessorials
+  'POST /api/v1/accessorials/batch/get': 'AccessorialsController.getBatchAccessorials',
 
+ // States
+  'GET /api/v1/states/search/:query': 'StatesController.searchState',
+  
 };

@@ -118,6 +118,7 @@ module.exports = {
           }
 
           appliedRate += markup;
+          rate.markupValue = markup;
           rate.appliedRate = appliedRate;
 
           // Making a list of vendor Ids in order to fetch them again because of associated data

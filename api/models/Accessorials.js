@@ -1,5 +1,5 @@
 /**
- * Contracts.js
+ * Accessorials.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,74 +12,60 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    uid: {
-      type: 'number',
-      unique: true
-    },
-    name: {
-      type: 'string',
-      required: true
-    },
+
     description: {
-      type: 'string',
+      type: 'string'
     },
-    reference: {
-      type: 'string',
+    effectiveDate: {
+      type: 'string'
     },
-    effectiveFrom: {
-      type: 'string',
+    fixedCharge: {
+      type: 'number'
     },
-    expiryDate: {
-      type: 'string',
+    minCharge: {
+      type: 'number'
     },
-    renewalDate: {
-      type: 'string',
+    maxCharge: {
+      type: 'number'
     },
-    weightBreaks: {
-      type: 'string',
-    },
-    isClientSpecific: {
-      type: 'boolean',
-      defaultsTo: false
+    perUnitCharge: {
+      type: 'number'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    vendor: {
-      model: 'tradingPartners'
+
+    contract: {
+      model: 'contracts'
     },
-    client: {
-      model: 'tradingPartners'
-    },
-    contractType: {
+    service: {
       model: 'dropdownMapper'
     },
-    currency: {
+    chargeType: {
       model: 'dropdownMapper'
     },
-    contractStatus: {
+    chargeUOM: {
+      model: 'dropdownMapperChild'
+    },
+    fixedChargeCurrency: {
       model: 'dropdownMapper'
     },
+    minChargeCurrency: {
+      model: 'dropdownMapper'
+    },
+    maxChargeCurrency: {
+      model: 'dropdownMapper'
+    },
+    perUnitChargeCurrency: {
+      model: 'dropdownMapper'
+    }
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
 
-    rateSheets: {
-      collection: 'rateSheets',
-      via: 'contract'
-    },
-    accessorials: {
-      collection: 'accessorials',
-      via: 'contract'
-    },
   },
 
-  beforeCreate: (values, cb) => {
-    UtilityService.contractCounter++;
-    values.uid = UtilityService.contractCounter;
-    cb();
-  }
-
 };
+

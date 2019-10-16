@@ -9,7 +9,9 @@ module.exports = {
   create: async (req, res) => {
     let contract = req.body;
     let rateSheetList = contract.rateSheets;
+    let accessorialList = contract.accessorials;
     delete(contract.rateSheets);
+    delete(contract.accessorials);
 
     let contractObj = await Contracts.create(contract).fetch();
 
@@ -20,7 +22,12 @@ module.exports = {
       delete(rateSheet.rates);
     });
 
+    accessorialList.map(accessorial => {
+      accessorial.contract = contractObj.id
+    });
+
     let rateSheets = await RateSheets.createEach(rateSheetList).fetch();
+    let accessorials = await Accessorials.createEach(accessorialList).fetch();
 
     ratesCollection.map(async (rateList, idx) => {
       rateList.map(rate => rate.rateSheet = rateSheets[idx].id);
@@ -28,6 +35,7 @@ module.exports = {
     });
 
     contractObj.rateSheets = rateSheets;
+    contractObj.accessorials = accessorials;
 
     res.ok(contractObj);
   },
