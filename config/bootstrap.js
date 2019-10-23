@@ -9,6 +9,8 @@
  * https://sailsjs.com/config/bootstrap
  */
 
+const XLSX = require('xlsx');
+
 module.exports.bootstrap = async function () {
 
   // By convention, this is a good place to set up fake data during development.
@@ -20,7 +22,10 @@ module.exports.bootstrap = async function () {
   if (await Dropdown.count() == 0) {
     let data = [{
         field: 'Country',
-        values: []
+        values: [{
+          name: 'US',
+          position: 0
+        }, ]
       },
       {
         field: 'Product',
@@ -28,11 +33,62 @@ module.exports.bootstrap = async function () {
       },
       {
         field: 'Handling Unit',
-        values: [
-          // {
-          //   name: 'Software Development',
-          //   position: 1,
-          // },
+        values: [{
+            name: 'Letter',
+            position: 0
+          },
+          {
+            name: 'YourPackaging',
+            position: 1
+          },
+          {
+            name: 'Pallet',
+            position: 2
+          },
+          {
+            name: 'Loose',
+            position: 3
+          },
+          {
+            name: 'Drum',
+            position: 4
+          },
+          {
+            name: 'Crate',
+            position: 5
+          },
+          {
+            name: 'Pail',
+            position: 6
+          },
+          {
+            name: 'Roll',
+            position: 7
+          },
+          {
+            name: 'Carton',
+            position: 8
+          },
+          {
+            name: 'Tube',
+            position: 9
+          },
+          {
+            name: 'Box (fibreboard box)',
+            position: 10
+          },
+          {
+            name: 'Jerrican',
+            position: 11
+          },
+          {
+            name: 'Bag',
+            position: 12
+          },
+          {
+            name: 'Skid',
+            position: 13
+          },
         ]
       },
       {
@@ -69,11 +125,27 @@ module.exports.bootstrap = async function () {
       },
       {
         field: 'Freight Terms',
-        values: []
+        values: [{
+            name: 'Collect',
+            position: 0
+          },
+          {
+            name: 'Prepaid',
+            position: 1
+          },
+        ]
       },
       {
         field: 'Vendor Status',
-        values: []
+        values: [{
+            name: 'Active',
+            position: 0
+          },
+          {
+            name: 'Inactive',
+            position: 1
+          },
+        ]
       },
       {
         field: 'Contract Status',
@@ -81,7 +153,10 @@ module.exports.bootstrap = async function () {
       },
       {
         field: 'Currency',
-        values: []
+        values: [{
+          name: 'USD',
+          position: 0
+        }, ]
       },
       {
         field: 'Vendor Type',
@@ -89,7 +164,675 @@ module.exports.bootstrap = async function () {
       },
       {
         field: 'Vendor Services',
-        values: []
+        values: [{
+            name: 'Delivery Surcharge - Cont. US',
+            position: 0
+          },
+          {
+            name: 'Extended Surcharge - Cont. US',
+            position: 1
+          },
+          {
+            name: 'Delivery Surcharge - AK',
+            position: 2
+          },
+          {
+            name: 'Delivery Surcharge - HI',
+            position: 3
+          },
+          {
+            name: 'Intra HI Surcharge',
+            position: 4
+          },
+          {
+            name: 'Residential Surcharge',
+            position: 5
+          },
+          {
+            name: 'Oversize',
+            position: 6
+          },
+          {
+            name: 'Additional Handling',
+            position: 7
+          },
+          {
+            name: 'Fuel Surcharge',
+            position: 8
+          },
+          {
+            name: 'Stop Off',
+            position: 9
+          },
+          {
+            name: 'Liftgate Delivery',
+            position: 10
+          },
+          {
+            name: 'Liftgate Pickup',
+            position: 11
+          },
+          {
+            name: 'Residential Delivery',
+            position: 12
+          },
+          {
+            name: 'Notification',
+            position: 13
+          },
+          {
+            name: 'Call for appointment',
+            position: 14
+          },
+          {
+            name: 'Change in Terms of Payment',
+            position: 15
+          },
+          {
+            name: 'Convention/Tradeshow Pickup',
+            position: 16
+          },
+          {
+            name: 'Convention/Tradeshow Delivery',
+            position: 17
+          },
+          {
+            name: 'Construction Site Pickup',
+            position: 18
+          },
+          {
+            name: 'Construction Site Delivery',
+            position: 19
+          },
+          {
+            name: 'Appointment',
+            position: 20
+          },
+          {
+            name: 'Canadian Surcharge',
+            position: 21
+          },
+          {
+            name: 'CFS Surcharge',
+            position: 22
+          },
+          {
+            name: 'Church Delivery',
+            position: 23
+          },
+          {
+            name: 'SChurch PickupqM',
+            position: 24
+          },
+          {
+            name: 'COD Fee',
+            position: 25
+          },
+          {
+            name: 'Corrected BOLs',
+            position: 26
+          },
+          {
+            name: 'Cross-Dock Handling',
+            position: 27
+          },
+          {
+            name: 'Cubic Density Surcharge',
+            position: 28
+          },
+          {
+            name: 'Delivery Area Surcharge',
+            position: 29
+          },
+          {
+            name: 'Delivery Area Surcharge (Extended)',
+            position: 30
+          },
+          {
+            name: 'International Delivery Area Surcharge',
+            position: 31
+          },
+          {
+            name: 'Deliver By Date or Date Range',
+            position: 32
+          },
+          {
+            name: 'Detention',
+            position: 33
+          },
+          {
+            name: 'Detention without power',
+            position: 34
+          },
+          {
+            name: '(SED) for each Puerto Rico or U.S. Virgin Island ',
+            position: 35
+          },
+          {
+            name: 'Documentation Charge',
+            position: 36
+          },
+          {
+            name: 'Excessive Length',
+            position: 37
+          },
+          {
+            name: 'Excess Liability',
+            position: 38
+          },
+          {
+            name: 'Floor Load',
+            position: 39
+          },
+          {
+            name: 'Fuel Surcharge Bad',
+            position: 40
+          },
+          {
+            name: 'Floor Unload',
+            position: 41
+          },
+          {
+            name: 'Geographic Linehaul Surcharge',
+            position: 42
+          },
+          {
+            name: 'Golf Course Delivery',
+            position: 43
+          },
+          {
+            name: 'Golf Course Pickup',
+            position: 44
+          },
+          {
+            name: 'Goverment Site Delivery',
+            position: 45
+          },
+          {
+            name: 'Goverment Site Pickup',
+            position: 46
+          },
+          {
+            name: 'Grocery Warehouse Delivery',
+            position: 47
+          },
+          {
+            name: 'Grocery Warehouse Pickup',
+            position: 48
+          },
+          {
+            name: 'Guaranteed Delivery',
+            position: 49
+          },
+          {
+            name: 'Guaranteed Delivery Before 3:30 PM',
+            position: 50
+          },
+          {
+            name: 'Guaranteed Delivery Before 9:00 AM',
+            position: 51
+          },
+          {
+            name: 'Guaranteed Delivery Before 10:00 am',
+            position: 52
+          },
+          {
+            name: 'Guaranteed Delivery Before Noon',
+            position: 53
+          },
+          {
+            name: 'Guaranteed Delivery - Single or multi-hour',
+            position: 54
+          },
+          {
+            name: 'Hazardous Material',
+            position: 55
+          },
+          {
+            name: 'High Cost Area',
+            position: 56
+          },
+          {
+            name: 'Holiday Pickup or Delivery',
+            position: 57
+          },
+          {
+            name: 'Hospital Delivery',
+            position: 58
+          },
+          {
+            name: 'Hospital Pickup',
+            position: 59
+          },
+          {
+            name: 'Homeland Security ',
+            position: 60
+          },
+          {
+            name: 'Hotel Delivery',
+            position: 61
+          },
+          {
+            name: 'Hotel Pickup',
+            position: 62
+          },
+          {
+            name: 'In Bond',
+            position: 63
+          },
+          {
+            name: 'Insurance',
+            position: 64
+          },
+          {
+            name: 'Inspection of Freight',
+            position: 65
+          },
+          {
+            name: 'Inside Delivery',
+            position: 66
+          },
+          {
+            name: 'Inside Pickup',
+            position: 67
+          },
+          {
+            name: 'Jail/Detention Center Delivery',
+            position: 68
+          },
+          {
+            name: 'Jail/Detention Center Pickup',
+            position: 69
+          },
+          {
+            name: 'Liftgate pickup with pallet jack',
+            position: 70
+          },
+          {
+            name: 'Liftgate delivery with pallet jack',
+            position: 71
+          },
+          {
+            name: 'Limited Access Delivery',
+            position: 72
+          },
+          {
+            name: 'Limited Access Pickup',
+            position: 73
+          },
+          {
+            name: 'Linehaul',
+            position: 74
+          },
+          {
+            name: 'Lumper',
+            position: 75
+          },
+          {
+            name: 'Mall Delivery',
+            position: 76
+          },
+          {
+            name: 'Marking or Tagging',
+            position: 77
+          },
+          {
+            name: 'Metropolitan Areas',
+            position: 78
+          },
+          {
+            name: 'Military Base or Facility Pickup',
+            position: 79
+          },
+          {
+            name: 'Military Base or Facility Delivery',
+            position: 80
+          },
+          {
+            name: 'Mine Delivery',
+            position: 81
+          },
+          {
+            name: 'Mine Pickup',
+            position: 82
+          },
+          {
+            name: 'Mini Storage Delivery',
+            position: 83
+          },
+          {
+            name: 'Mini Storage Pickup ',
+            position: 84
+          },
+          {
+            name: 'Minimum Charge Shipment',
+            position: 85
+          },
+          {
+            name: 'Next Flight Guaranteed',
+            position: 86
+          },
+          {
+            name: 'Overlength 14 ft',
+            position: 87
+          },
+          {
+            name: 'Overlength 20 ft',
+            position: 88
+          },
+          {
+            name: 'Overlength 24 ft',
+            position: 89
+          },
+          {
+            name: 'Overlength 12ft',
+            position: 90
+          },
+          {
+            name: 'Over Dimension',
+            position: 91
+          },
+          {
+            name: 'Packaging Cost',
+            position: 92
+          },
+          {
+            name: 'Perishable',
+            position: 93
+          },
+          {
+            name: 'Pallet Jack',
+            position: 94
+          },
+          {
+            name: 'Delivery at US Port',
+            position: 95
+          },
+          {
+            name: 'Pickup at US Port',
+            position: 96
+          },
+          {
+            name: 'Protect from Freezingx',
+            position: 97
+          },
+          {
+            name: 'Reconsignment',
+            position: 98
+          },
+          {
+            name: 'Redelivery',
+            position: 99
+          },
+          {
+            name: 'REMOTE SITE DELIVERY',
+            position: 100
+          },
+          {
+            name: 'REMOTE SITE PICKUP',
+            position: 101
+          },
+          {
+            name: 'Residential Pickup',
+            position: 102
+          },
+          {
+            name: 'Returned Shipment Documentation',
+            position: 103
+          },
+          {
+            name: 'Rural Areas',
+            position: 104
+          },
+          {
+            name: 'Saturday Pickup/Delivery',
+            position: 105
+          },
+          {
+            name: 'School / University Delivery',
+            position: 106
+          },
+          {
+            name: 'School / University Pickup',
+            position: 107
+          },
+          {
+            name: 'Security Inspection',
+            position: 108
+          },
+          {
+            name: 'Second Man',
+            position: 109
+          },
+          {
+            name: 'Security',
+            position: 110
+          },
+          {
+            name: 'Sort Segregate',
+            position: 111
+          },
+          {
+            name: 'Single Shipment',
+            position: 112
+          },
+          {
+            name: 'SAT/SUN Pickup or Delivery',
+            position: 113
+          },
+          {
+            name: 'Self Storage Unit Delivery',
+            position: 114
+          },
+          {
+            name: 'Storage',
+            position: 115
+          },
+          {
+            name: 'Tarping Fee',
+            position: 116
+          },
+          {
+            name: 'Tolls',
+            position: 117
+          },
+          {
+            name: 'TWIC Delivery',
+            position: 118
+          },
+          {
+            name: 'TWIC Pickup',
+            position: 119
+          },
+          {
+            name: 'Unloading',
+            position: 120
+          },
+          {
+            name: 'Utility Site Delivery',
+            position: 121
+          },
+          {
+            name: 'Utility Site Pickups',
+            position: 122
+          },
+          {
+            name: 'Walmart Delivery',
+            position: 123
+          },
+          {
+            name: 'White Glove Service',
+            position: 124
+          },
+          {
+            name: 'Weight & Inspection',
+            position: 125
+          },
+          {
+            name: 'Airport Delivery',
+            position: 126
+          },
+          {
+            name: 'Airport Pickup',
+            position: 127
+          },
+          {
+            name: 'Airport Airline Surcharge',
+            position: 128
+          },
+          {
+            name: 'Airport Transfer',
+            position: 129
+          },
+          {
+            name: 'Arbitrary Charge',
+            position: 130
+          },
+          {
+            name: 'Audit Fee',
+            position: 131
+          },
+          {
+            name: 'Before or After Hours',
+            position: 132
+          },
+          {
+            name: 'Blind Shipment Fee',
+            position: 133
+          },
+          {
+            name: 'Canadian Surcharge AB,BC',
+            position: 134
+          },
+          {
+            name: 'Capacity Load',
+            position: 135
+          },
+          {
+            name: 'Carbon Black',
+            position: 136
+          },
+          {
+            name: 'Carbon Tax',
+            position: 137
+          },
+          {
+            name: 'Country Club Delivery',
+            position: 138
+          },
+          {
+            name: 'Country Club Pickup',
+            position: 139
+          },
+          {
+            name: 'Overlength 28 feet',
+            position: 140
+          },
+          {
+            name: 'Resort Pickup/Delivery',
+            position: 141
+          },
+          {
+            name: 'Restaurant Delivery',
+            position: 142
+          },
+          {
+            name: 'Unknown Accessorial',
+            position: 143
+          },
+          {
+            name: 'California Compliance',
+            position: 144
+          },
+          {
+            name: 'Ground Delivery Service',
+            position: 145
+          },
+          {
+            name: 'Inside Pickup',
+            position: 146
+          },
+          {
+            name: 'Inside Delivery',
+            position: 147
+          },
+          {
+            name: 'Limited Access Delivery',
+            position: 148
+          },
+          {
+            name: 'IHT - Tolls',
+            position: 149
+          },
+          {
+            name: 'Country Club Delivery',
+            position: 150
+          },
+          {
+            name: 'Country Club Pick-up',
+            position: 151
+          },
+          {
+            name: `Overlength 16'`,
+            position: 152
+          },
+          {
+            name: `Overlength 8'`,
+            position: 153
+          },
+          {
+            name: `Overlength 16'`,
+            position: 154
+          },
+          {
+            name: 'Overlength 11 Feet',
+            position: 155
+          },
+          {
+            name: 'Overlength 15ft-19ft',
+            position: 156
+          },
+          {
+            name: 'Overlength 19.1ft to 29ft',
+            position: 157
+          },
+          {
+            name: 'Overlength 29.1ft & Over',
+            position: 158
+          },
+          {
+            name: 'Chassis Rental',
+            position: 159
+          },
+          {
+            name: 'Chassis Split',
+            position: 160
+          },
+          {
+            name: 'Prepull',
+            position: 161
+          },
+          {
+            name: 'Reefer',
+            position: 162
+          },
+          {
+            name: 'Triaxle',
+            position: 163
+          },
+          {
+            name: 'Special Equipment',
+            position: 164
+          },
+          {
+            name: 'Overlength 19.1 ft to 26ft',
+            position: 165
+          },
+          {
+            name: 'Overlength 19.1ft & 26ft',
+            position: 166
+          },
+        ]
       },
       {
         field: 'User Type',
@@ -101,19 +844,83 @@ module.exports.bootstrap = async function () {
       },
       {
         field: 'Contract Type',
-        values: []
+        values: [{
+            name: 'Blanket Cost',
+            position: 0
+          },
+          {
+            name: 'Client Cost',
+            position: 1
+          },
+          {
+            name: 'Blanket Billing',
+            position: 2
+          },
+          {
+            name: 'Client Billing',
+            position: 3
+          },
+        ]
       },
       {
         field: 'Rate Type',
-        values: []
+        values: [{
+            name: 'Area',
+            position: 0
+          },
+          {
+            name: 'Destiny',
+            position: 1
+          },
+          {
+            name: 'Flat Rate',
+            position: 2
+          },
+          {
+            name: 'Pieces',
+            position: 3
+          },
+          {
+            name: 'Weight',
+            position: 4
+          },
+          {
+            name: 'Volume',
+            position: 5
+          },
+          {
+            name: 'Per Pallet / Handling Unit',
+            position: 6
+          },
+        ]
       },
       {
         field: 'Rate Calc UOM',
-        values: []
+        values: [{
+            name: 'SqFt',
+            position: 0
+          },
+          {
+            name: 'SqM',
+            position: 1
+          },
+        ]
       },
       {
         field: 'Rate Calc Type',
-        values: []
+        values: [{
+            name: 'Cumulative Unit Rate',
+            position: 0
+          },
+          {
+            name: 'Total Rate',
+            position: 1
+          },
+          {
+            name: 'Unit Rate',
+            position: 2
+          },
+        ]
       },
       {
         field: 'Rate Breaks',
@@ -121,11 +928,103 @@ module.exports.bootstrap = async function () {
       },
       {
         field: 'Rate Break UOM',
-        values: []
+        values: [{
+            name: 'Lb',
+            position: 0
+          },
+          {
+            name: 'Kg',
+            position: 1
+          },
+          {
+            name: 'Cwt',
+            position: 2
+          },
+          {
+            name: 'Ton',
+            position: 3
+          },
+          {
+            name: 'Tonne',
+            position: 4
+          },
+          {
+            name: 'CuFt',
+            position: 5
+          },
+          {
+            name: 'M3',
+            position: 6
+          },
+          {
+            name: 'CuIn',
+            position: 7
+          },
+          {
+            name: 'Cc',
+            position: 8
+          },
+          {
+            name: 'CuYd',
+            position: 9
+          },
+          {
+            name: 'Mi',
+            position: 10
+          },
+          {
+            name: 'Km',
+            position: 11
+          },
+          {
+            name: 'Ft',
+            position: 12
+          },
+          {
+            name: 'M',
+            position: 13
+          },
+          {
+            name: 'In',
+            position: 14
+          },
+          {
+            name: 'Cm',
+            position: 15
+          },
+          {
+            name: 'Yd',
+            position: 16
+          },
+          {
+            name: 'SqFt',
+            position: 17
+          },
+          {
+            name: 'SqM',
+            position: 18
+          },
+        ]
       },
       {
         field: 'Location Type',
-        values: []
+        values: [{
+            name: 'Terminal',
+            position: 0
+          },
+          {
+            name: 'Through Point',
+            position: 1
+          },
+          {
+            name: 'Warehouse',
+            position: 2
+          },
+          {
+            name: 'Multi-Purpose',
+            position: 3
+          },
+        ]
       },
       {
         field: 'Shipment Status',
@@ -151,9 +1050,34 @@ module.exports.bootstrap = async function () {
           },
         ]
       },
+      {
+        field: 'Freight Class',
+        values: []
+      },
     ];
 
-    data.forEach(async val => {
+    // Import data from Excel
+    let workbook = XLSX.readFile(process.cwd() + '/TMS_Drop_Down.xlsx');
+    let results = XLSX.utils.sheet_to_json(workbook.Sheets['Product']);
+    let productIdx = data.findIndex(val => val.field == 'Product');
+    // let nmfcIdx = data.findIndex(val => val.field == 'NMFC')
+    let freightClassIdx = data.findIndex(val => val.field == 'Freight Class')
+
+    results.forEach((obj, idx) => {
+      if (obj.Product)
+        data[productIdx].values.push({
+          name: obj.Product,
+          position: idx
+        });
+
+      if (obj.FreightClass)
+        data[freightClassIdx].values.push({
+          name: obj.FreightClass,
+          position: idx
+        });
+    });
+
+    data.forEach(async (val, idx) => {
       let dropdown = await Dropdown.create({
         field: val.field
       }).fetch();
@@ -162,9 +1086,7 @@ module.exports.bootstrap = async function () {
         cityDropdownId = dropdown.id;
       }
 
-      val.values.forEach(obj => {
-        dropdown: dropdown.id
-      });
+      data[idx].values.forEach(obj => obj.dropdown = dropdown.id);
 
       await DropdownMapper.createEach(val.values);
     });
