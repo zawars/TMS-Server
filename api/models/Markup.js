@@ -63,4 +63,10 @@ module.exports = {
 
   },
 
+  beforeCreate: (values, cb) => {
+    UtilityService.markupCounter++;
+    values.uid = UtilityService.markupCounter;
+    cb();
+  }
+
 };

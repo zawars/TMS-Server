@@ -220,6 +220,12 @@ module.exports.bootstrap = async function () {
     UtilityService.invoiceCounter = uid;
   }
 
+  if (await Markup.count() > 0) {
+    let markups = await Markup.find();
+    let uid = markups[markups.length - 1].uid;
+    UtilityService.markupCounter = uid;
+  }
+
   if (await States.count() == 0) {
     let promise = new Promise(async (resolve, reject) => {
       let data = {

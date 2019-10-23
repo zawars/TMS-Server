@@ -5,4 +5,5 @@ module.exports = {
   quoteCounter: 0,
   orderCounter: 0,
   invoiceCounter: 0,
+  markupCounter: 0
 };
