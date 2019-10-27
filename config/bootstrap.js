@@ -1054,6 +1054,42 @@ module.exports.bootstrap = async function () {
         field: 'Freight Class',
         values: []
       },
+      {
+        field: 'Claim Types',
+        values: [{
+            name: 'Visible Damage',
+            position: 0
+          },
+          {
+            name: 'Shortage',
+            position: 1
+          },
+          {
+            name: 'Concealed Damage',
+            position: 2
+          },
+          {
+            name: 'Concealed Loss',
+            position: 3
+          },
+          {
+            name: 'Shipment Loss',
+            position: 4
+          },
+          {
+            name: 'Wreck',
+            position: 5
+          },
+          {
+            name: 'Delay',
+            position: 6
+          },
+          {
+            name: 'Theft',
+            position: 7
+          },
+        ]
+      },
     ];
 
     // Import data from Excel
@@ -1211,4 +1247,5 @@ module.exports.bootstrap = async function () {
 
     promise.then(result => console.log(result));
   }
+
 };
