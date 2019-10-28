@@ -49,10 +49,7 @@ module.exports = {
     status: {
       type: 'string'
     },
-    postalCodel: {
-      type: 'json'
-    },
-    city: {
+    cityPostalCode: {
       type: 'json'
     },
     state: {
