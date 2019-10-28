@@ -13,6 +13,54 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    bolNumber: {
+      type: 'string'
+    },
+    proNumber: {
+      type: 'string'
+    },
+    claimFor: {
+      type: 'string'
+    },
+    companyName: {
+      type: 'string'
+    },
+    address1: {
+      type: 'string'
+    },
+    address2: {
+      type: 'string'
+    },
+    phone: {
+      type: 'string'
+    },
+    fax: {
+      type: 'string'
+    },
+    email: {
+      type: 'string'
+    },
+    description: {
+      type: 'string'
+    },
+    decision: {
+      type: 'string'
+    },
+    status: {
+      type: 'string'
+    },
+    postalCodel: {
+      type: 'json'
+    },
+    city: {
+      type: 'json'
+    },
+    state: {
+      type: 'json'
+    },
+    claimTypes: {
+      type: 'json'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -22,6 +70,11 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
+
+    attachments: {
+      collection: 'attachments',
+      via: 'claim'
+    },
 
   },
 
