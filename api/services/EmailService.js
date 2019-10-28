@@ -39,13 +39,17 @@ module.exports = {
       from: 'project.notification@bkw-oneview.com',
       to: options.email,
       subject: options.subject,
-      html: options.message + `<br><br>
-      <div>Freundliche Grüsse / Meilleures salutations / Best Regards,<br><br>
-      <strong>oneView</strong><br><br>
+      html: options.message + 
+      `<br><br>
+      Best Regards,<br><br>
+      <strong>Röhlig Claim Management</strong>`
 
-      Dies ist eine vom System generierte Mail. Bitte Antworten Sie nicht darauf. Bei Fragen oder Anliegen wenden Sie sich an den Applikationsverantwortlichen oder an den Service Desk der BKW.									
-      This is an automatically generated message. Please do not reply to this message. For Questions please contact application responsible or BKW service desk.
-      </div>`
+      // <div>Freundliche Grüsse / Meilleures salutations / Best Regards,<br><br>
+      // <strong>oneView</strong><br><br>
+
+      // Dies ist eine vom System generierte Mail. Bitte Antworten Sie nicht darauf. Bei Fragen oder Anliegen wenden Sie sich an den Applikationsverantwortlichen oder an den Service Desk der BKW.									
+      // This is an automatically generated message. Please do not reply to this message. For Questions please contact application responsible or BKW service desk.
+      // </div>`
     }, (err, info) => {
       if (err) {
         return done(err);
