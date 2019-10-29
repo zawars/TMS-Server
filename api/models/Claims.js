@@ -13,6 +13,10 @@ module.exports = {
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
 
+    uid: {
+      type: 'number',
+      unique: true
+    },
     bolNumber: {
       type: 'string'
     },
@@ -58,6 +62,9 @@ module.exports = {
     claimTypes: {
       type: 'json'
     },
+    comments: {
+      type: 'json',
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -77,5 +84,11 @@ module.exports = {
     },
 
   },
+
+  beforeCreate: (values, cb) => {
+    UtilityService.claimCounter++;
+    values.uid = UtilityService.claimCounter;
+    cb();
+  }
 
 };

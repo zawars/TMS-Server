@@ -1178,6 +1178,12 @@ module.exports.bootstrap = async function () {
     UtilityService.invoiceCounter = uid;
   }
 
+  if (await Claims.count() > 0) {
+    let claims = await Claims.find();
+    let uid = claims[claims.length - 1].uid;
+    UtilityService.claimCounter = uid;
+  }
+
   if (await States.count() == 0) {
     let promise = new Promise(async (resolve, reject) => {
       let data = {

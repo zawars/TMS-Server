@@ -132,4 +132,8 @@ module.exports.routes = {
   'GET /api/v1/area/:id': 'AreaController.show',
   'PATCH /api/v1/area/:id': 'AreaController.update',
 
+  // Claims
+  'GET /api/v1/claims/customer/:id': 'ClaimsController.getClaimByCustomer',
+  'GET /api/v1/claims': 'ClaimsController.getAllClaims',
+
 };
