@@ -4,7 +4,7 @@ const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
   name: 'mail3.gridhost.co.uk',  //'www.bkw-oneview.com',
   host: "mail.infomaniak.com",
-  port: 26,   //587,
+  port: 25,   //587,
   secure: false, // true for 465, false for other ports
   auth: {
     user: 'claims@crekey.com', //'project.notification@bkw-oneview.com', // generated ethereal user
