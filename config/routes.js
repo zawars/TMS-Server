@@ -134,6 +134,6 @@ module.exports.routes = {
 
   // Claims
   'GET /api/v1/claims/customer/:id': 'ClaimsController.getClaimByCustomer',
-  'GET /api/v1/claims': 'ClaimsController.getAllClaims',
+  'GET /api/v1/claims': 'ClaimsController.index',
 
 };

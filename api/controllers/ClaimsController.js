@@ -21,7 +21,7 @@ module.exports = {
         }
 		},
 		
-		getAllClaims: async (req, res) => {
+		index: async (req, res) => {
 			try {
 					let claims = await Claims.find().populateAll().sort('createdAt DESC');
 					res.ok(claims);
