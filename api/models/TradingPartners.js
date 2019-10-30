@@ -74,10 +74,10 @@ module.exports = {
       model: 'dropdownMapperChild',
     },
     city: {
-      model: 'json',  //'dropdownMapper',
+      type: 'json',  //'dropdownMapper',
     },
     billingCity: {
-      model: 'json', //'dropdownMapper',
+      type: 'json', //'dropdownMapper',
     },
     billingZipCode: {
       model: 'dropdownMapperChild',
