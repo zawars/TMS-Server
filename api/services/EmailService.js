@@ -2,13 +2,13 @@
 
 const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
-  name: 'www.bkw-oneview.com',
+  name: 'mail3.gridhost.co.uk',  //'www.bkw-oneview.com',
   host: "mail.infomaniak.com",
-  port: 587,
+  port: 465,   //587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: 'project.notification@bkw-oneview.com', // generated ethereal user
-    pass: 'kitcHlew2277$$$' // generated ethereal password
+    user: 'claims@crekey.com', //'project.notification@bkw-oneview.com', // generated ethereal user
+    pass: 'Crekey2019$$',  //'kitcHlew2277$$$' // generated ethereal password
   },
 });
 
