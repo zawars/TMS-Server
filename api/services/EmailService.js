@@ -2,8 +2,8 @@
 
 const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
-  name: 'mail3.gridhost.co.uk',  //'www.bkw-oneview.com',
-  host: "mail.infomaniak.com",
+  name: 'www.bkw-oneview.com',
+  host: 'mail3.gridhost.co.uk',   //"mail.infomaniak.com",
   port: 25,   //587,
   secure: false, // true for 465, false for other ports
   auth: {
@@ -36,7 +36,7 @@ module.exports = {
 
   sendMail: async (options, done) => {
     transporter.sendMail({
-      from: 'project.notification@bkw-oneview.com',
+      from: 'claims@crekey.com',      //'project.notification@bkw-oneview.com',
       to: options.email,
       subject: options.subject,
       html: options.message + 
