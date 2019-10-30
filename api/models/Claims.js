@@ -53,10 +53,10 @@ module.exports = {
     status: {
       type: 'string'
     },
-    cityPostalCode: {
+    city: {
       type: 'json'
     },
-    state: {
+    postalCode: {
       type: 'json'
     },
     claimTypes: {
@@ -72,6 +72,9 @@ module.exports = {
 
     customer: {
       model: 'tradingPartners'
+    },
+    state: {
+      model: 'states'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
