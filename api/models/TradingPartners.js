@@ -98,7 +98,7 @@ module.exports = {
       model: 'dropdownMapper',
     },
     billingState: {
-      model: 'dropdownMapper',
+      model: 'states',
     },
     billingCountry: {
       model: 'dropdownMapper',
