@@ -86,7 +86,7 @@ module.exports = {
       model: 'dropdownMapper'
     },
     state: {
-      model: 'dropdownMapper',
+      model: 'states',
     },
     country: {
       model: 'dropdownMapper',
