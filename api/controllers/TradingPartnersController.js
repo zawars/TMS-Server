@@ -21,7 +21,7 @@ module.exports = {
       id
     }).populateAll();
 
-    if(partner) {
+    if (partner) {
       partner.locations = await Locations.find({
         tradingPartner: partner.id
       }).populateAll();
@@ -37,6 +37,8 @@ module.exports = {
 
   create: async (req, res) => {
     let data = req.body;
+    let partnerType = data.partnerType;
+    delete(data.partnerType);
     let locations = data.locations;
     let products = data.products;
     delete(data.locations);
@@ -70,6 +72,21 @@ module.exports = {
       let productsList = await Products.createEach(products).fetch();
       partner.products = productsList;
     }
+
+    let obj = {
+      firstName: data.name,
+      lastName: '',
+      email: data.contactEmail,
+      username: '',
+      password: 'password',
+      phone: data.number,
+      permission: '',
+      partner: partner.id,
+      role: partner.type,
+      isVerified: true
+    };
+
+    await User.create(obj);
 
     res.ok(partner);
   },
