@@ -20,13 +20,13 @@ module.exports = {
         result = await DropdownMapper.find({
           dropdown: dropDown.id,
           name: {
-            'contains': query
+            'startsWith': query
           }
         }).populateAll().limit(10);
       } else {
         result = await DropdownMapperChild.find({
           name: {
-            'contains': query
+            'startsWith': query
           }
         }).limit(20).populateAll();
       }
@@ -53,14 +53,14 @@ module.exports = {
             in: states
           },
           name: {
-            'contains': city
+            'startsWith': city
           }
         }).populateAll().limit(10);
       } else {
         result = await DropdownMapper.find({
           dropdown: dropDown.id,
           name: {
-            'contains': city
+            'startsWith': city
           }
         }).populateAll().limit(10);
       }
@@ -81,13 +81,13 @@ module.exports = {
           in: data.cities
         },
         name: {
-          'contains': data.postalCode
+          'startsWith': data.postalCode
         }
       }).populateAll().limit(10);
     } else {
       result = await DropdownMapperChild.find({
         name: {
-          'contains': data.postalCode
+          'startsWith': data.postalCode
         }
       }).populateAll().limit(10);
     }
