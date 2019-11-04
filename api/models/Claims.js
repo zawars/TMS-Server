@@ -26,7 +26,7 @@ module.exports = {
     claimFor: {
       type: 'string'
     },
-    companyName: {
+    claimantName: {
       type: 'string'
     },
     address1: {
