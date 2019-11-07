@@ -63,18 +63,24 @@ module.exports = {
       type: 'string'
     },
     pickupCity: {
-      type: 'string'
+      type: 'json'
     },
     pickupEmail: {
       type: 'string'
     },
     pickupPostalCode: {
-      type: 'string'
+      type: 'json'
     },
     pickupHours: {
       type: 'string'
     },
     pickupMinutes: {
+      type: 'string'
+    },
+    pickUpReadyTime: {
+      type: 'string'
+    },
+    pickUpCloseTime: {
       type: 'string'
     },
     dropoffLocation: {
@@ -99,13 +105,13 @@ module.exports = {
       type: 'string'
     },
     dropoffCity: {
-      type: 'string'
+      type: 'json'
     },
     dropoffEmail: {
       type: 'string'
     },
     dropoffPostalCode: {
-      type: 'string'
+      type: 'json'
     },
     dropoffHours: {
       type: 'string'
@@ -113,10 +119,13 @@ module.exports = {
     dropoffMinutes: {
       type: 'string'
     },
-    pickupCountry: {
+    dropoffCountry: {
       type: 'string'
     },
-    dropoffCountry: {
+    dropoffReadyTime: {
+      type: 'string'
+    },
+    dropoffCloseTime: {
       type: 'string'
     },
     services: {
@@ -141,16 +150,46 @@ module.exports = {
     markupValue: {
       type: 'number'
     },
+    payerCompanyName: {
+      type: 'string'
+    },
+    payerAddress: {
+      type: 'string'
+    },
+    payerCity: {
+      type: 'json'
+    },
+    payerPostalCode: {
+      type: 'json'
+    },
+    payerContactName: {
+      type: 'string'
+    },
+    payerContactNumber: {
+      type: 'string'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
+    pickupCountry: {
+      type: 'dropdownMapper'
+    },
+    dropoffCountry: {
+      type: 'dropdownMapper'
+    },
     pickupState: {
-      model: 'dropdownMapper'
+      model: 'states'
     },
     dropoffState: {
-      model: 'dropdownMapper'
+      model: 'states'
+    },
+    payerCountry: {
+      type: 'dropdownMapper'
+    },
+    payerState: {
+      model: 'states'
     },
     pickupLocation: {
       model: 'locations'

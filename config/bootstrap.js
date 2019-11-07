@@ -1090,6 +1090,106 @@ module.exports.bootstrap = async function () {
           },
         ]
       },
+      {
+        field: 'Haz Class',
+        values: [{
+            name: '1',
+            position: 0
+          },
+          {
+            name: '2',
+            position: 1
+          },
+          {
+            name: '2.1',
+            position: 2
+          },
+          {
+            name: '2.2',
+            position: 3
+          },
+          {
+            name: '2.3',
+            position: 4
+          },
+          {
+            name: '3',
+            position: 5
+          },
+          {
+            name: '4',
+            position: 6
+          },
+          {
+            name: '4.1',
+            position: 7
+          },
+          {
+            name: '4.2',
+            position: 8
+          },
+          {
+            name: '4.3',
+            position: 9
+          },
+          {
+            name: '5',
+            position: 10
+          },
+          {
+            name: '5.1',
+            position: 11
+          },
+          {
+            name: '5.2',
+            position: 12
+          },
+          {
+            name: '6',
+            position: 13
+          },
+          {
+            name: '6.1',
+            position: 14
+          },
+          {
+            name: '6.2',
+            position: 15
+          },
+          {
+            name: '7',
+            position: 16
+          },
+          {
+            name: '8',
+            position: 17
+          },
+          {
+            name: '9',
+            position: 18
+          },
+        ]
+      },
+      {
+        field: 'Packing Group',
+        values: [{
+            name: 'None',
+            position: 0
+          },
+          {
+            name: 'PGI',
+            position: 1
+          },
+          {
+            name: 'PGII',
+            position: 2
+          },
+          {
+            name: 'PGIII',
+            position: 3
+          }
+        ]
+      },
     ];
 
     // Import data from Excel
