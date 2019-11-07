@@ -174,10 +174,10 @@ module.exports = {
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
     pickupCountry: {
-      type: 'dropdownMapper'
+      model: 'dropdownMapper'
     },
     dropoffCountry: {
-      type: 'dropdownMapper'
+      model: 'dropdownMapper'
     },
     pickupState: {
       model: 'states'
@@ -186,7 +186,7 @@ module.exports = {
       model: 'states'
     },
     payerCountry: {
-      type: 'dropdownMapper'
+      model: 'dropdownMapper'
     },
     payerState: {
       model: 'states'
