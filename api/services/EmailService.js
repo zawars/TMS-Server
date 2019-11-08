@@ -3,12 +3,12 @@
 const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
   name: 'www.bkw-oneview.com',
-  host: 'mail3.gridhost.co.uk',   //"mail.infomaniak.com",
-  port: 25,   //587,
+  host: 'mail3.gridhost.co.uk', //"mail.infomaniak.com",
+  port: 25, //587,
   secure: false, // true for 465, false for other ports
   auth: {
     user: 'claims@crekey.com', //'project.notification@bkw-oneview.com', // generated ethereal user
-    pass: 'Crekey2019$$',  //'kitcHlew2277$$$' // generated ethereal password
+    pass: 'Crekey2019$$', //'kitcHlew2277$$$' // generated ethereal password
   },
 });
 
@@ -36,12 +36,12 @@ module.exports = {
 
   sendMail: async (options, done) => {
     transporter.sendMail({
-      from: 'claims@crekey.com',      //'project.notification@bkw-oneview.com',
+      from: 'claims@crekey.com', //'project.notification@bkw-oneview.com',
       to: options.email,
       subject: options.subject,
-      html: options.message + 
-      `<br><br>
-      Best Regards,<br><br>
+      html: options.message +
+        `<br><br>
+      Best Regards,<br>
       <strong>Röhlig Claim Management</strong>`
 
       // <div>Freundliche Grüsse / Meilleures salutations / Best Regards,<br><br>

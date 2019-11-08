@@ -149,25 +149,22 @@ module.exports = {
 
   search: async (req, res) => {
     let query = req.params.query;
-    let type = req.params.type;
+    // let type = req.params.type;
     let partners = await TradingPartners.find({
       or: [{
           name: {
-            'contains': query
+            'startsWith': query
           },
-          type
         },
         {
           email: {
-            'contains': query
+            'startsWith': query
           },
-          type
         },
         {
           number: {
-            'contains': query
+            'startsWith': query
           },
-          type
         },
       ]
     }).populateAll();
