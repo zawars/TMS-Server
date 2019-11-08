@@ -55,6 +55,9 @@ module.exports = {
     huCount: {
       type: 'string'
     },
+    contactPhone: {
+      type: 'string'
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -67,6 +70,12 @@ module.exports = {
       model: 'dropdownMapper',
     },
     lengthUnit: {
+      model: 'dropdownMapper',
+    },
+    hazClass: {
+      model: 'dropdownMapper',
+    },
+    packingGroup: {
       model: 'dropdownMapper',
     },
     product: {
