@@ -37,19 +37,63 @@ module.exports = {
 
   create: async (req, res) => {
     let data = req.body;
-    let partnerType = data.partnerType;
-    delete(data.partnerType);
-    let locations = data.locations;
+    let customerLocations = data.customerLocations;
     let products = data.products;
-    delete(data.locations);
+    let vendorLocations = data.vendorLocations;
+    let thirdPartyLocations = data.thirdPartyLocations;
+    let thirdPartyBillToList = data.thirdPartyBillTo;
+    let usersList = data.users;
+    delete(data.customerLocations);
     delete(data.products);
+    delete(data.vendorLocations);
+    delete(data.thirdPartyLocations);
+    delete(data.thirdPartyBillTo);
+    delete(data.users);
+
+    data.thirdPartyBillTo = [];
+    thirdPartyBillToList.forEach(val => {
+      data.thirdPartyBillTo.push(val.id);
+    });
+
+    // Trading Partner
     data.postalCode = data.postalCode.id;
     data.city = data.city.id;
-    data.billingCity = data.billingCity.id;
-    data.billingZipCode = data.billingZipCode.id;
+    data.state = data.state.id != undefined ? data.state.id : data.state;
+    data.country = data.country.id != undefined ? data.country.id : data.country;
+    // Customer
+    data.customerBillingPostalCode = data.customerBillingPostalCode.id != undefined ? data.customerBillingPostalCode.id : data.customerBillingPostalCode;
+    data.customerBillingCity = data.customerBillingCity.id != undefined ? data.customerBillingCity.id : data.customerBillingCity;
+    data.customerBillingState = data.customerBillingState.id != undefined ? data.customerBillingState.id : data.customerBillingState;
+    data.customerBillingCountry = data.customerBillingCountry.id != undefined ? data.customerBillingCountry.id : data.customerBillingCountry;
+    // Vendor
+    data.vendorBillingPostalCode = data.vendorBillingPostalCode.id != undefined ? data.vendorBillingPostalCode.id : data.vendorBillingPostalCode;
+    data.vendorBillingCity = data.vendorBillingCity.id != undefined ? data.vendorBillingCity.id : data.vendorBillingCity;
+    data.vendorBillingState = data.vendorBillingState.id != undefined ? data.vendorBillingState.id : data.vendorBillingState;
+    data.vendorBillingCountry = data.vendorBillingCountry.id != undefined ? data.vendorBillingCountry.id : data.vendorBillingCountry;
+    // Third Party
+    data.thirdPartyBillingPostalCode = data.thirdPartyBillingPostalCode.id != undefined ? data.thirdPartyBillingPostalCode.id : data.thirdPartyBillingPostalCode;
+    data.thirdPartyBillingCity = data.thirdPartyBillingCity.id != undefined ? data.thirdPartyBillingCity.id : data.thirdPartyBillingCity;
+    data.thirdPartyBillingState = data.thirdPartyBillingState.id != undefined ? data.thirdPartyBillingState.id : data.thirdPartyBillingState;
+    data.thirdPartyBillingCountry = data.thirdPartyBillingCountry.id != undefined ? data.thirdPartyBillingCountry.id : data.thirdPartyBillingCountry;
 
     let partner = await TradingPartners.create(data).fetch();
-    locations.forEach(location => {
+    customerLocations.forEach(location => {
+      location.tradingPartner = partner.id;
+      location.type = location.type.id;
+      location.state = location.state.id;
+      location.country = location.country.id;
+      location.city = location.city.id;
+      location.postalCode = location.postalCode.id;
+    });
+    vendorLocations.forEach(location => {
+      location.tradingPartner = partner.id;
+      location.type = location.type.id;
+      location.state = location.state.id;
+      location.country = location.country.id;
+      location.city = location.city.id;
+      location.postalCode = location.postalCode.id;
+    });
+    thirdPartyLocations.forEach(location => {
       location.tradingPartner = partner.id;
       location.type = location.type.id;
       location.state = location.state.id;
@@ -58,8 +102,8 @@ module.exports = {
       location.postalCode = location.postalCode.id;
     });
 
-    let locationsList = await Locations.createEach(locations).fetch();
-    partner.locations = locationsList;
+    let locations = [...customerLocations, ...vendorLocations, ...thirdPartyLocations];
+    await Locations.createEach(locations).fetch();
 
     // Check for products and create them if being sent by the user, in case of Customer.
     if (products) {
@@ -69,24 +113,11 @@ module.exports = {
         product.classType = product.classType.id;
       });
 
-      let productsList = await Products.createEach(products).fetch();
-      partner.products = productsList;
+      await Products.createEach(products).fetch();
     }
 
-    let obj = {
-      firstName: data.name,
-      lastName: '',
-      email: data.contactEmail,
-      username: '',
-      password: 'password',
-      phone: data.number,
-      permission: '',
-      partner: partner.id,
-      role: partner.type,
-      isVerified: true
-    };
-
-    await User.create(obj);
+    // Users creation
+    await User.createEach(usersList);
 
     res.ok(partner);
   },

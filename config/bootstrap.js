@@ -105,7 +105,10 @@ module.exports.bootstrap = async function () {
       },
       {
         field: 'Class',
-        values: []
+        values: [{
+          name: 'A',
+          position: 0
+        }]
       },
       {
         field: 'Show Accessorials',
@@ -1268,7 +1271,7 @@ module.exports.bootstrap = async function () {
       lastName: 'Shahid',
       phone: '03244663758',
       isVerified: true,
-      role: 'Admin'
+      roles: ['Admin']
     });
   }
 

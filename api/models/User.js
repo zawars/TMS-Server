@@ -14,11 +14,6 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    username: {
-      type: 'string',
-      unique: true,
-      required: true
-    },
     email: {
       type: 'string',
       unique: true,
@@ -51,9 +46,9 @@ module.exports = {
       type: 'boolean',
       defaultsTo: false
     },
-    role: {
-      type: 'string',
-      isIn: ['Admin', 'Customer', 'Vendor', 'Agent'],
+    roles: {
+      type: 'json',
+      // isIn: ['Admin', 'Customer', 'Vendor', 'Agent'],
       required: true
     },
     permissions: {
@@ -63,7 +58,7 @@ module.exports = {
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    partner: {
+    tradingPartner: {
       model: 'tradingPartners'
     },
 

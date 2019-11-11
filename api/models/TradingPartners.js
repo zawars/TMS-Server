@@ -19,9 +19,6 @@ module.exports = {
     name: {
       type: 'string',
     },
-    number: {
-      type: 'string',
-    },
     street: {
       type: 'string',
     },
@@ -34,30 +31,78 @@ module.exports = {
     contactNumber: {
       type: 'string',
     },
-    billingName: {
+
+    customerBillingName: {
       type: 'string',
     },
-    billingStreet: {
+    customerBillingStreet: {
       type: 'string',
     },
-    billingContactName: {
+    customerBillingContactName: {
       type: 'string',
     },
-    billingContactEmail: {
+    customerBillingContactEmail: {
       type: 'string',
     },
-    paymentTerms: {
+    customerPaymentTerms: {
+      type: 'string',
+    },
+    customerConfirmationEmail: {
       type: 'string',
     },
     creditLimit: {
       type: 'number',
     },
-    confirmationEmail: {
+
+    vendorBillingName: {
       type: 'string',
     },
-    type: {
+    vendorBillingStreet: {
       type: 'string',
-      isIn: ['Vendor', 'Customer'],
+    },
+    vendorBillingContactName: {
+      type: 'string',
+    },
+    vendorBillingContactEmail: {
+      type: 'string',
+    },
+    vendorPaymentTerms: {
+      type: 'string',
+    },
+    vendorConfirmationEmail: {
+      type: 'string',
+    },
+
+    thirdPartyBillingName: {
+      type: 'string',
+    },
+    thirdPartyBillingStreet: {
+      type: 'string',
+    },
+    thirdPartyBillingContactName: {
+      type: 'string',
+    },
+    thirdPartyBillingContactEmail: {
+      type: 'string',
+    },
+    thirdPartyPaymentTerms: {
+      type: 'string',
+    },
+    thirdPartyNotificationEmail: {
+      type: 'string',
+    },
+
+    isCustomer: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    isVendor: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    isThirdParty: {
+      type: 'boolean',
+      defaultsTo: false
     },
     isActive: {
       type: 'boolean',
@@ -74,16 +119,7 @@ module.exports = {
       model: 'dropdownMapperChild',
     },
     city: {
-      model: 'dropdownMapper',  
-    },
-    billingCity: {
       model: 'dropdownMapper',
-    },
-    billingZipCode: {
-      model: 'dropdownMapperChild',
-    },
-    partnerType: {
-      model: 'dropdownMapper'
     },
     state: {
       model: 'states',
@@ -91,25 +127,31 @@ module.exports = {
     country: {
       model: 'dropdownMapper',
     },
-    freightTerms: {
-      model: 'dropdownMapper',
-    },
     status: {
       model: 'dropdownMapper',
     },
-    billingState: {
+    customerBillingCity: {
+      model: 'dropdownMapper',
+    },
+    customerBillingPostalCode: {
+      model: 'dropdownMapperChild',
+    },
+    customerBillingState: {
       model: 'states',
     },
-    billingCountry: {
+    customerBillingCountry: {
       model: 'dropdownMapper',
     },
-    currency: {
+    customerFreightTerms: {
       model: 'dropdownMapper',
     },
-    services: {
+    customerCurrency: {
+      model: 'dropdownMapper',
+    },
+    customerServices: {
       collection: 'dropdownMapper',
     },
-    locations: {
+    customerLocations: {
       collection: 'locations',
       via: 'tradingPartner'
     },
@@ -118,13 +160,66 @@ module.exports = {
       via: 'tradingPartner'
     },
 
+    vendorBillingCity: {
+      model: 'dropdownMapper',
+    },
+    vendorBillingPostalCode: {
+      model: 'dropdownMapperChild',
+    },
+    vendorBillingState: {
+      model: 'states',
+    },
+    vendorBillingCountry: {
+      model: 'dropdownMapper',
+    },
+    vendorFreightTerms: {
+      model: 'dropdownMapper',
+    },
+    vendorCurrency: {
+      model: 'dropdownMapper',
+    },
+    vendorServices: {
+      collection: 'dropdownMapper',
+    },
+    vendorLocations: {
+      collection: 'locations',
+      via: 'tradingPartner'
+    },
+
+    thirdPartyBillingCity: {
+      model: 'dropdownMapper',
+    },
+    thirdPartyBillingPostalCode: {
+      model: 'dropdownMapperChild',
+    },
+    thirdPartyBillingState: {
+      model: 'states',
+    },
+    thirdPartyBillingCountry: {
+      model: 'dropdownMapper',
+    },
+    thirdPartyLocations: {
+      collection: 'locations',
+      via: 'tradingPartner'
+    },
+    thirdPartyServices: {
+      collection: 'dropdownMapper',
+    },
+    thirdPartyBillTo: {
+      collection: 'tradingPartners'
+    },
+
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
     contracts: {
       collection: 'contracts',
       via: 'vendor'
-    }
+    },
+    users: {
+      collection: 'user',
+      via: 'tradingPartner'
+    },
   },
 
   beforeCreate: (values, cb) => {
