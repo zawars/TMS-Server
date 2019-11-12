@@ -261,6 +261,7 @@ module.exports = {
       let toBeCreatedUsers = [];
       usersList.forEach(user => {
         if (user.id == undefined) {
+          user.tradingPartner = partner.id;
           toBeCreatedUsers.push(user);
         }
       });
