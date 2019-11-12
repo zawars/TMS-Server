@@ -177,6 +177,24 @@ module.exports = {
       data.thirdPartyBillingCountry = data.thirdPartyBillingCountry.id != undefined ? data.thirdPartyBillingCountry.id : data.thirdPartyBillingCountry;
     }
 
+    let services = [];
+    data.customerServices.forEach(service => {
+      services.push(service.id);
+    });
+    data.customerServices = services;
+
+    let vendorServices = [];
+    data.vendorServices.forEach(service => {
+      vendorServices.push(service.id);
+    });
+    data.vendorServices = vendorServices;
+
+    let TPservices = [];
+    data.thirdPartyServices.forEach(service => {
+      TPservices.push(service.id);
+    });
+    data.thirdPartyServices = TPservices;
+
     let partner = await TradingPartners.update({
       id: req.params.id
     }).set(data).fetch();
