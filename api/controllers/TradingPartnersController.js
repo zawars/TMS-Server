@@ -61,20 +61,26 @@ module.exports = {
     data.state = data.state.id != undefined ? data.state.id : data.state;
     data.country = data.country.id != undefined ? data.country.id : data.country;
     // Customer
-    data.customerBillingPostalCode = data.customerBillingPostalCode.id != undefined ? data.customerBillingPostalCode.id : data.customerBillingPostalCode;
-    data.customerBillingCity = data.customerBillingCity.id != undefined ? data.customerBillingCity.id : data.customerBillingCity;
-    data.customerBillingState = data.customerBillingState.id != undefined ? data.customerBillingState.id : data.customerBillingState;
-    data.customerBillingCountry = data.customerBillingCountry.id != undefined ? data.customerBillingCountry.id : data.customerBillingCountry;
+    if (data.isCustomer == true) {
+      data.customerBillingPostalCode = data.customerBillingPostalCode.id != undefined ? data.customerBillingPostalCode.id : data.customerBillingPostalCode;
+      data.customerBillingCity = data.customerBillingCity.id != undefined ? data.customerBillingCity.id : data.customerBillingCity;
+      data.customerBillingState = data.customerBillingState.id != undefined ? data.customerBillingState.id : data.customerBillingState;
+      data.customerBillingCountry = data.customerBillingCountry.id != undefined ? data.customerBillingCountry.id : data.customerBillingCountry;
+    }
     // Vendor
-    data.vendorBillingPostalCode = data.vendorBillingPostalCode.id != undefined ? data.vendorBillingPostalCode.id : data.vendorBillingPostalCode;
-    data.vendorBillingCity = data.vendorBillingCity.id != undefined ? data.vendorBillingCity.id : data.vendorBillingCity;
-    data.vendorBillingState = data.vendorBillingState.id != undefined ? data.vendorBillingState.id : data.vendorBillingState;
-    data.vendorBillingCountry = data.vendorBillingCountry.id != undefined ? data.vendorBillingCountry.id : data.vendorBillingCountry;
+    if (data.isVendor == true) {
+      data.vendorBillingPostalCode = data.vendorBillingPostalCode.id != undefined ? data.vendorBillingPostalCode.id : data.vendorBillingPostalCode;
+      data.vendorBillingCity = data.vendorBillingCity.id != undefined ? data.vendorBillingCity.id : data.vendorBillingCity;
+      data.vendorBillingState = data.vendorBillingState.id != undefined ? data.vendorBillingState.id : data.vendorBillingState;
+      data.vendorBillingCountry = data.vendorBillingCountry.id != undefined ? data.vendorBillingCountry.id : data.vendorBillingCountry;
+    }
     // Third Party
-    data.thirdPartyBillingPostalCode = data.thirdPartyBillingPostalCode.id != undefined ? data.thirdPartyBillingPostalCode.id : data.thirdPartyBillingPostalCode;
-    data.thirdPartyBillingCity = data.thirdPartyBillingCity.id != undefined ? data.thirdPartyBillingCity.id : data.thirdPartyBillingCity;
-    data.thirdPartyBillingState = data.thirdPartyBillingState.id != undefined ? data.thirdPartyBillingState.id : data.thirdPartyBillingState;
-    data.thirdPartyBillingCountry = data.thirdPartyBillingCountry.id != undefined ? data.thirdPartyBillingCountry.id : data.thirdPartyBillingCountry;
+    if (data.isThirdPart == true) {
+      data.thirdPartyBillingPostalCode = data.thirdPartyBillingPostalCode.id != undefined ? data.thirdPartyBillingPostalCode.id : data.thirdPartyBillingPostalCode;
+      data.thirdPartyBillingCity = data.thirdPartyBillingCity.id != undefined ? data.thirdPartyBillingCity.id : data.thirdPartyBillingCity;
+      data.thirdPartyBillingState = data.thirdPartyBillingState.id != undefined ? data.thirdPartyBillingState.id : data.thirdPartyBillingState;
+      data.thirdPartyBillingCountry = data.thirdPartyBillingCountry.id != undefined ? data.thirdPartyBillingCountry.id : data.thirdPartyBillingCountry;
+    }
 
     let partner = await TradingPartners.create(data).fetch();
     customerLocations.forEach(location => {
@@ -138,9 +144,11 @@ module.exports = {
     delete(data.users);
 
     data.thirdPartyBillTo = [];
-    thirdPartyBillToList.forEach(val => {
-      data.thirdPartyBillTo.push(val.id);
-    });
+    if (thirdPartyBillToList != undefined) {
+      thirdPartyBillToList.forEach(val => {
+        data.thirdPartyBillTo.push(val.id);
+      });
+    }
 
     // Trading Partner
     data.postalCode = data.postalCode.id;
