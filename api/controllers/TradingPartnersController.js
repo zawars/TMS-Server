@@ -22,8 +22,32 @@ module.exports = {
     }).populateAll();
 
     if (partner) {
-      partner.locations = await Locations.find({
-        tradingPartner: partner.id
+      // partner.locations = await Locations.find({
+      //   tradingPartner: partner.id
+      // }).populateAll();
+
+      let customerLocations = [];
+      partner.customerLocations.map(val => customerLocations.push(val.id));
+      partner.customerLocations = await Locations.find({
+        id: {
+          in: customerLocations
+        }
+      }).populateAll();
+
+      let vendorLocations = [];
+      partner.vendorLocations.map(val => vendorLocations.push(val.id));
+      partner.vendorLocations = await Locations.find({
+        id: {
+          in: vendorLocations
+        }
+      }).populateAll();
+
+      let thirdPartyLocations = [];
+      partner.thirdPartyLocations.map(val => thirdPartyLocations.push(val.id));
+      partner.thirdPartyLocations = await Locations.find({
+        id: {
+          in: thirdPartyLocations
+        }
       }).populateAll();
     }
 
