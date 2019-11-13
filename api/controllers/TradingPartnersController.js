@@ -129,7 +129,7 @@ module.exports = {
       res.ok(partner);
 
     } catch (error) {
-      res.ok({
+      res.badRequest({
         error
       })
     }
@@ -191,17 +191,17 @@ module.exports = {
       });
       data.customerServices = services;
 
-      let vendorServices = [];
-      data.vendorServices.forEach(service => {
-        vendorServices.push(service.id);
-      });
-      data.vendorServices = vendorServices;
+      // let vendorServices = [];
+      // data.vendorServices.forEach(service => {
+      //   vendorServices.push(service.id);
+      // });
+      // data.vendorServices = vendorServices;
 
-      let TPservices = [];
-      data.thirdPartyServices.forEach(service => {
-        TPservices.push(service.id);
-      });
-      data.thirdPartyServices = TPservices;
+      // let TPservices = [];
+      // data.thirdPartyServices.forEach(service => {
+      //   TPservices.push(service.id);
+      // });
+      // data.thirdPartyServices = TPservices;
 
       let partner = await TradingPartners.update({
         id: req.params.id
@@ -282,7 +282,7 @@ module.exports = {
       res.ok(partner);
 
     } catch (error) {
-      res.ok({
+      res.badRequest({
         error
       });
     }
