@@ -27,12 +27,15 @@ module.exports = {
       // }).populateAll();
 
       let customerLocations = [];
+      console.log('customer locations ', partner.customerLocations)
       partner.customerLocations.map(val => customerLocations.push(val.id));
+      console.log('customer locations ids ', customerLocations)
       partner.customerLocations = await Locations.find({
         id: {
           in: customerLocations
         }
       }).populateAll();
+      console.log('customer locations ', partner.customerLocations)
 
       let vendorLocations = [];
       partner.vendorLocations.map(val => vendorLocations.push(val.id));
