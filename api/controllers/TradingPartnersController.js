@@ -175,13 +175,6 @@ module.exports = {
       delete(data.thirdPartyBillTo);
       delete(data.users);
 
-      data.thirdPartyBillTo = [];
-      if (thirdPartyBillToList != undefined) {
-        thirdPartyBillToList.forEach(val => {
-          data.thirdPartyBillTo.push(val.id);
-        });
-      }
-
       // Trading Partner
       data.postalCode = data.postalCode.id;
       data.city = data.city.id;
@@ -299,6 +292,15 @@ module.exports = {
           await Products.createEach(toBeCreatedProducts).fetch();
         }
       }
+
+      // Bill-To section
+      data.thirdPartyBillTo = [];
+      if (thirdPartyBillToList != undefined) {
+        thirdPartyBillToList.forEach(val => {
+          data.thirdPartyBillTo.push(val.id);
+        });
+      }
+      console.log('bill to ', data.thirdPartyBillTo)
 
       // Users section
       if (usersList) {
