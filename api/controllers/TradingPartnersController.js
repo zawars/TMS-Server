@@ -27,15 +27,12 @@ module.exports = {
       // }).populateAll();
 
       let customerLocations = [];
-      console.log('customer locations ', partner.customerLocations)
       partner.customerLocations.map(val => customerLocations.push(val.id));
-      console.log('customer locations ids ', customerLocations)
       partner.customerLocations = await Locations.find({
         id: {
           in: customerLocations
         }
       }).populateAll();
-      console.log('customer locations ', partner.customerLocations)
 
       let vendorLocations = [];
       partner.vendorLocations.map(val => vendorLocations.push(val.id));
@@ -250,7 +247,7 @@ module.exports = {
       let toBeCreatedLocations = [];
       customerLocations.forEach(location => {
         if (location.id == undefined) {
-          location.tradingPartner = partner.id;
+          location.customer = partner.id;
           location.type = location.type.id;
           location.state = location.state.id;
           location.country = location.country.id;
@@ -261,7 +258,7 @@ module.exports = {
       });
       vendorLocations.forEach(location => {
         if (location.id == undefined) {
-          location.tradingPartner = partner.id;
+          location.vendor = partner.id;
           location.type = location.type.id;
           location.state = location.state.id;
           location.country = location.country.id;
@@ -272,7 +269,7 @@ module.exports = {
       });
       thirdPartyLocations.forEach(location => {
         if (location.id == undefined) {
-          location.tradingPartner = partner.id;
+          location.thirdParty = partner.id;
           location.type = location.type.id;
           location.state = location.state.id;
           location.country = location.country.id;
