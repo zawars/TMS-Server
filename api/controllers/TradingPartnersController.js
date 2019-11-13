@@ -187,21 +187,33 @@ module.exports = {
 
       let services = [];
       data.customerServices.forEach(service => {
-        services.push(service.id);
+        if (service.id != undefined) {
+          services.push(service.id);
+        } else {
+          services.push(service);
+        }
       });
       data.customerServices = services;
 
-      // let vendorServices = [];
-      // data.vendorServices.forEach(service => {
-      //   vendorServices.push(service.id);
-      // });
-      // data.vendorServices = vendorServices;
+      let vendorServices = [];
+      data.vendorServices.forEach(service => {
+        if (service.id != undefined) {
+          vendorServices.push(service.id);
+        } else {
+          vendorServices.push(service);
+        }
+      });
+      data.vendorServices = vendorServices;
 
-      // let TPservices = [];
-      // data.thirdPartyServices.forEach(service => {
-      //   TPservices.push(service.id);
-      // });
-      // data.thirdPartyServices = TPservices;
+      let TPservices = [];
+      data.thirdPartyServices.forEach(service => {
+        if (service.id != undefined) {
+          TPservices.push(service.id);
+        } else {
+          TPservices.push(service);
+        }
+      });
+      data.thirdPartyServices = TPservices;
 
       let partner = await TradingPartners.update({
         id: req.params.id
