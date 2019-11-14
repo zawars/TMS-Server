@@ -210,7 +210,8 @@ module.exports = {
       collection: 'dropdownMapper',
     },
     thirdPartyBillTo: {
-      collection: 'tradingPartners'
+      collection: 'tradingPartners',
+      via: 'billedTo'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
@@ -224,6 +225,9 @@ module.exports = {
       collection: 'user',
       via: 'tradingPartner'
     },
+    billedTo: {
+      model: 'tradingPartners'
+    }
   },
 
   beforeCreate: (values, cb) => {

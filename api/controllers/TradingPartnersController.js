@@ -49,6 +49,15 @@ module.exports = {
           in: thirdPartyLocations
         }
       }).populateAll();
+
+      // Products section
+      let products = [];
+      partner.products.map(val => products.push(val.id));
+      partner.products = await Products.find({
+        id: {
+          in: products
+        }
+      }).populateAll();
     }
 
     res.ok(partner);
