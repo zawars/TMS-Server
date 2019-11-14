@@ -12,6 +12,10 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    uid: {
+      type: 'number',
+      unique: true,
+    },
     name: {
       type: 'string'
     },
@@ -41,4 +45,10 @@ module.exports = {
 
   },
 
+
+  beforeCreate: (values, cb) => {
+    UtilityService.organisationCounter++;
+    values.uid = UtilityService.organisationCounter;
+    cb();
+  }
 };

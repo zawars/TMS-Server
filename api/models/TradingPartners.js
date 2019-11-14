@@ -127,9 +127,13 @@ module.exports = {
     country: {
       model: 'dropdownMapper',
     },
+    organisation: {
+      model: 'organisation'
+    },
     status: {
       model: 'dropdownMapper',
     },
+
     customerBillingCity: {
       model: 'dropdownMapper',
     },
