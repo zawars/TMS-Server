@@ -157,6 +157,7 @@ module.exports = {
       }
 
       // Users creation
+      usersList.forEach(val => val.tradingPartner = partner.id);
       await User.createEach(usersList);
 
       res.ok(partner);
@@ -248,7 +249,6 @@ module.exports = {
           data.thirdPartyBillTo.push(val.id);
         });
       }
-      console.log('bill to ', data.thirdPartyBillTo)
 
       let partner = await TradingPartners.update({
         id: req.params.id
