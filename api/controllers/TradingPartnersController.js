@@ -241,6 +241,15 @@ module.exports = {
       });
       data.thirdPartyServices = TPservices;
 
+      // Bill-To section
+      data.thirdPartyBillTo = [];
+      if (thirdPartyBillToList != undefined) {
+        thirdPartyBillToList.forEach(val => {
+          data.thirdPartyBillTo.push(val.id);
+        });
+      }
+      console.log('bill to ', data.thirdPartyBillTo)
+
       let partner = await TradingPartners.update({
         id: req.params.id
       }).set(data).fetch();
@@ -301,15 +310,6 @@ module.exports = {
           await Products.createEach(toBeCreatedProducts).fetch();
         }
       }
-
-      // Bill-To section
-      data.thirdPartyBillTo = [];
-      if (thirdPartyBillToList != undefined) {
-        thirdPartyBillToList.forEach(val => {
-          data.thirdPartyBillTo.push(val.id);
-        });
-      }
-      console.log('bill to ', data.thirdPartyBillTo)
 
       // Users section
       if (usersList) {
