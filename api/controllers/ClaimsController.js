@@ -124,6 +124,14 @@ module.exports = {
       let organisation = await Organisation.findOne({
         id: claim.customer.organisation
       }).populateAll();
+      emailsList.push(data.contactEmail);
+      if (organisation.users.length > 0) {
+        organisation.users.forEach(user => {
+          if (user.roles.includes('Claim Manager')) {
+            emailsList.push(user.email);
+          }
+        });
+      }
       emailsList = new Set(emailsList);
 
       EmailService.sendMail({
@@ -131,14 +139,14 @@ module.exports = {
         subject: `New Claim # ${claim.uid}`,
         message: `<p>
         Dear Sir/Madam, <br><br>
-        Your claim has been registered. Please see details below. <br><br>
 
-        BOL: ${claim.bolNumber} <br> PRO: ${claim.proNumber} <br> Claimant Information <br> 
-        ${claim.claimantName} <br> ${claim.address1} <br> ${claim.city.name} <br> 
-        ${claim.postalCode.name} <br> ${claim.phone} <br> ${claim.email} <br>  <br> 
+        Claim # (${claim.uid}) has been updated.<br><br> 
 
-        We will update you as soon as possible.<br>
-        Thank you for your understanding.<br><br>
+        Please log in via below link to view the changes.<br><br>
+
+        http://claim.crekey.solutions/#/claims/${claim.id} <br><br>
+
+        For any questions or concerns please use the comment section on the claim form. <br><br>
         </p>`
       }, (err) => {
         if (err) {
@@ -146,33 +154,7 @@ module.exports = {
             message: "Error sending email."
           });
         } else {
-          emailsList = [];
-          emailsList.push(data.contactEmail);
-          if (organisation.users.length > 0) {
-            organisation.users.forEach(user => {
-              if (user.roles.includes('Claim Manager')) {
-                emailsList.push(user.email);
-              }
-            });
-          }
-          emailsList = new Set(emailsList);
-
-          EmailService.sendMail({
-            email: emailsList,
-            subject: `New Claim # ${claim.uid}`,
-            message: `<p>
-            Dear Claim Manager, <br><br>
-            A new claim# xx has been reported. Please see the details below.
-            </p>`
-          }, (err) => {
-            if (err) {
-              res.badRequest({
-                message: "Error sending email."
-              });
-            } else {
-              res.ok(claim);
-            }
-          });
+          res.ok(claim);
         }
       });
     } catch (error) {
