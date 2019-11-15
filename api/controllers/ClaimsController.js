@@ -41,10 +41,12 @@ module.exports = {
     let emailsList = [];
 
     emailsList.push(data.contactEmail);
+    console.log('claim ', claim)
 
     let organisation = await Organisation.findOne({
       id: claim.customer.organisation
     }).populateAll;
+    console.log('org ', organisation)
 
     emailsList.push(data.contactEmail);
     organisation.users.forEach(user => {
