@@ -33,31 +33,31 @@ module.exports = {
   },
 
   create: async (req, res) => {
-    try {
-      let data = req.body;
-      let userEmail = data.userEmail;
-      delete(data.userEmail);
-      let claim = await Claims.create(data).fetch();
-      let emailsList = [];
+    // try {
+    let data = req.body;
+    let userEmail = data.userEmail;
+    delete(data.userEmail);
+    let claim = await Claims.create(data).fetch();
+    let emailsList = [];
 
-      emailsList.push(data.contactEmail);
+    emailsList.push(data.contactEmail);
 
-      let organisation = await Organisation.findOne({
-        id: claim.customer.organisation
-      }).populateAll;
+    let organisation = await Organisation.findOne({
+      id: claim.customer.organisation
+    }).populateAll;
 
-      emailsList.push(data.contactEmail);
-      organisation.users.forEach(user => {
-        if (user.roles.includes('Claim Manager')) {
-          emailsList.push(user.email);
-        }
-      });
-      console.log(emailsList)
+    emailsList.push(data.contactEmail);
+    organisation.users.forEach(user => {
+      if (user.roles.includes('Claim Manager')) {
+        emailsList.push(user.email);
+      }
+    });
+    console.log(emailsList)
 
-      EmailService.sendMail({
-        email: emailsList,
-        subject: `New Claim # ${responseClaim.uid}`,
-        message: `<p>
+    EmailService.sendMail({
+      email: emailsList,
+      subject: `New Claim # ${responseClaim.uid}`,
+      message: `<p>
         Dear Sir/Madam, <br><br>
         Your claim has been registered. Please see details below. <br><br>
 
@@ -68,20 +68,20 @@ module.exports = {
         We will update you as soon as possible.<br>
         Thank you for your understanding.<br><br>
         </p>`
-      }, (err) => {
-        if (err) {
-          res.badRequest({
-            message: "Error sending email."
-          });
-        } else {
-          res.ok(claim);
-        }
-      });
-    } catch (error) {
-      res.badRequest({
-        error
-      });
-    }
+    }, (err) => {
+      if (err) {
+        res.badRequest({
+          message: "Error sending email."
+        });
+      } else {
+        res.ok(claim);
+      }
+    });
+    // } catch (error) {
+    //   res.badRequest({
+    //     error
+    //   });
+    // }
   },
 
 };
