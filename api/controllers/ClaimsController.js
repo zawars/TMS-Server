@@ -69,8 +69,8 @@ module.exports = {
           message: "Error sending email."
         });
       } else {
+        console.log('here')
         emailsList = [];
-        emailsList.push(data.contactEmail);
         if (organisation.users.length > 0) {
           organisation.users.forEach(user => {
             if (user.roles.includes('Claim Manager')) {
@@ -79,13 +79,14 @@ module.exports = {
           });
         }
         emailsList = new Set(emailsList);
+        console.log(emailsList)
 
         EmailService.sendMail({
           email: emailsList,
           subject: `New Claim # ${claim.uid}`,
           message: `<p>
             Dear Claim Manager, <br><br>
-            A new claim# xx has been reported. Please see the details below.
+            A new claim# ${claim.uid} has been reported. Please see the details below.
             </p>`
         }, (err) => {
           if (err) {

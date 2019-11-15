@@ -136,6 +136,7 @@ module.exports.routes = {
   'GET /api/v1/claims/customer/:id': 'ClaimsController.getClaimByCustomer',
   'GET /api/v1/claims': 'ClaimsController.index',
   'POST /api/v1/claims': 'ClaimsController.create',
+  'PATCH /api/v1/claims/:id': 'ClaimsController.update',
 
   // Organisation
   'GET /api/v1/organisation/search/name/:query': 'OrganisationController.search',
