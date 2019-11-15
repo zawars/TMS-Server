@@ -35,6 +35,8 @@ module.exports = {
   create: async (req, res) => {
     try {
       let data = req.body;
+      let userEmail = data.userEmail;
+      delete(data.userEmail);
       let claim = await Claims.create(data).fetch();
       let emailsList = [];
 
@@ -44,7 +46,13 @@ module.exports = {
         id: claim.customer.organisation
       }).populateAll;
 
-      console.log(organisation)
+      emailsList.push(data.contactEmail);
+      organisation.users.forEach(user => {
+        if (user.roles.includes('Claim Manager')) {
+          emailsList.push(user.email);
+        }
+      });
+      console.log(emailsList)
 
       EmailService.sendMail({
         email: emailsList,
