@@ -38,6 +38,9 @@ module.exports = {
     let userEmail = data.userEmail;
     delete(data.userEmail);
     let claim = await Claims.create(data).fetch();
+    claim = await Claims.findOne({
+      id: claim.id
+    }).populateAll();
     let emailsList = [];
 
     emailsList.push(data.contactEmail);
@@ -45,7 +48,7 @@ module.exports = {
 
     let organisation = await Organisation.findOne({
       id: claim.customer.organisation
-    }).populateAll;
+    }).populateAll();
     console.log('org ', organisation)
 
     emailsList.push(data.contactEmail);
