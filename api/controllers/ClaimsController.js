@@ -42,7 +42,6 @@ module.exports = {
         id: claim.id
       }).populateAll();
       let emailsList = [];
-
       emailsList.push(data.contactEmail, userEmail);
 
       let organisation = await Organisation.findOne({
@@ -57,6 +56,7 @@ module.exports = {
           }
         });
       }
+      emailsList = new Set(emailsList);
 
       EmailService.sendMail({
         email: emailsList,
