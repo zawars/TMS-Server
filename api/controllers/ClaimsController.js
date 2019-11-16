@@ -33,7 +33,7 @@ module.exports = {
   },
 
   create: async (req, res) => {
-    try {
+    // try {
       let data = req.body;
       let userEmail = data.userEmail;
       delete(data.userEmail);
@@ -97,11 +97,11 @@ module.exports = {
           });
         }
       });
-    } catch (error) {
-      res.badRequest({
-        error
-      });
-    }
+    // } catch (error) {
+    //   res.badRequest({
+    //     error
+    //   });
+    // }
   },
 
   update: async (req, res) => {
