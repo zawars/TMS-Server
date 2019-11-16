@@ -33,27 +33,26 @@ module.exports = {
   },
 
   create: async (req, res) => {
-    // try {
-    let data = req.body;
-    let userEmail = data.userEmail;
-    delete(data.userEmail);
-    let claim = await Claims.create(data).fetch();
-    claim = await Claims.findOne({
-      id: claim.id
-    }).populateAll();
-    let emailsList = [];
-    emailsList.push(data.contactEmail, userEmail);
+    try {
+      let data = req.body;
+      let userEmail = data.userEmail;
+      delete(data.userEmail);
+      let claim = await Claims.create(data).fetch();
+      claim = await Claims.findOne({
+        id: claim.id
+      }).populateAll();
+      let emailsList = [];
+      emailsList.push(data.contactEmail, userEmail);
 
-    let organisation = await Organisation.findOne({
-      id: claim.customer.organisation
-    }).populateAll();
-    emailsList = Array.from(new Set(emailsList));
-    console.log(emailsList)
+      let organisation = await Organisation.findOne({
+        id: claim.customer.organisation
+      }).populateAll();
+      emailsList = Array.from(new Set(emailsList));
 
-    EmailService.sendMail({
-      email: emailsList,
-      subject: `New Claim # ${claim.uid}`,
-      message: `<p>
+      EmailService.sendMail({
+        email: emailsList,
+        subject: `New Claim # ${claim.uid}`,
+        message: `<p>
         Dear Sir/Madam, <br><br>
         Your claim has been registered. Please see details below. <br><br>
 
@@ -64,46 +63,49 @@ module.exports = {
         We will update you as soon as possible.<br>
         Thank you for your understanding.<br><br>
         </p>`
-    }, (err) => {
-      if (err) {
-        res.badRequest({
-          message: "Error sending email."
-        });
-      } else {
-        emailsList = [];
-        if (organisation.users.length > 0) {
-          organisation.users.forEach(user => {
-            if (user.roles.includes('Claim Manager')) {
-              emailsList.push(user.email);
-            }
+      }, (err) => {
+        if (err) {
+          res.badRequest({
+            message: "Error sending email."
           });
-        }
-        emailsList = Array.from(new Set(emailsList));
-        console.log(emailsList)
+        } else {
+          emailsList = [];
+          if (organisation.users.length > 0) {
+            organisation.users.forEach(user => {
+              if (user.roles.includes('Claim Manager')) {
+                emailsList.push(user.email);
+              }
+            });
+          }
+          emailsList = Array.from(new Set(emailsList));
 
-        EmailService.sendMail({
-          email: emailsList,
-          subject: `New Claim # ${claim.uid}`,
-          message: `<p>
+          if (emailsList.length > 1) {
+            EmailService.sendMail({
+              email: emailsList,
+              subject: `New Claim # ${claim.uid}`,
+              message: `<p>
             Dear Claim Manager, <br><br>
             A new claim# ${claim.uid} has been reported. Please see the details below.
             </p>`
-        }, (err) => {
-          if (err) {
-            res.badRequest({
-              message: "Error sending email."
+            }, (err) => {
+              if (err) {
+                res.badRequest({
+                  message: "Error sending email."
+                });
+              } else {
+                res.ok(claim);
+              }
             });
           } else {
             res.ok(claim);
           }
-        });
-      }
-    });
-    // } catch (error) {
-    //   res.badRequest({
-    //     error
-    //   });
-    // }
+        }
+      });
+    } catch (error) {
+      res.badRequest({
+        error
+      });
+    }
   },
 
   update: async (req, res) => {
