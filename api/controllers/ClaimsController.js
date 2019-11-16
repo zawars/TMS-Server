@@ -47,7 +47,8 @@ module.exports = {
     let organisation = await Organisation.findOne({
       id: claim.customer.organisation
     }).populateAll();
-    emailsList = new Set(emailsList);
+    emailsList = Array.from(new Set(emailsList));
+    console.log('1st ', emailsList)
 
     EmailService.sendMail({
       email: emailsList,
@@ -78,7 +79,7 @@ module.exports = {
             }
           });
         }
-        emailsList = new Set(emailsList);
+        emailsList = Array.from(new Set(emailsList));
         console.log(emailsList)
 
         EmailService.sendMail({
@@ -133,7 +134,8 @@ module.exports = {
         }
       });
     }
-    emailsList = new Set(emailsList);
+    emailsList = Array.from(new Set(emailsList));
+
 
     EmailService.sendMail({
       email: emailsList,
