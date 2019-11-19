@@ -158,7 +158,8 @@ module.exports = {
     let type = req.params.type;
 
     let result = await Orders.find({
-      orderType: type
+      orderType: type,
+      isPlaced: true
     }).paginate({
       limit: req.query.limit,
       skip: req.query.skip
