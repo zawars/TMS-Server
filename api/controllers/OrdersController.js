@@ -154,4 +154,17 @@ module.exports = {
     res.ok(result);
   },
 
+  getPickupRequests: async (req, res) => {
+    let type = req.params.type;
+
+    let result = await Orders.find({
+      orderType: type
+    }).paginate({
+      limit: req.query.limit,
+      skip: req.query.skip
+    }).populateAll();
+
+    res.ok(result);
+  },
+
 };

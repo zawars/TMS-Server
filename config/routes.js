@@ -103,7 +103,8 @@ module.exports.routes = {
   'PATCH /api/v1/orders/batch/:id': 'OrdersController.updateOrderBatchFreights',
   'GET /api/v1/orders/placed': 'OrdersController.getPlacedOrders',
   'GET /api/v1/orders': 'OrdersController.getAllOrders',
-  'POST /api/v1/orders/pickup': 'OrdersController.getPickupRequestsForThirdParty',
+  'POST /api/v1/orders/pickup/tradingPartner/:id': 'OrdersController.getPickupRequestsForThirdParty',
+  'GET /api/v1/orders/pickup/:type': 'OrdersController.getPickupRequests',
 
   // Quotes
   'GET /api/v1/quotes/customer/:id': 'QuotesController.getQuotesByCustomer',
