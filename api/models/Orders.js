@@ -189,6 +189,9 @@ module.exports = {
     dropoffState: {
       model: 'states'
     },
+    billTp: {
+      model: 'tradingPartners'
+    },
     payerCountry: {
       model: 'dropdownMapper'
     },

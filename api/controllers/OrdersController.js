@@ -144,7 +144,7 @@ module.exports = {
     let data = req.body;
 
     let result = await Orders.find({
-      id: data.id,
+      tradingPartner: data.id,
       orderType: data.orderType
     }).paginate({
       limit: req.query.limit,
