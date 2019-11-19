@@ -115,7 +115,10 @@ module.exports = {
     try {
       let orders = await Orders.find({
         isPlaced: true
-      }).populateAll().sort('createdAt DESC');
+      }).populateAll().sort('createdAt DESC').paginate({
+        skip: req.query.skip,
+        limit: req.query.limit
+      });
 
       res.ok(orders);
     } catch (error) {
@@ -135,6 +138,20 @@ module.exports = {
         message: error
       });
     }
+  },
+
+  getPickupRequestsForThirdParty: async (req, res) => {
+    let data = req.body;
+
+    let result = await Orders.find({
+      id: data.id,
+      orderType: data.orderType
+    }).paginate({
+      limit: req.query.limit,
+      skip: req.query.skip
+    }).populateAll();
+
+    res.ok(result);
   },
 
 };

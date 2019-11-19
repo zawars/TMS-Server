@@ -168,6 +168,10 @@ module.exports = {
     payerContactNumber: {
       type: 'string'
     },
+    orderType: {
+      type: 'string',
+      isIn: ['Order', 'Pickup']
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -197,10 +201,7 @@ module.exports = {
     dropoffLocation: {
       model: 'locations'
     },
-    customer: {
-      model: 'tradingPartners'
-    },
-    vendor: {
+    tradingPartner: {
       model: 'tradingPartners'
     },
     rate: {

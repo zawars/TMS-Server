@@ -50,9 +50,6 @@ module.exports = {
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
 
-    customer: {
-      model: 'tradingPartners'
-    },
     pickUpFromCountry: {
       model: 'dropdownMapper'
     },
@@ -62,7 +59,7 @@ module.exports = {
     rate: {
       model: 'rates'
     },
-    vendor: {
+    tradingPartner: {
       model: 'tradingPartners'
     },
 
@@ -85,4 +82,3 @@ module.exports = {
   }
 
 };
-
