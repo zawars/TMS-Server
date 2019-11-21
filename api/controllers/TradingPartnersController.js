@@ -16,7 +16,7 @@ io.on('connection', socket => {
     }).populateAll();
 
     // io.sockets.connected[data.socketId]
-    socket.emit('message', partner)
+    socket.emit('fetchTradingPartner', partner);
   });
 });
 
