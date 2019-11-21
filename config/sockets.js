@@ -27,7 +27,7 @@ module.exports.sockets = {
    *                                                                          *
    ***************************************************************************/
 
-  transports: [ 'websocket1' ],
+  transports: ['websocket', 'polling'],
 
 
   /***************************************************************************
@@ -46,9 +46,9 @@ module.exports.sockets = {
 
     // `true` allows the socket to connect.
     // (`false` would reject the connection)
-    console.log('connected')
-    return proceed(undefined, true);
-
+    console.log('Client Connected')
+    // console.log(handshake._query.token)
+    proceed(undefined, true);
   },
 
 
@@ -61,12 +61,14 @@ module.exports.sockets = {
    *                                                                          *
    ***************************************************************************/
 
-  // afterDisconnect: function(session, socket, done) {
-  //
+  // afterDisconnect: function (session, socket, done) {
+
   //   // By default: do nothing.
   //   // (but always trigger the callback)
+
+  //   console.log(`Client disconnected: ${socket.id}`)
   //   return done();
-  //
+
   // },
 
 

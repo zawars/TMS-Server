@@ -5,6 +5,21 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('fetchTradingPartner', async data => {
+    let partner = await TradingPartners.findOne({
+      id: data.id
+    }).populateAll();
+
+    // io.sockets.connected[data.socketId]
+    socket.emit('message', partner)
+  });
+});
+
 module.exports = {
   partnersByType: async (req, res) => {
     let partners = await TradingPartners.find({
