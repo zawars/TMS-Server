@@ -37,10 +37,6 @@ module.exports = {
     }).populateAll();
 
     if (partner) {
-      // partner.locations = await Locations.find({
-      //   tradingPartner: partner.id
-      // }).populateAll();
-
       let customerLocations = [];
       partner.customerLocations.map(val => customerLocations.push(val.id));
       partner.customerLocations = await Locations.find({

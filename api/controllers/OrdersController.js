@@ -145,11 +145,11 @@ module.exports = {
 
     console.log(data)
     let result = await Orders.find({
-      tradingPartner: data.id,
+      tradingPartner: req.params.id,
       orderType: data.orderType
     }).paginate({
-      limit: req.query.limit,
-      skip: req.query.skip
+      limit: req.query.pageNumber,
+      skip: req.query.pageSize
     }).populateAll();
 
     res.ok(result);
