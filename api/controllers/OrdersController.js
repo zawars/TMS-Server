@@ -143,6 +143,7 @@ module.exports = {
   getPickupRequestsForThirdParty: async (req, res) => {
     let data = req.body;
 
+    console.log(data)
     let result = await Orders.find({
       tradingPartner: data.id,
       orderType: data.orderType
