@@ -143,14 +143,10 @@ module.exports = {
   getPickupRequestsForThirdParty: async (req, res) => {
     let data = req.body;
 
-    console.log(data)
     let result = await Orders.find({
       tradingPartner: req.params.id,
       orderType: data.orderType
-    }).paginate({
-      limit: req.query.pageNumber,
-      skip: req.query.pageSize
-    }).populateAll();
+    }).paginate(req.query.pageNumber, req.query.pageSize).populateAll();
 
     res.ok(result);
   },
@@ -161,10 +157,7 @@ module.exports = {
     let result = await Orders.find({
       orderType: type,
       isPlaced: true
-    }).paginate({
-      limit: req.query.limit,
-      skip: req.query.skip
-    }).populateAll();
+    }).paginate(req.query.pageNumber, req.query.pageSize).populateAll();
 
     res.ok(result);
   },
