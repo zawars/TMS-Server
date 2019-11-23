@@ -27,14 +27,20 @@ io.on('connection', socket => {
     });
   });
 
-  socket.on('ordersCount', async data => {
-    let count = await Orders.count();
-    socket.emit('ordersCount', count);
+  socket.on('pickupCountAdmin', async data => {
+    let count = await Orders.find({
+      orderType: 'Pickup',
+      isPlaced: true
+    }).count();
+    socket.emit('pickupCountAdmin', count);
   });
 
-  socket.on('ordersIndex', async data => {
-    let result = await Orders.find().paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
-    socket.emit('ordersIndex', result);
+  socket.on('pickupIndexAdmin', async data => {
+    let result = await Orders.find({
+      orderType: 'Pickup',
+      isPlaced: true
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('pickupIndexAdmin', result);
   });
 
 });
