@@ -5,6 +5,29 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('claimsCount', async data => {
+    let count = await Claims.count();
+    socket.emit('claimsCount', count);
+  });
+
+  socket.on('claimsIndex', async data => {
+    let result = await Claims.find().paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('claimsIndex', result);
+  });
+
+  socket.on('searchClaims', async data => {
+    let result = await Claims.find({
+
+    }).paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('claimsIndex', result);
+  });
+
+});
+
 module.exports = {
 
   getClaimByCustomer: async (req, res) => {

@@ -31,7 +31,7 @@ io.on('connection', socket => {
 
   socket.on('searchTradingPartners', async data => {
     let result = await TradingPartners.find({
-      
+
     }).paginate(data.pageNumber, data.pageSize).populateAll();
     socket.emit('tradingPartnerIndex', result);
   });
