@@ -20,10 +20,22 @@ io.on('connection', socket => {
   });
 
   socket.on('tradingPartnerCount', async data => {
-    console.log('count')
     let count = await TradingPartners.count();
     socket.emit('tradingPartnerCount', count);
   });
+
+  socket.on('tradingPartnersIndex', async data => {
+    let result = await TradingPartners.find().paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('tradingPartnerIndex', result);
+  });
+
+  socket.on('searchTradingPartners', async data => {
+    let result = await TradingPartners.find({
+      
+    }).paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('tradingPartnerIndex', result);
+  });
+
 });
 
 module.exports = {
