@@ -15,7 +15,7 @@ io.on('connection', socket => {
   });
 
   socket.on('claimsIndex', async data => {
-    let result = await Claims.find().paginate(data.pageNumber, data.pageSize).populateAll();
+    let result = await Claims.find().paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
     socket.emit('claimsIndex', result);
   });
 

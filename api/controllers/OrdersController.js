@@ -26,6 +26,17 @@ io.on('connection', socket => {
       }
     });
   });
+
+  socket.on('ordersCount', async data => {
+    let count = await Orders.count();
+    socket.emit('ordersCount', count);
+  });
+
+  socket.on('ordersIndex', async data => {
+    let result = await Orders.find().paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('ordersIndex', result);
+  });
+
 });
 
 module.exports = {
