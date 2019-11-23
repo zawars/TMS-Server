@@ -18,6 +18,12 @@ io.on('connection', socket => {
     // io.sockets.connected[data.socketId]
     socket.emit('fetchTradingPartner', partner);
   });
+
+  socket.on('tradingPartnerCount', async data => {
+    console.log('count')
+    let count = await TradingPartners.count();
+    socket.emit('tradingPartnerCount', count);
+  });
 });
 
 module.exports = {

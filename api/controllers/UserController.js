@@ -71,7 +71,7 @@ module.exports = {
           message: "Email sent."
         });
       }
-    })
+    });
   },
 
   search: async (req, res) => {

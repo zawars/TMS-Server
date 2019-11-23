@@ -10,13 +10,21 @@ const io = sails.io;
 io.on('connection', socket => {
 
   socket.on('sendEmailForOrderPlaced', async data => {
-    let users = await users.find({
+    let users = await User.find({
       roles: {
         contains: 'Admin'
       }
     });
+    data.email = [];
+    users.map(user => data.email.push(user.email));
 
-    socket.emit('orderPlaced', users);
+    EmailService.sendMail(data, (err) => {
+      if (err) {
+        socket.emit('orderPlaced', "Error Sending Email")
+      } else {
+        socket.emit('orderPlaced', {});
+      }
+    });
   });
 });
 
