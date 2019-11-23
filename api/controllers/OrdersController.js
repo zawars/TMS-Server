@@ -5,6 +5,21 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('sendEmailForOrderPlaced', async data => {
+    let users = await users.find({
+      roles: {
+        contains: 'Admin'
+      }
+    });
+
+    socket.emit('orderPlaced', users);
+  });
+});
+
 module.exports = {
   getOrderByCustomer: async (req, res) => {
     try {
