@@ -28,10 +28,10 @@ io.on('connection', socket => {
   });
 
   socket.on('pickupCount', async data => {
-    let count = await Orders.find({
+    let count = await Orders.count({
       orderType: 'Pickup',
       isPlaced: true
-    }).count();
+    });
     socket.emit('pickupCount', count);
   });
 

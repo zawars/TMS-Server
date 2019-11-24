@@ -20,9 +20,9 @@ io.on('connection', socket => {
   });
 
   socket.on('claimsCountClient', async data => {
-    let count = await Claims.find({
+    let count = await Claims.count({
       tradingPartner: data.tradingPartner
-    }).count();
+    });
     socket.emit('claimsCountClient', count);
   });
 
