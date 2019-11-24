@@ -78,6 +78,7 @@ io.on('connection', socket => {
   socket.on('customerOrdersCountClient', async data => {
     let count = await Orders.count({
       tradingPartner: data.tradingPartner,
+      isPlaced: data.status == "saved" ? false : true
     });
     socket.emit('customerOrdersCountClient', count);
   });
