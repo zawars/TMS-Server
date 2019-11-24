@@ -21,14 +21,14 @@ io.on('connection', socket => {
 
   socket.on('claimsCountClient', async data => {
     let count = await Claims.count({
-      tradingPartner: data.tradingPartner
+      customer: data.tradingPartner
     });
     socket.emit('claimsCountClient', count);
   });
 
   socket.on('claimsIndexClient', async data => {
     let result = await Claims.find({
-      tradingPartner: data.tradingPartner
+      customer: data.tradingPartner
     }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
     socket.emit('claimsIndexClient', result);
   });
