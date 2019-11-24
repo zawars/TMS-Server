@@ -189,7 +189,7 @@ module.exports = {
     dropoffState: {
       model: 'states'
     },
-    billTp: {
+    billTo: {
       model: 'tradingPartners'
     },
     payerCountry: {
@@ -205,6 +205,9 @@ module.exports = {
       model: 'locations'
     },
     tradingPartner: {
+      model: 'tradingPartners'
+    },
+    vendor: {
       model: 'tradingPartners'
     },
     rate: {

@@ -43,6 +43,53 @@ io.on('connection', socket => {
     socket.emit('pickupIndex', result);
   });
 
+  socket.on('pickupCountClient', async data => {
+    let count = await Orders.count({
+      tradingPartner: data.tradingPartner,
+      orderType: data.orderType,
+    });
+    socket.emit('pickupCountClient', count);
+  });
+
+  socket.on('pickupIndexClient', async data => {
+    let result = await Orders.find({
+      tradingPartner: data.tradingPartner,
+      orderType: data.orderType,
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('pickupIndexClient', result);
+  });
+
+  socket.on('vendorOrdersCountClient', async data => {
+    let count = await Orders.count({
+      vendor: data.vendor,
+      isPlaced: true,
+    });
+    socket.emit('vendorOrdersCountClient', count);
+  });
+
+  socket.on('vendorOrdersIndexClient', async data => {
+    let result = await Orders.find({
+      vendor: data.vendor,
+      isPlaced: true,
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('vendorOrdersIndexClient', result);
+  });
+
+  socket.on('customerOrdersCountClient', async data => {
+    let count = await Orders.count({
+      tradingPartner: data.tradingPartner,
+    });
+    socket.emit('customerOrdersCountClient', count);
+  });
+
+  socket.on('customerOrdersIndexClient', async data => {
+    let result = await Orders.find({
+      tradingPartner: data.tradingPartner,
+      isPlaced: data.status == "saved" ? false : true
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('customerOrdersIndexClient', result);
+  });
+
 });
 
 module.exports = {
