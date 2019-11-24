@@ -19,6 +19,20 @@ io.on('connection', socket => {
     socket.emit('claimsIndex', result);
   });
 
+  socket.on('claimsCountClient', async data => {
+    let count = await Claims.find({
+      tradingPartner: data.tradingPartner
+    }).count();
+    socket.emit('claimsCountClient', count);
+  });
+
+  socket.on('claimsIndexClient', async data => {
+    let result = await Claims.find({
+      tradingPartner: data.tradingPartner
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('claimsIndexClient', result);
+  });
+
   socket.on('searchClaims', async data => {
     let result = await Claims.find({
 
