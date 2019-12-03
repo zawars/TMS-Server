@@ -5,6 +5,35 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+  socket.on('citiesAndPostalCodes', async data => {
+    let result;
+    let val = +data.query;
+    let dropDown = await Dropdown.findOne({
+      field: 'Cities'
+    });
+
+    if (Number.isNaN(val)) {
+      result = await DropdownMapper.find({
+        dropdown: dropDown.id,
+        name: {
+          'startsWith': data.query
+        }
+      }).populateAll().limit(10);
+    } else {
+      result = await DropdownMapperChild.find({
+        name: {
+          'startsWith': data.query
+        }
+      }).limit(10).populateAll();
+    }
+
+    socket.emit('citiesAndPostalCodes', result);
+  });
+});
+
 module.exports = {
 
   searchCity: async (req, res) => {
@@ -28,7 +57,7 @@ module.exports = {
           name: {
             'startsWith': query
           }
-        }).limit(20).populateAll();
+        }).limit(10).populateAll();
       }
 
       res.ok(result);
