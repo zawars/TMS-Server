@@ -9,6 +9,8 @@
  * https://sailsjs.com/config/sockets
  */
 
+const jwt = require('jsonwebtoken');
+
 module.exports.sockets = {
 
   /***************************************************************************
@@ -46,9 +48,31 @@ module.exports.sockets = {
 
     // `true` allows the socket to connect.
     // (`false` would reject the connection)
-    console.log('Client Connected')
-    // console.log(handshake._query.token)
-    proceed(undefined, true);
+
+    let token = handshake._query.token;
+
+    if (token) {
+      jwt.verify(token, sails.config.session.secret, (err, authData) => {
+        if (err) {
+          proceed('You are not permitted to perform this action. Unauthorized, Token mismatch.', false);
+        } else {
+          RedisService.get(authData.id, (result) => {
+            if (result != undefined) {
+              if (token == result) {
+                proceed({
+                  userId: authData.id
+                }, true)
+              } else {
+                proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
+              }
+            } else {
+              proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
+            }
+          });
+        }
+      });
+    }
+
   },
 
 

@@ -21,13 +21,13 @@ io.on('connection', socket => {
         name: {
           'startsWith': data.query
         }
-      }).populateAll().limit(10);
+      }).populateAll().limit(15);
     } else {
       result = await DropdownMapperChild.find({
         name: {
           'startsWith': data.query
         }
-      }).limit(10).populateAll();
+      }).limit(15).populateAll();
     }
 
     socket.emit('citiesAndPostalCodes', result);

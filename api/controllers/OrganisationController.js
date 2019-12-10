@@ -19,6 +19,18 @@ io.on('connection', socket => {
     socket.emit('organisationIndex', result);
   });
 
+  socket.on('organisationSearch', async data => {
+    let query = data.query;
+
+    let result = await Organisation.find({
+      name: {
+        'startsWith': query
+      }
+    }).populateAll().limit(10);
+
+    socket.emit('organisationSearch', result);
+  });
+
 });
 
 module.exports = {

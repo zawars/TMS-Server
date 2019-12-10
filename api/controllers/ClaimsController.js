@@ -185,7 +185,7 @@ module.exports = {
 
         Please log in via below link to view the changes.<br><br>
 
-        http://claim.crekey.solutions/#/claims/${claim.id} <br><br>
+        <a href="http://claim.crekey.solutions/#/claims/${claim.id}" target="_blank">http://claim.crekey.solutions/#/claims/${claim.id}</a> <br><br>
 
         For any questions or concerns please use the comment section on the claim form. <br><br>
         </p>`
