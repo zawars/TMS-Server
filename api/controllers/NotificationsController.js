@@ -9,6 +9,7 @@ const io = sails.io;
 
 io.on('connection', socket => {
   socket.on('postNotification', async data => {
+    console.log(data)
     if (data.module == 'claims') {
       let claim = await Claims.findOne({
         id: data.moduleItemId
