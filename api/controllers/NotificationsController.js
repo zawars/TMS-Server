@@ -54,23 +54,25 @@ io.on('connection', socket => {
         });
       }
     } else if (data.module == 'pickup') {
-      // let pickup = await Orders.findOne({
-      //   id: data.moduleItemId
-      // }).populateAll();
-
-      let users = await User.find({
-        roles: ['Admin']
+      let pickup = await Orders.findOne({
+        id: data.moduleItemId
       });
 
-      if (users.length > 0) {
-        let notificationsList = [];
+      let organisation = await Organisation.findOne({
+        id: pickup.billTo.organisation
+      }).populateAll();
 
-        users.map(user => {
-          notificationsList.push({
-            ...data,
-            owner: user.id
-          });
-        })
+      if (organisation.users.length > 0) {
+        organisation.users.forEach(user => {
+          if (user.roles.includes('Admin')) {
+            notificationsList.push({
+              ...data,
+              owner: user.id
+            });
+          }
+        });
+
+        let notificationsList = [];
 
         let ids = [];
         await Notifications.createEach(notificationsList);
@@ -100,7 +102,7 @@ io.on('connection', socket => {
   socket.on('fetchNotifications', async data => {
     let notifications = await Notifications.find({
       owner: data.userId
-    }).limit(3).populateAll();
+    }).sort('createdAt DESC').limit(3).populateAll();
 
     socket.emit('fetchNotifications', notifications);
   });
