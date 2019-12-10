@@ -41,6 +41,7 @@ io.on('connection', socket => {
 
           if (idx == notificationsList.length - 1) {
             notificationsList.map(obj => {
+              console.log(obj.socketId)
               io.to(socketId).emit('notification', obj)
             });
           }
