@@ -34,14 +34,13 @@ io.on('connection', socket => {
         await Notifications.createEach(notificationsList);
         let ids = [];
         notificationsList.map(val => ids.push(val._id.toString()));
-        console.log(ids);
 
         notificationsList = await Notifications.find({
           id: ids
         }).populateAll();
 
         notificationsList.forEach((notifObj, idx) => {
-          RedisService.get(`socket-${notifObj.owner}`, result => {
+          RedisService.get(`socket-${notifObj.owner.id}`, result => {
             if (result != undefined) {
               notificationsList[idx].socketId = result;
             }
