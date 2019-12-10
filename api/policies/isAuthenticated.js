@@ -15,7 +15,7 @@ module.exports = function (req, res, next) {
     } else {
       RedisService.get(authData.id, (result) => {
         if (result != undefined) {
-          if (token == result) {
+          if (bearerToken == result) {
             return next();
           } else {
             return res.ok({
