@@ -48,7 +48,7 @@ module.exports = {
     try {
       let claims = await Claims.find({
         customer: req.params.id,
-      }).populateAll().sort('createdAt DESC');
+      }).paginate(req.query.pageNumber, req.query.pageSize || 10).populateAll().sort('createdAt DESC');
 
       res.ok(claims);
     } catch (error) {
