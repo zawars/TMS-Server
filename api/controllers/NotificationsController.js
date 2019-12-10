@@ -34,7 +34,9 @@ io.on('connection', socket => {
       let ids = [];
       notificationsList.map(val => ids.push(val._id));
       notificationsList = await Notifications.find({
-        in: ids
+        id: {
+          in: ids
+        }
       }).populateAll();
 
       notificationsList.forEach((notifObj, idx) => {
