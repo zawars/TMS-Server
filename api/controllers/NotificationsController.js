@@ -9,7 +9,6 @@ const io = sails.io;
 
 io.on('connection', socket => {
   socket.on('postNotification', async data => {
-    console.log(data)
     if (data.module == 'claims') {
       let claim = await Claims.findOne({
         id: data.moduleItemId
@@ -32,6 +31,11 @@ io.on('connection', socket => {
       }
 
       await Notifications.createEach(notificationsList);
+      let ids = [];
+      notificationsList.map(val => ids.push(val._id));
+      notificationsList = await Notifications.find({
+        in: ids
+      }).populateAll();
 
       notificationsList.forEach((notifObj, idx) => {
         RedisService.get(`socket-${notifObj.owner}`, result => {
@@ -41,8 +45,7 @@ io.on('connection', socket => {
 
           if (idx == notificationsList.length - 1) {
             notificationsList.map(obj => {
-              console.log(obj.socketId)
-              io.to(socketId).emit('notification', obj)
+              io.to(obj.socketId).emit('notification', obj)
             });
           }
         });
