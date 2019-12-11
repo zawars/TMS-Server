@@ -15,7 +15,6 @@ io.on('connection', socket => {
       id: data.id
     }).populateAll();
 
-    // io.sockets.connected[data.socketId]
     socket.emit('fetchTradingPartner', partner);
   });
 
@@ -34,6 +33,14 @@ io.on('connection', socket => {
 
     }).paginate(data.pageNumber, data.pageSize).populateAll();
     socket.emit('tradingPartnerIndex', result);
+  });
+
+  socket.on('getTradingPartner', async data => {
+    let result = await TradingPartners.findOne({
+      id: data.id
+    }).populateAll();
+
+    socket.emit('getTradingPartner', result);
   });
 
 });

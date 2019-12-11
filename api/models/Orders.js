@@ -204,7 +204,7 @@ module.exports = {
     dropoffLocation: {
       model: 'locations'
     },
-    tradingPartner: {
+    customer: {
       model: 'tradingPartners'
     },
     vendor: {
