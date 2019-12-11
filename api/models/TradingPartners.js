@@ -157,7 +157,7 @@ module.exports = {
     },
     customerLocations: {
       collection: 'locations',
-      via: 'tradingPartner'
+      via: 'customer'
     },
     products: {
       collection: 'products',
@@ -187,7 +187,7 @@ module.exports = {
     },
     vendorLocations: {
       collection: 'locations',
-      via: 'tradingPartner'
+      via: 'vendor'
     },
 
     thirdPartyBillingCity: {
@@ -204,7 +204,7 @@ module.exports = {
     },
     thirdPartyLocations: {
       collection: 'locations',
-      via: 'tradingPartner'
+      via: 'thirdParty'
     },
     thirdPartyServices: {
       collection: 'dropdownMapper',

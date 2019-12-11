@@ -41,9 +41,15 @@ module.exports = {
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    tradingPartner: {
+    customer: {
       model: 'tradingPartners'
-    }
+    },
+    vendor: {
+      model: 'tradingPartners'
+    },
+    thirdParty: {
+      model: 'tradingPartners'
+    },
   },
 
 };

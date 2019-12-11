@@ -154,7 +154,7 @@ module.exports = {
 
       let partner = await TradingPartners.create(data).fetch();
       customerLocations.forEach(location => {
-        location.tradingPartner = partner.id;
+        location.customer = partner.id;
         location.type = location.type.id;
         location.state = location.state.id;
         location.country = location.country.id;
@@ -162,7 +162,7 @@ module.exports = {
         location.postalCode = location.postalCode.id;
       });
       vendorLocations.forEach(location => {
-        location.tradingPartner = partner.id;
+        location.vendor = partner.id;
         location.type = location.type.id;
         location.state = location.state.id;
         location.country = location.country.id;
@@ -170,7 +170,7 @@ module.exports = {
         location.postalCode = location.postalCode.id;
       });
       thirdPartyLocations.forEach(location => {
-        location.tradingPartner = partner.id;
+        location.thirdParty = partner.id;
         location.type = location.type.id;
         location.state = location.state.id;
         location.country = location.country.id;
