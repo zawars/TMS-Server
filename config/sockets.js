@@ -57,14 +57,17 @@ module.exports.sockets = {
           proceed('You are not permitted to perform this action. Unauthorized, Token mismatch.', false);
         } else {
           RedisService.get(authData.id, (result) => {
+
             if (result != undefined) {
-              if (token == result) {
-                proceed({
-                  userId: authData.id
-                }, true)
-              } else {
-                proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
-              }
+              jwt.verify(result, sails.config.session.secret, (err, authDataResult) => {
+                if (authData.id == authDataResult.id) {
+                  proceed({
+                    userId: authData.id
+                  }, true)
+                } else {
+                  proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
+                }
+              });
             } else {
               proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
             }
