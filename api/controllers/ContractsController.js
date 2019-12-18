@@ -5,6 +5,22 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('contractsCount', async data => {
+    let count = await Contracts.count();
+    socket.emit('contractsCount', count);
+  });
+
+  socket.on('contractssIndex', async data => {
+    let result = await Contracts.find().paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('contractsIndex', result);
+  });
+
+});
+
 module.exports = {
   create: async (req, res) => {
     let contract = req.body;

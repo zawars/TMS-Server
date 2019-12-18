@@ -43,6 +43,28 @@ io.on('connection', socket => {
     socket.emit('getTradingPartner', result);
   });
 
+  socket.on('getTradingPartnerAsVendor', async data => {
+    let result = await TradingPartners.find({
+      isVendor: true,
+      customerBillingName: {
+        'startsWith': data.query
+      }
+    }).limit(10).populateAll();
+
+    this.socket.emit('getTradingPartnerAsVendor', result);
+  });
+
+  socket.on('getTradingPartnerAsCustomer', async data => {
+    let result = await TradingPartners.find({
+      isCustomer: true,
+      customerBillingName: {
+        'startsWith': data.query
+      }
+    }).limit(10).populateAll();
+
+    this.socket.emit('getTradingPartnerAsCustomer', result);
+  });
+
 });
 
 module.exports = {
@@ -52,6 +74,11 @@ module.exports = {
     }).populateAll();
 
     res.ok(partners);
+  },
+
+  index: async (req, res) => {
+    let results = await TradingPartners.find().paginate(req.query.pageNumber, req.query.pageSize || 10).populateAll();
+    res.ok(results);
   },
 
   show: async (req, res) => {
@@ -97,11 +124,6 @@ module.exports = {
     }
 
     res.ok(partner);
-  },
-
-  index: async (req, res) => {
-    let results = await TradingPartners.find().populateAll();
-    res.ok(results);
   },
 
   create: async (req, res) => {
