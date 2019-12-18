@@ -51,7 +51,7 @@ io.on('connection', socket => {
       }
     }).limit(10).populateAll();
 
-    this.socket.emit('getTradingPartnerAsVendor', result);
+    socket.emit('getTradingPartnerAsVendor', result);
   });
 
   socket.on('getTradingPartnerAsCustomer', async data => {
@@ -62,7 +62,7 @@ io.on('connection', socket => {
       }
     }).limit(10).populateAll();
 
-    this.socket.emit('getTradingPartnerAsCustomer', result);
+    socket.emit('getTradingPartnerAsCustomer', result);
   });
 
 });
