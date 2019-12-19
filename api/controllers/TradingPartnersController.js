@@ -15,6 +15,15 @@ io.on('connection', socket => {
       id: data.id
     }).populateAll();
 
+    let thirdPartyLocations = [];
+    partner.thirdPartyLocations.map(val => thirdPartyLocations.push(val.id));
+
+    partner.thirdPartyLocations = await Locations.find({
+      id: {
+        in: thirdPartyLocations
+      }
+    }).populateAll();
+
     socket.emit('fetchTradingPartner', partner);
   });
 
