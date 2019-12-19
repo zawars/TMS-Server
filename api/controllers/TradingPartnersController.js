@@ -57,8 +57,10 @@ io.on('connection', socket => {
             },
           },
         ]
-      }).paginate(data.pageNumber, data.pageSize).populateAll();
+      }).limit(10).populateAll();
+
       socket.emit('searchTradingPartnerByType', result);
+
     } else if (data.type == 'Vendor') {
       let result = await TradingPartners.find({
         isVendor: true,
@@ -78,7 +80,8 @@ io.on('connection', socket => {
             },
           },
         ]
-      }).paginate(data.pageNumber, data.pageSize).populateAll();
+      }).limit(10).populateAll();
+
       socket.emit('searchTradingPartnerByType', result);
     }
   });

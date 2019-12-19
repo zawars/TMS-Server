@@ -61,9 +61,7 @@ module.exports.sockets = {
             if (result != undefined) {
               jwt.verify(result, sails.config.session.secret, (err, authDataResult) => {
                 if (authData.id == authDataResult.id) {
-                  proceed({
-                    userId: authData.id
-                  }, true)
+                  proceed(undefined, true)
                 } else {
                   proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
                 }

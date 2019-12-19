@@ -24,7 +24,7 @@ io.on('connection', socket => {
 module.exports = {
   create: async (req, res) => {
     let data = req.body;
-    data.client = data.client.id;
+    data.customer = data.customer.id;
     data.vendor = data.vendor.id;
     // let rates = await Rates.find({
     //   rateSheet: data.rateSheet
@@ -54,7 +54,7 @@ module.exports = {
 
   update: async (req, res) => {
     let data = req.body;
-    data.client = data.client.id;
+    data.customer = data.customer.id;
     data.vendor = data.vendor.id;
     // let rates = await Rates.find({
     //   rateSheet: data.rateSheet
