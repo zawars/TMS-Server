@@ -5,6 +5,22 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('markupCount', async data => {
+    let count = await Markup.count();
+    socket.emit('markupCount', count);
+  });
+
+  socket.on('markupsIndex', async data => {
+    let result = await Markup.find().paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('markupIndex', result);
+  });
+
+});
+
 module.exports = {
   create: async (req, res) => {
     let data = req.body;

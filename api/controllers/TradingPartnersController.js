@@ -37,11 +37,50 @@ io.on('connection', socket => {
     socket.emit('tradingPartnerIndex', result);
   });
 
-  socket.on('searchTradingPartners', async data => {
-    let result = await TradingPartners.find({
-
-    }).paginate(data.pageNumber, data.pageSize).populateAll();
-    socket.emit('tradingPartnerIndex', result);
+  socket.on('searchTradingPartnerByType', async data => {
+    if (data.type == 'Customer') {
+      let result = await TradingPartners.find({
+        isCustomer: true,
+        or: [{
+            name: {
+              'startsWith': data.query
+            },
+          },
+          {
+            email: {
+              'startsWith': data.query
+            },
+          },
+          {
+            number: {
+              'startsWith': data.query
+            },
+          },
+        ]
+      }).paginate(data.pageNumber, data.pageSize).populateAll();
+      socket.emit('searchTradingPartnerByType', result);
+    } else if (data.type == 'Vendor') {
+      let result = await TradingPartners.find({
+        isVendor: true,
+        or: [{
+            name: {
+              'startsWith': data.query
+            },
+          },
+          {
+            email: {
+              'startsWith': data.query
+            },
+          },
+          {
+            number: {
+              'startsWith': data.query
+            },
+          },
+        ]
+      }).paginate(data.pageNumber, data.pageSize).populateAll();
+      socket.emit('searchTradingPartnerByType', result);
+    }
   });
 
   socket.on('getTradingPartner', async data => {
