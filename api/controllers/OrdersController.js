@@ -77,7 +77,7 @@ io.on('connection', socket => {
 
   socket.on('customerOrdersCountClient', async data => {
     let count = await Orders.count({
-      tradingPartner: data.tradingPartner,
+      customer: data.tradingPartner,
       isPlaced: data.status == "saved" ? false : true
     });
     socket.emit('customerOrdersCountClient', count);
@@ -85,12 +85,34 @@ io.on('connection', socket => {
 
   socket.on('customerOrdersIndexClient', async data => {
     let result = await Orders.find({
-      tradingPartner: data.tradingPartner,
+      customer: data.tradingPartner,
       isPlaced: data.status == "saved" ? false : true
     }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
     socket.emit('customerOrdersIndexClient', result);
   });
 
+  // socket.on('dashboardOrderCount', async data => {
+  //   let totalOrdersCount = await Orders.count();
+  //   let newOrders = await Orders.count({
+  //     status: 
+  //   });
+  // });
+
+  socket.on('placedOrdersCount', async data => {
+    let orders = await Orders.count({
+      isPlaced: true
+    });
+
+    socket.emit('placedOrdersCount', orders);
+  });
+
+  socket.on('placedOrdersIndex', async data => {
+    let orders = await Orders.find({
+      isPlaced: true
+    }).paginate(data.pageNumber, data.pageSize).sort('createdAt DESC').populateAll();
+
+    socket.emit('placedOrdersIndex', orders);
+  });
 });
 
 module.exports = {
@@ -100,12 +122,15 @@ module.exports = {
       let status = req.params.status;
 
       const orders = await Orders.find({
-        tradingPartner: id,
+        customer: id,
         isPlaced: status == "saved" ? false : true
-      }).populateAll().sort('createdAt DESC');
+      }).limit(10).populateAll().sort('createdAt DESC');
+
       res.ok(orders);
     } catch (e) {
-      res.badRequest(e);
+      res.badRequest({
+        message: e
+      });
     }
   },
 
@@ -193,10 +218,7 @@ module.exports = {
     try {
       let orders = await Orders.find({
         isPlaced: true
-      }).populateAll().sort('createdAt DESC').paginate({
-        skip: req.query.skip,
-        limit: req.query.limit
-      });
+      }).limit(10).sort('createdAt DESC').populateAll();
 
       res.ok(orders);
     } catch (error) {
