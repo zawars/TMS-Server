@@ -27,6 +27,23 @@ io.on('connection', socket => {
     socket.emit('fetchTradingPartner', partner);
   });
 
+  socket.on('fetchTradingPartnerWithCustomerLocations', async data => {
+    let partner = await TradingPartners.findOne({
+      id: data.id
+    }).populateAll();
+
+    let customerLocations = [];
+    partner.customerLocations.map(val => customerLocations.push(val.id));
+
+    partner.customerLocations = await Locations.find({
+      id: {
+        in: customerLocations
+      }
+    }).populateAll();
+
+    socket.emit('fetchTradingPartner', partner);
+  });
+
   socket.on('tradingPartnerCount', async data => {
     let count = await TradingPartners.count();
     socket.emit('tradingPartnerCount', count);
