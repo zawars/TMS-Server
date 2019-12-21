@@ -41,7 +41,7 @@ io.on('connection', socket => {
       }
     }).populateAll();
 
-    socket.emit('fetchTradingPartner', partner);
+    socket.emit('fetchTradingPartnerWithCustomerLocations', partner);
   });
 
   socket.on('tradingPartnerCount', async data => {
