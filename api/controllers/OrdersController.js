@@ -91,12 +91,36 @@ io.on('connection', socket => {
     socket.emit('customerOrdersIndexClient', result);
   });
 
-  // socket.on('dashboardOrderCount', async data => {
-  //   let totalOrdersCount = await Orders.count();
-  //   let newOrders = await Orders.count({
-  //     status: 
-  //   });
-  // });
+  socket.on('dashboardOrderCount', async data => {
+    let totalOrders = await Orders.count({
+      isPlaced: true
+    });
+    let newOrders = await Orders.count({
+      status: {
+        in: ['Waiting for pick up', 'Picked up'],
+      },
+      isPlaced: true,
+    });
+    let inTransitOrders = await Orders.count({
+      status: {
+        in: ['In Transit'],
+      },
+      isPlaced: true,
+    });
+    let deliveredOrders = await Orders.count({
+      status: {
+        in: ['Delivered'],
+      },
+      isPlaced: true,
+    });
+
+    socket.emit('dashboardOrderCount', {
+      totalOrders,
+      newOrders,
+      inTransitOrders,
+      deliveredOrders
+    });
+  });
 
   socket.on('placedOrdersCount', async data => {
     let orders = await Orders.count({
