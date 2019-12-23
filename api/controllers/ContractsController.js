@@ -14,11 +14,21 @@ io.on('connection', socket => {
     socket.emit('contractsCount', count);
   });
 
-  socket.on('contractssIndex', async data => {
+  socket.on('contractsIndex', async data => {
     let result = await Contracts.find().paginate(data.pageNumber, data.pageSize).populateAll();
     socket.emit('contractsIndex', result);
+
   });
 
+  socket.on('searchContracts', async data => {
+    let result = await Contracts.find({
+      name: {
+        startsWith: data.query
+      }
+    }).limit(10).populateAll();
+
+    socket.emit('searchContracts', result);
+  });
 });
 
 module.exports = {
