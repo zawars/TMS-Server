@@ -97,7 +97,7 @@ io.on('connection', socket => {
     });
     let newOrders = await Orders.count({
       status: {
-        in: ['Waiting for pick up', 'Picked up'],
+        in: ['Placed'],
       },
       isPlaced: true,
     });
