@@ -13,6 +13,24 @@ io.on('connection', socket => {
   RedisService.set(`socket-${socket.handshake.query.userId}`, socket.id, () => {
     console.log('Client Connected', socket.id)
   });
+
+  socket.on('isUserAvailable', async data => {
+    let user = await User.findOne({
+      email: {
+        startsWith: data.query
+      }
+    });
+
+    if (user) {
+      socket.emit('isUserAvailable', {
+        message: 'Not Available'
+      });
+    } else {
+      res.emit('isUserAvailable', {
+        message: 'Available'
+      });
+    }
+  });
 });
 
 module.exports = {
