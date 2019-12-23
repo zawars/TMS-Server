@@ -7,6 +7,13 @@
 
 const speakEasy = require('speakeasy');
 const fs = require('fs');
+const io = sails.io;
+
+io.on('connection', socket => {
+  RedisService.set(`socket-${socket.handshake.query.userId}`, socket.id, () => {
+    console.log('Client Connected', socket.id)
+  });
+});
 
 module.exports = {
   // create: async (req, res) => {
@@ -71,7 +78,7 @@ module.exports = {
           message: "Email sent."
         });
       }
-    })
+    });
   },
 
   search: async (req, res) => {

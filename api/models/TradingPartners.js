@@ -127,9 +127,13 @@ module.exports = {
     country: {
       model: 'dropdownMapper',
     },
+    organisation: {
+      model: 'organisation'
+    },
     status: {
       model: 'dropdownMapper',
     },
+
     customerBillingCity: {
       model: 'dropdownMapper',
     },
@@ -153,7 +157,7 @@ module.exports = {
     },
     customerLocations: {
       collection: 'locations',
-      via: 'tradingPartner'
+      via: 'customer'
     },
     products: {
       collection: 'products',
@@ -183,7 +187,7 @@ module.exports = {
     },
     vendorLocations: {
       collection: 'locations',
-      via: 'tradingPartner'
+      via: 'vendor'
     },
 
     thirdPartyBillingCity: {
@@ -200,13 +204,14 @@ module.exports = {
     },
     thirdPartyLocations: {
       collection: 'locations',
-      via: 'tradingPartner'
+      via: 'thirdParty'
     },
     thirdPartyServices: {
       collection: 'dropdownMapper',
     },
     thirdPartyBillTo: {
-      collection: 'tradingPartners'
+      collection: 'tradingPartners',
+      via: 'billedTo'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
@@ -220,6 +225,9 @@ module.exports = {
       collection: 'user',
       via: 'tradingPartner'
     },
+    billedTo: {
+      model: 'tradingPartners'
+    }
   },
 
   beforeCreate: (values, cb) => {

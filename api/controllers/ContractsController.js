@@ -5,6 +5,22 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('contractsCount', async data => {
+    let count = await Contracts.count();
+    socket.emit('contractsCount', count);
+  });
+
+  socket.on('contractssIndex', async data => {
+    let result = await Contracts.find().paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('contractsIndex', result);
+  });
+
+});
+
 module.exports = {
   create: async (req, res) => {
     let contract = req.body;
@@ -14,20 +30,27 @@ module.exports = {
     delete(contract.accessorials);
 
     let contractObj = await Contracts.create(contract).fetch();
+    let rateSheets;
+    let accessorials;
 
     let ratesCollection = [];
-    rateSheetList.map(rateSheet => {
-      rateSheet.contract = contractObj.id
-      ratesCollection.push(rateSheet.rates);
-      delete(rateSheet.rates);
-    });
+    if (this.rateSheetList != undefined) {
+      rateSheetList.map(rateSheet => {
+        rateSheet.contract = contractObj.id
+        ratesCollection.push(rateSheet.rates);
+        delete(rateSheet.rates);
+      });
 
-    accessorialList.map(accessorial => {
-      accessorial.contract = contractObj.id
-    });
+      rateSheets = await RateSheets.createEach(rateSheetList).fetch();
+    }
 
-    let rateSheets = await RateSheets.createEach(rateSheetList).fetch();
-    let accessorials = await Accessorials.createEach(accessorialList).fetch();
+    if (accessorialList != undefined) {
+      accessorialList.map(accessorial => {
+        accessorial.contract = contractObj.id
+      });
+
+      accessorials = await Accessorials.createEach(accessorialList).fetch();
+    }
 
     ratesCollection.map(async (rateList, idx) => {
       rateList.map(rate => rate.rateSheet = rateSheets[idx].id);

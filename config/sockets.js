@@ -9,6 +9,8 @@
  * https://sailsjs.com/config/sockets
  */
 
+const jwt = require('jsonwebtoken');
+
 module.exports.sockets = {
 
   /***************************************************************************
@@ -27,7 +29,7 @@ module.exports.sockets = {
    *                                                                          *
    ***************************************************************************/
 
-  transports: [ 'websocket1' ],
+  transports: ['websocket', 'polling'],
 
 
   /***************************************************************************
@@ -46,8 +48,31 @@ module.exports.sockets = {
 
     // `true` allows the socket to connect.
     // (`false` would reject the connection)
-    console.log('connected')
-    return proceed(undefined, true);
+
+    let token = handshake._query.token;
+
+    if (token) {
+      jwt.verify(token, sails.config.session.secret, (err, authData) => {
+        if (err) {
+          proceed('You are not permitted to perform this action. Unauthorized, Token mismatch.', false);
+        } else {
+          RedisService.get(authData.id, (result) => {
+
+            if (result != undefined) {
+              jwt.verify(result, sails.config.session.secret, (err, authDataResult) => {
+                if (authData.id == authDataResult.id) {
+                  proceed(undefined, true)
+                } else {
+                  proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
+                }
+              });
+            } else {
+              proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
+            }
+          });
+        }
+      });
+    }
 
   },
 
@@ -61,12 +86,14 @@ module.exports.sockets = {
    *                                                                          *
    ***************************************************************************/
 
-  // afterDisconnect: function(session, socket, done) {
-  //
+  // afterDisconnect: function (session, socket, done) {
+
   //   // By default: do nothing.
   //   // (but always trigger the callback)
+
+  //   console.log(`Client disconnected: ${socket.id}`)
   //   return done();
-  //
+
   // },
 
 

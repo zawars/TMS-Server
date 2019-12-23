@@ -1,5 +1,5 @@
 /**
- * Locations.js
+ * Notifications.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,43 +12,32 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    name: {
+    isSeen: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    action: {
       type: 'string'
     },
-    street: {
+    module: {
+      type: 'string'
+    },
+    moduleItemId: {
       type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    type: {
-      model: 'dropdownMapper'
-    },
-    state: {
-      model: 'states'
-    },
-    country: {
-      model: 'dropdownMapper'
-    },
-    city: {
-      model: 'dropdownMapper'
-    },
-    postalCode: {
-      model: 'dropdownMapperChild'
+    actor: {
+      model: 'user'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    customer: {
-      model: 'tradingPartners'
-    },
-    vendor: {
-      model: 'tradingPartners'
-    },
-    thirdParty: {
-      model: 'tradingPartners'
+    owner: {
+      model: 'user'
     },
   },
 

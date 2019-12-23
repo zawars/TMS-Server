@@ -61,6 +61,9 @@ module.exports = {
     tradingPartner: {
       model: 'tradingPartners'
     },
+    organisation: {
+      model: 'organisation'
+    }
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗

@@ -103,6 +103,8 @@ module.exports.routes = {
   'PATCH /api/v1/orders/batch/:id': 'OrdersController.updateOrderBatchFreights',
   'GET /api/v1/orders/placed': 'OrdersController.getPlacedOrders',
   'GET /api/v1/orders': 'OrdersController.getAllOrders',
+  'POST /api/v1/orders/pickup/tradingPartner/:id': 'OrdersController.getPickupRequestsForThirdParty',
+  'GET /api/v1/orders/pickup/:type': 'OrdersController.getPickupRequests',
 
   // Quotes
   'GET /api/v1/quotes/customer/:id': 'QuotesController.getQuotesByCustomer',
@@ -135,5 +137,10 @@ module.exports.routes = {
   // Claims
   'GET /api/v1/claims/customer/:id': 'ClaimsController.getClaimByCustomer',
   'GET /api/v1/claims': 'ClaimsController.index',
+  'POST /api/v1/claims': 'ClaimsController.create',
+  'PATCH /api/v1/claims/:id': 'ClaimsController.update',
+
+  // Organisation
+  'GET /api/v1/organisation/search/name/:query': 'OrganisationController.search',
 
 };
