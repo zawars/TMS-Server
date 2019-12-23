@@ -5,6 +5,136 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('fetchTradingPartner', async data => {
+    let partner = await TradingPartners.findOne({
+      id: data.id
+    }).populateAll();
+
+    let thirdPartyLocations = [];
+    partner.thirdPartyLocations.map(val => thirdPartyLocations.push(val.id));
+
+    partner.thirdPartyLocations = await Locations.find({
+      id: {
+        in: thirdPartyLocations
+      }
+    }).populateAll();
+
+    socket.emit('fetchTradingPartner', partner);
+  });
+
+  socket.on('fetchTradingPartnerWithCustomerLocations', async data => {
+    let partner = await TradingPartners.findOne({
+      id: data.id
+    }).populateAll();
+
+    let customerLocations = [];
+    partner.customerLocations.map(val => customerLocations.push(val.id));
+
+    partner.customerLocations = await Locations.find({
+      id: {
+        in: customerLocations
+      }
+    }).populateAll();
+
+    socket.emit('fetchTradingPartnerWithCustomerLocations', partner);
+  });
+
+  socket.on('tradingPartnerCount', async data => {
+    let count = await TradingPartners.count();
+    socket.emit('tradingPartnerCount', count);
+  });
+
+  socket.on('tradingPartnersIndex', async data => {
+    let result = await TradingPartners.find().paginate(data.pageNumber, data.pageSize).populateAll();
+    socket.emit('tradingPartnerIndex', result);
+  });
+
+  socket.on('searchTradingPartnerByType', async data => {
+    if (data.type == 'Customer') {
+      let result = await TradingPartners.find({
+        isCustomer: true,
+        or: [{
+            name: {
+              'startsWith': data.query
+            },
+          },
+          {
+            email: {
+              'startsWith': data.query
+            },
+          },
+          {
+            number: {
+              'startsWith': data.query
+            },
+          },
+        ]
+      }).limit(10).populateAll();
+
+      socket.emit('searchTradingPartnerByType', result);
+
+    } else if (data.type == 'Vendor') {
+      let result = await TradingPartners.find({
+        isVendor: true,
+        or: [{
+            name: {
+              'startsWith': data.query
+            },
+          },
+          {
+            email: {
+              'startsWith': data.query
+            },
+          },
+          {
+            number: {
+              'startsWith': data.query
+            },
+          },
+        ]
+      }).limit(10).populateAll();
+
+      socket.emit('searchTradingPartnerByType', result);
+    }
+  });
+
+  socket.on('getTradingPartner', async data => {
+    let result = await TradingPartners.findOne({
+      id: data.id
+    }).populateAll();
+
+    socket.emit('getTradingPartner', result);
+  });
+
+  socket.on('getTradingPartnerAsVendor', async data => {
+    let result = await TradingPartners.find({
+      isVendor: true,
+      customerBillingName: {
+        'startsWith': data.query
+      }
+    }).limit(10).populateAll();
+
+    socket.emit('getTradingPartnerAsVendor', result);
+  });
+
+  socket.on('getTradingPartnerAsCustomer', async data => {
+    let result = await TradingPartners.find({
+      isCustomer: true,
+      customerBillingName: {
+        'startsWith': data.query
+      }
+    }).limit(10).populateAll();
+
+    socket.emit('getTradingPartnerAsCustomer', result);
+  });
+
+});
+
 module.exports = {
   partnersByType: async (req, res) => {
     let partners = await TradingPartners.find({
@@ -12,6 +142,11 @@ module.exports = {
     }).populateAll();
 
     res.ok(partners);
+  },
+
+  index: async (req, res) => {
+    let results = await TradingPartners.find().paginate(req.query.pageNumber, req.query.pageSize || 10).populateAll();
+    res.ok(results);
   },
 
   show: async (req, res) => {
@@ -22,17 +157,41 @@ module.exports = {
     }).populateAll();
 
     if (partner) {
-      partner.locations = await Locations.find({
-        tradingPartner: partner.id
+      let customerLocations = [];
+      partner.customerLocations.map(val => customerLocations.push(val.id));
+      partner.customerLocations = await Locations.find({
+        id: {
+          in: customerLocations
+        }
+      }).populateAll();
+
+      let vendorLocations = [];
+      partner.vendorLocations.map(val => vendorLocations.push(val.id));
+      partner.vendorLocations = await Locations.find({
+        id: {
+          in: vendorLocations
+        }
+      }).populateAll();
+
+      let thirdPartyLocations = [];
+      partner.thirdPartyLocations.map(val => thirdPartyLocations.push(val.id));
+      partner.thirdPartyLocations = await Locations.find({
+        id: {
+          in: thirdPartyLocations
+        }
+      }).populateAll();
+
+      // Products section
+      let products = [];
+      partner.products.map(val => products.push(val.id));
+      partner.products = await Products.find({
+        id: {
+          in: products
+        }
       }).populateAll();
     }
 
     res.ok(partner);
-  },
-
-  index: async (req, res) => {
-    let results = await TradingPartners.find().populateAll();
-    res.ok(results);
   },
 
   create: async (req, res) => {
@@ -85,7 +244,7 @@ module.exports = {
 
       let partner = await TradingPartners.create(data).fetch();
       customerLocations.forEach(location => {
-        location.tradingPartner = partner.id;
+        location.customer = partner.id;
         location.type = location.type.id;
         location.state = location.state.id;
         location.country = location.country.id;
@@ -93,7 +252,7 @@ module.exports = {
         location.postalCode = location.postalCode.id;
       });
       vendorLocations.forEach(location => {
-        location.tradingPartner = partner.id;
+        location.vendor = partner.id;
         location.type = location.type.id;
         location.state = location.state.id;
         location.country = location.country.id;
@@ -101,7 +260,7 @@ module.exports = {
         location.postalCode = location.postalCode.id;
       });
       thirdPartyLocations.forEach(location => {
-        location.tradingPartner = partner.id;
+        location.thirdParty = partner.id;
         location.type = location.type.id;
         location.state = location.state.id;
         location.country = location.country.id;
@@ -124,12 +283,13 @@ module.exports = {
       }
 
       // Users creation
+      usersList.forEach(val => val.tradingPartner = partner.id);
       await User.createEach(usersList);
 
       res.ok(partner);
 
     } catch (error) {
-      res.ok({
+      res.badRequest({
         error
       })
     }
@@ -150,13 +310,6 @@ module.exports = {
       delete(data.thirdPartyLocations);
       delete(data.thirdPartyBillTo);
       delete(data.users);
-
-      data.thirdPartyBillTo = [];
-      if (thirdPartyBillToList != undefined) {
-        thirdPartyBillToList.forEach(val => {
-          data.thirdPartyBillTo.push(val.id);
-        });
-      }
 
       // Trading Partner
       data.postalCode = data.postalCode.id;
@@ -187,21 +340,41 @@ module.exports = {
 
       let services = [];
       data.customerServices.forEach(service => {
-        services.push(service.id);
+        if (service.id != undefined) {
+          services.push(service.id);
+        } else {
+          services.push(service);
+        }
       });
       data.customerServices = services;
 
       let vendorServices = [];
       data.vendorServices.forEach(service => {
-        vendorServices.push(service.id);
+        if (service.id != undefined) {
+          vendorServices.push(service.id);
+        } else {
+          vendorServices.push(service);
+        }
       });
       data.vendorServices = vendorServices;
 
       let TPservices = [];
       data.thirdPartyServices.forEach(service => {
-        TPservices.push(service.id);
+        if (service.id != undefined) {
+          TPservices.push(service.id);
+        } else {
+          TPservices.push(service);
+        }
       });
       data.thirdPartyServices = TPservices;
+
+      // Bill-To section
+      data.thirdPartyBillTo = [];
+      if (thirdPartyBillToList != undefined) {
+        thirdPartyBillToList.forEach(val => {
+          data.thirdPartyBillTo.push(val.id);
+        });
+      }
 
       let partner = await TradingPartners.update({
         id: req.params.id
@@ -211,7 +384,7 @@ module.exports = {
       let toBeCreatedLocations = [];
       customerLocations.forEach(location => {
         if (location.id == undefined) {
-          location.tradingPartner = partner.id;
+          location.customer = partner.id;
           location.type = location.type.id;
           location.state = location.state.id;
           location.country = location.country.id;
@@ -222,7 +395,7 @@ module.exports = {
       });
       vendorLocations.forEach(location => {
         if (location.id == undefined) {
-          location.tradingPartner = partner.id;
+          location.vendor = partner.id;
           location.type = location.type.id;
           location.state = location.state.id;
           location.country = location.country.id;
@@ -233,7 +406,7 @@ module.exports = {
       });
       thirdPartyLocations.forEach(location => {
         if (location.id == undefined) {
-          location.tradingPartner = partner.id;
+          location.thirdParty = partner.id;
           location.type = location.type.id;
           location.state = location.state.id;
           location.country = location.country.id;
@@ -282,7 +455,7 @@ module.exports = {
       res.ok(partner);
 
     } catch (error) {
-      res.ok({
+      res.badRequest({
         error
       });
     }

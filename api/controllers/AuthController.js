@@ -26,7 +26,7 @@ module.exports = {
             } else {
               if (result) {
                 jwt.sign(user, sails.config.session.secret, (err, token) => {
-                  RedisService.set(token, user, () => {
+                  RedisService.set(user.id, token, () => {
                     console.log(`${user.email} logged in.`);
                     res.ok({
                       token,
@@ -84,7 +84,7 @@ module.exports = {
           updatedUser = updatedUser[0];
 
           jwt.sign(updatedUser, sails.config.session.secret, (err, token) => {
-            RedisService.set(token, updatedUser, () => {
+            RedisService.set(updatedUser.id, token, () => {
               console.log(`${updatedUser.email} logged in.`);
 
               res.ok({
@@ -262,7 +262,7 @@ module.exports = {
                 user = user[0];
 
                 jwt.sign(user, sails.config.session.secret, (err, token) => {
-                  RedisService.set(token, user, () => {
+                  RedisService.set(user.id, token, () => {
                     console.log(`${user.email} logged in.`);
                     res.ok({
                       token,
@@ -312,7 +312,7 @@ module.exports = {
           user = user[0];
 
           jwt.sign(user, sails.config.session.secret, (err, token) => {
-            RedisService.set(token, user, () => {
+            RedisService.set(user.id, token, () => {
               console.log(`${user.email} logged in.`);
               res.ok({
                 token,
@@ -340,9 +340,11 @@ module.exports = {
 
   logout: async (req, res) => {
     const bearerToken = req.headers['authorization'].split(' ')[1];
-    RedisService.del(bearerToken, () => {
-      res.ok({
-        message: 'User logged out successfully.'
+    jwt.verify(bearerToken, sails.config.session.secret, (err, authData) => {
+      RedisService.del(authData.id, () => {
+        res.ok({
+          message: 'User logged out successfully.'
+        });
       });
     });
   },

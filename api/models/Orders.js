@@ -168,6 +168,10 @@ module.exports = {
     payerContactNumber: {
       type: 'string'
     },
+    orderType: {
+      type: 'string',
+      isIn: ['Order', 'Pickup']
+    },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
@@ -184,6 +188,9 @@ module.exports = {
     },
     dropoffState: {
       model: 'states'
+    },
+    billTo: {
+      model: 'tradingPartners'
     },
     payerCountry: {
       model: 'dropdownMapper'

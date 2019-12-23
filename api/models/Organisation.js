@@ -1,5 +1,5 @@
 /**
- * Locations.js
+ * Organisation.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,44 +12,46 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
+    uid: {
+      type: 'number',
+      unique: true,
+    },
     name: {
       type: 'string'
     },
-    street: {
+    description: {
       type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-    type: {
-      model: 'dropdownMapper'
+    parent: {
+      model: 'organisation'
     },
-    state: {
-      model: 'states'
-    },
-    country: {
+    currency: {
       model: 'dropdownMapper'
     },
     city: {
       model: 'dropdownMapper'
     },
-    postalCode: {
-      model: 'dropdownMapperChild'
+    country: {
+      model: 'dropdownMapper'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-    customer: {
-      model: 'tradingPartners'
-    },
-    vendor: {
-      model: 'tradingPartners'
-    },
-    thirdParty: {
-      model: 'tradingPartners'
-    },
+    users: {
+      collection: 'user',
+      via: 'organisation'
+    }
   },
 
+
+  beforeCreate: (values, cb) => {
+    UtilityService.organisationCounter++;
+    values.uid = UtilityService.organisationCounter;
+    cb();
+  }
 };

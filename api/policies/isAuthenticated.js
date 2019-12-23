@@ -9,17 +9,23 @@ module.exports = function (req, res, next) {
 
   jwt.verify(bearerToken, sails.config.session.secret, (err, authData) => {
     if (err) {
-      return res.ok({ message: 'You are not permitted to perform this action. Unauthorized, Token mismatch.' });
+      return res.ok({
+        message: 'You are not permitted to perform this action. Unauthorized, Token mismatch.'
+      });
     } else {
-      RedisService.get(bearerToken, (result) => {
+      RedisService.get(authData.id, (result) => {
         if (result != undefined) {
-          if (authData.email == result.email) {
+          if (bearerToken == result) {
             return next();
           } else {
-            return res.ok({ message: 'You are not permitted to perform this action. Unauthorized, Invalid request.' });
+            return res.ok({
+              message: 'You are not permitted to perform this action. Unauthorized, Invalid request.'
+            });
           }
         } else {
-          return res.ok({ message: 'You are not permitted to perform this action. Unauthorized, Invalid request.' });
+          return res.ok({
+            message: 'You are not permitted to perform this action. Unauthorized, Invalid request.'
+          });
         }
       });
     }

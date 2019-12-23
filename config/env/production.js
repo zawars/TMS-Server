@@ -152,7 +152,7 @@ module.exports = {
       // allowOrigins: [
       //   'https://example.com',
       // ]
-      allowRequestHeaders: ['content-type', 'authorization'],
+      allowRequestHeaders: ['content-type', 'authorization', 'Access-Control-Allow-Origin'],
     },
 
   },
