@@ -44,37 +44,37 @@ module.exports.sockets = {
    *                                                                          *
    ***************************************************************************/
 
-  beforeConnect: function (handshake, proceed) {
+  // beforeConnect: function (handshake, proceed) {
 
-    // `true` allows the socket to connect.
-    // (`false` would reject the connection)
+  //   // `true` allows the socket to connect.
+  //   // (`false` would reject the connection)
 
-    let token = handshake._query.token;
+  //   let token = handshake._query.token;
 
-    if (token) {
-      jwt.verify(token, sails.config.session.secret, (err, authData) => {
-        if (err) {
-          proceed('You are not permitted to perform this action. Unauthorized, Token mismatch.', false);
-        } else {
-          RedisService.get(authData.id, (result) => {
+  //   if (token) {
+  //     jwt.verify(token, sails.config.session.secret, (err, authData) => {
+  //       if (err) {
+  //         proceed('You are not permitted to perform this action. Unauthorized, Token mismatch.', false);
+  //       } else {
+  //         RedisService.get(authData.id, (result) => {
 
-            if (result != undefined) {
-              jwt.verify(result, sails.config.session.secret, (err, authDataResult) => {
-                if (authData.id == authDataResult.id) {
-                  proceed(undefined, true)
-                } else {
-                  proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
-                }
-              });
-            } else {
-              proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
-            }
-          });
-        }
-      });
-    }
+  //           if (result != undefined) {
+  //             jwt.verify(result, sails.config.session.secret, (err, authDataResult) => {
+  //               if (authData.id == authDataResult.id) {
+  //                 proceed(undefined, true)
+  //               } else {
+  //                 proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
+  //               }
+  //             });
+  //           } else {
+  //             proceed('You are not permitted to perform this action. Unauthorized, Invalid request.', false);
+  //           }
+  //         });
+  //       }
+  //     });
+  //   }
 
-  },
+  // },
 
 
   /***************************************************************************
