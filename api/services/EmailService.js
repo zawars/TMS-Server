@@ -3,12 +3,12 @@
 const nodemailer = require("nodemailer");
 let transporter = nodemailer.createTransport({
   name: 'www.bkw-oneview.com',
-  host: "mail.infomaniak.com",
-  port: 587,
+  host: 'mail3.gridhost.co.uk', //"mail.infomaniak.com",
+  port: 25, //587,
   secure: false, // true for 465, false for other ports
   auth: {
-    user: 'project.notification@bkw-oneview.com', // generated ethereal user
-    pass: 'kitcHlew2277$$$' // generated ethereal password
+    user: 'claims@crekey.com', //'project.notification@bkw-oneview.com', // generated ethereal user
+    pass: 'Crekey2019$$', //'kitcHlew2277$$$' // generated ethereal password
   },
 });
 
@@ -36,16 +36,20 @@ module.exports = {
 
   sendMail: async (options, done) => {
     transporter.sendMail({
-      from: 'project.notification@bkw-oneview.com',
+      from: 'claims@crekey.com', //'project.notification@bkw-oneview.com',
       to: options.email,
       subject: options.subject,
-      html: options.message + `<br><br>
-      <div>Freundliche Grüsse / Meilleures salutations / Best Regards,<br><br>
-      <strong>oneView</strong><br><br>
+      html: options.message +
+        `<br><br>
+      Best Regards,<br>
+      <strong>Röhlig Claim Management</strong>`
 
-      Dies ist eine vom System generierte Mail. Bitte Antworten Sie nicht darauf. Bei Fragen oder Anliegen wenden Sie sich an den Applikationsverantwortlichen oder an den Service Desk der BKW.									
-      This is an automatically generated message. Please do not reply to this message. For Questions please contact application responsible or BKW service desk.
-      </div>`
+      // <div>Freundliche Grüsse / Meilleures salutations / Best Regards,<br><br>
+      // <strong>oneView</strong><br><br>
+
+      // Dies ist eine vom System generierte Mail. Bitte Antworten Sie nicht darauf. Bei Fragen oder Anliegen wenden Sie sich an den Applikationsverantwortlichen oder an den Service Desk der BKW.									
+      // This is an automatically generated message. Please do not reply to this message. For Questions please contact application responsible or BKW service desk.
+      // </div>`
     }, (err, info) => {
       if (err) {
         return done(err);

@@ -57,7 +57,7 @@ module.exports.routes = {
   'POST /api/v1/tradingPartners': 'TradingPartnersController.create',
   'GET /api/v1/tradingPartners/:id': 'TradingPartnersController.show',
   'PATCH /api/v1/tradingPartners/:id': 'TradingPartnersController.update',
-  'GET /api/v1/tradingPartners/search/:type/:query': 'TradingPartnersController.search',
+  'GET /api/v1/tradingPartners/search/:query': 'TradingPartnersController.search',
 
   // Contracts
   'POST /api/v1/contracts': 'ContractsController.create',
@@ -103,6 +103,8 @@ module.exports.routes = {
   'PATCH /api/v1/orders/batch/:id': 'OrdersController.updateOrderBatchFreights',
   'GET /api/v1/orders/placed': 'OrdersController.getPlacedOrders',
   'GET /api/v1/orders': 'OrdersController.getAllOrders',
+  'POST /api/v1/orders/pickup/tradingPartner/:id': 'OrdersController.getPickupRequestsForThirdParty',
+  'GET /api/v1/orders/pickup/:type': 'OrdersController.getPickupRequests',
 
   // Quotes
   'GET /api/v1/quotes/customer/:id': 'QuotesController.getQuotesByCustomer',
@@ -131,5 +133,14 @@ module.exports.routes = {
   'GET /api/v1/area': 'AreaController.index',
   'GET /api/v1/area/:id': 'AreaController.show',
   'PATCH /api/v1/area/:id': 'AreaController.update',
+
+  // Claims
+  'GET /api/v1/claims/customer/:id': 'ClaimsController.getClaimByCustomer',
+  'GET /api/v1/claims': 'ClaimsController.index',
+  'POST /api/v1/claims': 'ClaimsController.create',
+  'PATCH /api/v1/claims/:id': 'ClaimsController.update',
+
+  // Organisation
+  'GET /api/v1/organisation/search/name/:query': 'OrganisationController.search',
 
 };

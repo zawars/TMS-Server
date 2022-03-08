@@ -11,7 +11,7 @@ module.exports = {
       let query = req.params.query;
       let result = await States.find({
         name: {
-          'contains': query
+          'startsWith': query
         }
       }).populateAll().limit(10);
 

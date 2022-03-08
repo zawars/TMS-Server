@@ -1,5 +1,5 @@
 /**
- * Attachments.js
+ * Notifications.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,34 +12,33 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    fileName: {
+    isSeen: {
+      type: 'boolean',
+      defaultsTo: false
+    },
+    action: {
       type: 'string'
     },
-    path: {
+    module: {
       type: 'string'
     },
-    originalName: {
-      type: 'string'
-    },
-    size: {
-      type: 'number'
-    },
-    type: {
+    moduleItemId: {
       type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
-    claim: {
-      model: 'claims'
+    actor: {
+      model: 'user'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
+    owner: {
+      model: 'user'
+    },
   },
 
 };

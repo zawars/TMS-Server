@@ -5,6 +5,35 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+  socket.on('citiesAndPostalCodes', async data => {
+    let result;
+    let val = +data.query;
+    let dropDown = await Dropdown.findOne({
+      field: 'Cities'
+    });
+
+    if (Number.isNaN(val)) {
+      result = await DropdownMapper.find({
+        dropdown: dropDown.id,
+        name: {
+          'startsWith': data.query
+        }
+      }).populateAll().limit(15);
+    } else {
+      result = await DropdownMapperChild.find({
+        name: {
+          'startsWith': data.query
+        }
+      }).limit(15).populateAll();
+    }
+
+    socket.emit('citiesAndPostalCodes', result);
+  });
+});
+
 module.exports = {
 
   searchCity: async (req, res) => {
@@ -20,15 +49,15 @@ module.exports = {
         result = await DropdownMapper.find({
           dropdown: dropDown.id,
           name: {
-            'contains': query
+            'startsWith': query
           }
         }).populateAll().limit(10);
       } else {
         result = await DropdownMapperChild.find({
           name: {
-            'contains': query
+            'startsWith': query
           }
-        }).limit(20).populateAll();
+        }).limit(10).populateAll();
       }
 
       res.ok(result);
@@ -53,14 +82,14 @@ module.exports = {
             in: states
           },
           name: {
-            'contains': city
+            'startsWith': city
           }
         }).populateAll().limit(10);
       } else {
         result = await DropdownMapper.find({
           dropdown: dropDown.id,
           name: {
-            'contains': city
+            'startsWith': city
           }
         }).populateAll().limit(10);
       }
@@ -81,13 +110,13 @@ module.exports = {
           in: data.cities
         },
         name: {
-          'contains': data.postalCode
+          'startsWith': data.postalCode
         }
       }).populateAll().limit(10);
     } else {
       result = await DropdownMapperChild.find({
         name: {
-          'contains': data.postalCode
+          'startsWith': data.postalCode
         }
       }).populateAll().limit(10);
     }

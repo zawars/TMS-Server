@@ -1,5 +1,5 @@
 /**
- * Attachments.js
+ * Organisation.js
  *
  * @description :: A model definition represents a database table/collection.
  * @docs        :: https://sailsjs.com/docs/concepts/models-and-orm/models
@@ -12,34 +12,46 @@ module.exports = {
     //  ╔═╗╦═╗╦╔╦╗╦╔╦╗╦╦  ╦╔═╗╔═╗
     //  ╠═╝╠╦╝║║║║║ ║ ║╚╗╔╝║╣ ╚═╗
     //  ╩  ╩╚═╩╩ ╩╩ ╩ ╩ ╚╝ ╚═╝╚═╝
-    fileName: {
+    uid: {
+      type: 'number',
+      unique: true,
+    },
+    name: {
       type: 'string'
     },
-    path: {
-      type: 'string'
-    },
-    originalName: {
-      type: 'string'
-    },
-    size: {
-      type: 'number'
-    },
-    type: {
+    description: {
       type: 'string'
     },
 
     //  ╔═╗╔╦╗╔╗ ╔═╗╔╦╗╔═╗
     //  ║╣ ║║║╠╩╗║╣  ║║╚═╗
     //  ╚═╝╩ ╩╚═╝╚═╝═╩╝╚═╝
-
-    claim: {
-      model: 'claims'
+    parent: {
+      model: 'organisation'
+    },
+    currency: {
+      model: 'dropdownMapper'
+    },
+    city: {
+      model: 'dropdownMapper'
+    },
+    country: {
+      model: 'dropdownMapper'
     },
 
     //  ╔═╗╔═╗╔═╗╔═╗╔═╗╦╔═╗╔╦╗╦╔═╗╔╗╔╔═╗
     //  ╠═╣╚═╗╚═╗║ ║║  ║╠═╣ ║ ║║ ║║║║╚═╗
     //  ╩ ╩╚═╝╚═╝╚═╝╚═╝╩╩ ╩ ╩ ╩╚═╝╝╚╝╚═╝
-
+    users: {
+      collection: 'user',
+      via: 'organisation'
+    }
   },
 
+
+  beforeCreate: (values, cb) => {
+    UtilityService.organisationCounter++;
+    values.uid = UtilityService.organisationCounter;
+    cb();
+  }
 };

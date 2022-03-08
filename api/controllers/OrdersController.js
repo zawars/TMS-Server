@@ -5,29 +5,156 @@
  * @help        :: See https://sailsjs.com/docs/concepts/actions
  */
 
+const io = sails.io;
+
+io.on('connection', socket => {
+
+  socket.on('sendEmailForOrderPlaced', async data => {
+    let users = await User.find({
+      roles: {
+        contains: 'Admin'
+      }
+    });
+    data.email = [];
+    users.map(user => data.email.push(user.email));
+
+    EmailService.sendMail(data, (err) => {
+      if (err) {
+        socket.emit('orderPlaced', "Error Sending Email")
+      } else {
+        socket.emit('orderPlaced', {});
+      }
+    });
+  });
+
+  socket.on('pickupCount', async data => {
+    let count = await Orders.count({
+      orderType: 'Pickup',
+      isPlaced: true
+    });
+    socket.emit('pickupCount', count);
+  });
+
+  socket.on('pickupIndex', async data => {
+    let result = await Orders.find({
+      orderType: 'Pickup',
+      isPlaced: true
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('pickupIndex', result);
+  });
+
+  socket.on('pickupCountClient', async data => {
+    let count = await Orders.count({
+      tradingPartner: data.tradingPartner,
+      orderType: data.orderType,
+    });
+    socket.emit('pickupCountClient', count);
+  });
+
+  socket.on('pickupIndexClient', async data => {
+    let result = await Orders.find({
+      tradingPartner: data.tradingPartner,
+      orderType: data.orderType,
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('pickupIndexClient', result);
+  });
+
+  socket.on('vendorOrdersCountClient', async data => {
+    let count = await Orders.count({
+      vendor: data.vendor,
+      isPlaced: true,
+    });
+    socket.emit('vendorOrdersCountClient', count);
+  });
+
+  socket.on('vendorOrdersIndexClient', async data => {
+    let result = await Orders.find({
+      vendor: data.vendor,
+      isPlaced: true,
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('vendorOrdersIndexClient', result);
+  });
+
+  socket.on('customerOrdersCountClient', async data => {
+    let count = await Orders.count({
+      customer: data.tradingPartner,
+      isPlaced: data.status == "saved" ? false : true
+    });
+    socket.emit('customerOrdersCountClient', count);
+  });
+
+  socket.on('customerOrdersIndexClient', async data => {
+    let result = await Orders.find({
+      customer: data.tradingPartner,
+      isPlaced: data.status == "saved" ? false : true
+    }).paginate(data.pageNumber, data.pageSize).populateAll().sort('createdAt DESC');
+    socket.emit('customerOrdersIndexClient', result);
+  });
+
+  socket.on('dashboardOrderCount', async data => {
+    let totalOrders = await Orders.count({
+      isPlaced: true
+    });
+    let newOrders = await Orders.count({
+      status: {
+        in: ['Placed'],
+      },
+      isPlaced: true,
+    });
+    let inTransitOrders = await Orders.count({
+      status: {
+        in: ['In Transit'],
+      },
+      isPlaced: true,
+    });
+    let deliveredOrders = await Orders.count({
+      status: {
+        in: ['Delivered'],
+      },
+      isPlaced: true,
+    });
+
+    socket.emit('dashboardOrderCount', {
+      totalOrders,
+      newOrders,
+      inTransitOrders,
+      deliveredOrders
+    });
+  });
+
+  socket.on('placedOrdersCount', async data => {
+    let orders = await Orders.count({
+      isPlaced: true
+    });
+
+    socket.emit('placedOrdersCount', orders);
+  });
+
+  socket.on('placedOrdersIndex', async data => {
+    let orders = await Orders.find({
+      isPlaced: true
+    }).paginate(data.pageNumber, data.pageSize).sort('createdAt DESC').populateAll();
+
+    socket.emit('placedOrdersIndex', orders);
+  });
+});
+
 module.exports = {
   getOrderByCustomer: async (req, res) => {
     try {
       let id = req.params.id;
       let status = req.params.status;
 
-      if (status == 'saved') {
-        const orders = await Orders.find({
-          customer: id,
-          isPlaced: false
-        }).populateAll().sort('createdAt DESC');
-        res.ok(orders);
-      } else if (status == 'placed') {
-        const orders = await Orders.find({
-          customer: id,
-          isPlaced: true
-        }).populateAll().sort('createdAt DESC');
-        res.ok(orders);
-      } else {
-        res.ok([]);
-      }
+      const orders = await Orders.find({
+        customer: id,
+        isPlaced: status == "saved" ? false : true
+      }).limit(10).populateAll().sort('createdAt DESC');
+
+      res.ok(orders);
     } catch (e) {
-      res.badRequest(e);
+      res.badRequest({
+        message: e
+      });
     }
   },
 
@@ -115,7 +242,7 @@ module.exports = {
     try {
       let orders = await Orders.find({
         isPlaced: true
-      }).populateAll().sort('createdAt DESC');
+      }).limit(10).sort('createdAt DESC').populateAll();
 
       res.ok(orders);
     } catch (error) {
@@ -135,6 +262,28 @@ module.exports = {
         message: error
       });
     }
+  },
+
+  getPickupRequestsForThirdParty: async (req, res) => {
+    let data = req.body;
+
+    let result = await Orders.find({
+      tradingPartner: req.params.id,
+      orderType: data.orderType
+    }).paginate(req.query.pageNumber, req.query.pageSize).populateAll();
+
+    res.ok(result);
+  },
+
+  getPickupRequests: async (req, res) => {
+    let type = req.params.type;
+
+    let result = await Orders.find({
+      orderType: type,
+      isPlaced: true
+    }).paginate(req.query.pageNumber, req.query.pageSize).populateAll();
+
+    res.ok(result);
   },
 
 };

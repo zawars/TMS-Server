@@ -49,7 +49,7 @@ module.exports = {
     vendor: {
       model: 'tradingPartners'
     },
-    client: {
+    customer: {
       model: 'tradingPartners'
     },
     contractType: {
