@@ -1,16 +1,28 @@
 // const sendmail = require('sendmail')({});
 
 const nodemailer = require("nodemailer");
-let transporter = nodemailer.createTransport({
-  name: 'www.bkw-oneview.com',
-  host: 'mail3.gridhost.co.uk', //"mail.infomaniak.com",
-  port: 25, //587,
-  secure: false, // true for 465, false for other ports
+// let transporter = nodemailer.createTransport({
+//   name: 'www.bkw-oneview.com',
+//   host: 'mail3.gridhost.co.uk', //"mail.infomaniak.com",
+//   port: 25, //587,
+//   secure: false, // true for 465, false for other ports
+//   auth: {
+//     user: 'claims@crekey.com', //'project.notification@bkw-oneview.com', // generated ethereal user
+//     pass: 'Crekey2019$$', //'kitcHlew2277$$$' // generated ethereal password
+//   },
+// });
+
+const emailId = 'saad.afzaal7777@gmail.com';
+
+let opts = {
+  service: 'Gmail',
   auth: {
-    user: 'claims@crekey.com', //'project.notification@bkw-oneview.com', // generated ethereal user
-    pass: 'Crekey2019$$', //'kitcHlew2277$$$' // generated ethereal password
-  },
-});
+    user: emailId,
+    pass: 'Roger123'
+  }
+}
+
+let transporter = nodemailer.createTransport(opts);
 
 module.exports = {
 
